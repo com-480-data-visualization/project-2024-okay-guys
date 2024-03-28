@@ -40,6 +40,8 @@ Our goal is to create an immersive experience where visualization acts as both a
 
 ### Exploratory Data Analysis
 
+[Exploratory Data Analysis and pre-processing details](./EDA.ipynb)
+
 ### Related work
 
 While the Olympic Games dataset has been extensively utilized for various analyses, often focusing on general trends in medal distribution, athlete demographics, and the overall success of countries. We will still represent such information, however our approach sets itself apart by delving into more specific aspects of the Olympic Games dataset. 
