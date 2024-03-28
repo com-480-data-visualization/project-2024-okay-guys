@@ -13,7 +13,7 @@
 ### Dataset
 
 #### Data Sources and Quality
-The [dataset](https://www.kaggle.com/datasets/bhanupratapbiswas/olympic-data/data)  for our Olympic Games analysis is obtained from Kaggle, a leading platform in the machine learning and data analysis community. It compiles information on the Olympic Games, boasting a perfect "usability" score of 100%, indicating high data quality in terms of completeness, credibility, and compatibility. This score underscores the dataset's reliability, as evidenced by its extensive download count within the data science community, reflecting its value in analysis and visualization efforts for our Olympic Games study.
+The [dataset](https://www.kaggle.com/datasets/bhanupratapbiswas/olympic-data/data)  for our Olympic Games analysis is obtained from Kaggle, a leading platform in the machine learning and data analysis community. It compiles information on the Olympic Games, boasting a perfect "usability" score of 100%, indicating high data quality in terms of completeness, credibility, and compatibility. This score highlights the dataset's reliability, as evidenced by its extensive download count within the data science community, reflecting its value in analysis and visualization efforts for our Olympic Games study.
 
 #### Data Content and Scope
 Our dataset comprises detailed information on modern editions of the Summer and Winter Olympics, spanning from 1896 to 2016. Notably, it excludes data related to the Tokyo 2021 Games and the Paralympic Games. It offers a comprehensive set of metadata for each participant, including unique identifiers (ID), demographic details (age, height, weight), team affiliations, National Olympic Committee (NOC), Games season (summer or winter), host city, sports, specific events, and, where applicable, medal achievements.
@@ -30,7 +30,7 @@ From the start in 1896 with 43 events in 10 sports, to over 300 in 49 sports tod
 Key features of our site include:
 
 - **Interactive Map**: A dynamic global map detailing each Olympic city, linked to a "Performance by Country" analysis for in-depth insights.
-- **Performance Metrics**: Filters allow users to sift through data by Olympic year, sport, or event, displayed via intuitive graphs.
+- **Performance Metrics**: Filters allow users to shift through data by Olympic year, sport, or event, displayed via intuitive graphs.
 - **Historical Timeline**: An engaging timeline highlighting the pivotal moments in Olympic history.
 - **Athletic Evolution**: Visualizations reveal how the typical athlete profile has changed over the decades.
 - **Sporting Discipline**: An exploration of the evolving Olympic program.
@@ -47,6 +47,7 @@ Our goal is to create an immersive experience where visualization acts as both a
 While the Olympic Games dataset has been extensively utilized for various analyses, often focusing on general trends in medal distribution, athlete demographics, and the overall success of countries. We will still represent such information, however our approach sets itself apart by delving into more specific aspects of the Olympic Games dataset. 
 By integrating a dynamic global map, sophisticated performance metrics, an engaging historical timeline, and in-depth explorations of athletic evolution and gender inclusion, we offer users a unique and immersive journey through the Olympics. This approach not only highlights general trends and demographic data but also uncovers the stories and developments behind the Games, making our analysis original and captivating for a broad audience.
 
-We will also study the evolution of performance throughout the years in athletics and highlight their progression. We will try to find out if a major event like the Olympics galvanized athletes in beating records. This idea comes from an enjoyment of looking at the limits of human performance in sports, often represented in mediums such as youtube videos or TV documentaries.
+Our inspiration for this project comes from an enjoyment of looking at the limits of human performance in sports often represented in mediums such as Youtube videos or TV documentaries as well as a general appreciation for History. Trying to track and display the past events of the Olympic Games like Wars have been documented seemed relevant for us. Hence our will to use maps and timelines to share the Olympic Games history. 
+
 
 Finally, this dataset is totally new to us three, hence it was never previously explored in our past projects. 
