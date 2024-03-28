@@ -40,7 +40,7 @@ Our goal is to create an immersive experience where visualization acts as both a
 
 ### Exploratory Data Analysis
 
-[Exploratory Data Analysis and pre-processing details](./EDA.ipynb)
+[Pre-processing of the dataset and basic statistics](./EDA.ipynb)
 
 ### Related work
 
