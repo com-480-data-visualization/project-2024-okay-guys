@@ -41,3 +41,10 @@ Our goal is to create an immersive experience where visualization acts as both a
 ### Exploratory Data Analysis
 
 ### Related work
+
+While, the Olympic Games dataset has been extensively utilized for various analyses, often focusing on general trends in medal distribution, athlete demographics, and the overall success of countries. We will still represent such information, however our approach sets itself apart by delving into more specific aspects of the Olympic Games dataset. 
+By integrating a dynamic global map, sophisticated performance metrics, an engaging historical timeline, and in-depth explorations of athletic evolution and gender inclusion, we offer users a unique and immersive journey through the Olympics. This approach not only highlights general trends and demographic data but also uncovers the stories and developments behind the Games, making our analysis original and captivating for a broad audience.
+
+We will also study the evolution of performance throughout the years in athletics and highlight their progression. We will try to find out if a major event like the Olympics galvanized athletes in beating records. This idea comes from an enjoyment of looking at the limits of human performance in sports often represented in mediums such as youtube videos or TV documentaries.
+
+Finally, this dataset is totally new to us three, hence it was never previously explored in our past projects. 
