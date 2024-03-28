@@ -13,7 +13,7 @@
 ### Dataset
 
 #### Data Sources and Quality
-The dataset for our Olympic Games analysis is obtained from Kaggle, a leading platform in the machine learning and data analysis community. It compiles information on the Olympic Games, boasting a perfect "usability" score of 100%, indicating high data quality in terms of completeness, credibility, and compatibility. This score underscores the dataset's reliability, as evidenced by its extensive download count within the data science community, reflecting its value in analysis and visualization efforts for our Olympic Games study.
+The [dataset](https://www.kaggle.com/datasets/bhanupratapbiswas/olympic-data/data)  for our Olympic Games analysis is obtained from Kaggle, a leading platform in the machine learning and data analysis community. It compiles information on the Olympic Games, boasting a perfect "usability" score of 100%, indicating high data quality in terms of completeness, credibility, and compatibility. This score underscores the dataset's reliability, as evidenced by its extensive download count within the data science community, reflecting its value in analysis and visualization efforts for our Olympic Games study.
 
 #### Data Content and Scope
 Our dataset comprises detailed information on modern editions of the Summer and Winter Olympics, spanning from 1896 to 2016. Notably, it excludes data related to the Tokyo 2021 Games and the Paralympic Games. It offers a comprehensive set of metadata for each participant, including unique identifiers (ID), demographic details (age, height, weight), team affiliations, National Olympic Committee (NOC), Games season (summer or winter), host city, sports, specific events, and, where applicable, medal achievements.
