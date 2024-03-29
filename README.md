@@ -39,8 +39,7 @@ Key features of our site include:
 Our goal is to create an immersive experience where visualization acts as both an educational tool and a lens into the Olympic legacy.
 
 ### Exploratory Data Analysis
-
-[Pre-processing of the dataset and basic statistics](./EDA.ipynb)
+The preprocessing and basic statistics are accessible in this [notebook](./EDA.ipynb) at point 3.
 
 ### Related work
 
