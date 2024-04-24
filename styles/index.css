@@ -1,0 +1,39 @@
+html {
+  background-color: #ffff;
+}
+
+
+h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 60px;
+  text-align: center;
+}
+
+
+.center {
+  text-align: center;
+}
+
+.logo-image {
+  width: 600px; /* ou la taille que vous préférez */
+  height: auto;
+}
+
+.menu {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.menu a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f2f2f2;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.menu a:hover {
+  background-color: #ddd;
+}
