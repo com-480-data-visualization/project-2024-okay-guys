@@ -2,22 +2,22 @@ var simplemaps_worldmap_mapdata = {
 main_settings:{
 		//General settings
 		width: '700', //or 'responsive'
-    background_color: '#C0C0C0',	
-    background_transparent: 'no',
+		background_color: '#C0C0C0',	
+		background_transparent: 'no',
 		popups: 'on_click', //on_click, on_hover, or detect
 	
 		//State defaults
-    state_description:  "Have multiple links for each state<br /><a  href='#' onClick=\"alert('You would go to Link 1')\">Link 1</a><br /><a  href='#' onClick=\"alert('You would go to Link 2')\">Link 2</a><br /><a  href='#' onClick=\"alert('You would go to Link 3')\">Link 3</a><br />",
-    state_color: '#88A4BC',
-    state_hover_color: '#3B729F',
-    state_url: '',
+		state_description:  "Have multiple links for each state<br /><a  href='#' onClick=\"alert('You would go to Link 1')\">Link 1</a><br /><a  href='#' onClick=\"alert('You would go to Link 2')\">Link 2</a><br /><a  href='#' onClick=\"alert('You would go to Link 3')\">Link 3</a><br />",
+		state_color: '#88A4BC',
+		state_hover_color: '#3B729F',
+		state_url: '',
 		border_size: 1.5,		
 		border_color: '#ffffff',
 		all_states_inactive: 'no',
 		all_states_zoomable: 'no',		
 		
 		//Location defaults
-    location_description:  "Have multiple links for each state<br /><a  href='#' onClick=\"alert('You would go to Link 1')\">Link 1</a><br /><a  href='#' onClick=\"alert('You would go to Link 2')\">Link 2</a><br /><a  href='#' onClick=\"alert('You would go to Link 3')\">Link 3</a><br />",
+    	location_description:  "Have multiple links for each state<br /><a  href='#' onClick=\"alert('You would go to Link 1')\">Link 1</a><br /><a  href='#' onClick=\"alert('You would go to Link 2')\">Link 2</a><br /><a  href='#' onClick=\"alert('You would go to Link 3')\">Link 3</a><br />",
 		location_color: '#FF0067',
 		location_opacity: .8,
 		location_hover_opacity: 1,
@@ -1486,62 +1486,618 @@ state_specific:{
 },
 
 // You must number locations sequentially
-locations:{
-
-	0: {
-		name: "New York",
-		lat: 40.71, 
-		lng: -74.0059731,
-		description: 'default',
-		color: 'default',
-		url: 'default',
-		size: 'default' //Note:  You must omit the comma after the last property in an object to prevent errors in internet explorer.
-	},
-
-	1: {
-		name: "London",
-		lat: 51.5073346, 
-		lng: -0.1276831,
-		description: 'default',
-		color: 'default',
-		url: 'default',
-		size: 'default'
-	},
-
-	2: {
-		name: "Sydney",
-		lat: -33.8674869, 
-		lng: 151.2069902,
-		description: 'default',
-		color: 'default',
-		url: 'default',
-		size: 'default'
-	},
-
-	3: {
-		name: "Shanghai",
-		lat: 31.230393, 
-		lng: 121.473704,
-		description: 'default',
-		color: 'default',
-		url: 'default',
-		size: 'default'		
-	},
-
-	4: {
-		name: "Paris",
-		lat: 48.856614, 
-		lng: 2.3522219,
-		description: 'default',
-		color: 'default',
-		url: 'default',
-		size: 'default' //Note:  You must omit the comma after the last property in an object to prevent errors in internet explorer.
-	} //Note:  You must omit the comma after the last property in an object to prevent errors in internet explorer.
+locations: {
+    0: {
+        name: 'Athens',
+        country: 'Greece',
+        noc: 'GRE',
+        summer: 'I',
+        winter: 0,
+        year: 1896,
+        lat: 37.9833333,
+        lng: 23.7333336,
+        x: 1111,
+        y: 257
+    },
+    1: {
+        name: 'Paris',
+        country: 'France',
+        noc: 'FRA',
+        summer: 'II',
+        winter: 0,
+        year: 1900,
+        lat: 48.85341,
+        lng: 2.3487999,
+        x: 997,
+        y: 189
+    },
+    2: {
+        name: 'St. Louis',
+        country: 'United States',
+        noc: 'USA',
+        summer: 'III',
+        winter: 0,
+        year: 1904,
+        lat: 38.6272733,
+        lng: -90.1978912,
+        x: 511,
+        y: 253
+    },
+    3: {
+        name: 'London',
+        country: 'United Kingdom',
+        noc: 'GBR',
+        summer: 'IV',
+        winter: 0,
+        year: 1908,
+        lat: 51.5084153,
+        lng: -0.1255327,
+        x: 985,
+        y: 172
+    },
+    4: {
+        name: 'Stockholm',
+        country: 'Sweden',
+        noc: 'SWE',
+        summer: 'V',
+        winter: 0,
+        year: 1912,
+        lat: 59.3325765,
+        lng: 18.0649033,
+        x: 1068,
+        y: 125
+    },
+    5: {
+        name: 'Antwerp',
+        country: 'Belgium',
+        noc: 'BEL',
+        summer: 'VII',
+        winter: 0,
+        year: 1920,
+        lat: 51.2166667,
+        lng: 4.4166665,
+        x: 1007,
+        y: 174
+    },
+    6: {
+        name: 'Chamonix',
+        country: 'France',
+        noc: 'FRA',
+        summer: 0,
+        winter: 'I',
+        year: 1924,
+        lat: 45.9237,
+        lng: 6.8694,
+        x: 1021,
+        y: 207
+    },
+    7: {
+        name: 'Paris',
+        country: 'France',
+        noc: 'FRA',
+        summer: 'VIII',
+        winter: 0,
+        year: 1924,
+        lat: 48.85341,
+        lng: 2.3487999,
+        x: 997,
+        y: 189
+    },
+    8: {
+        name: 'St. Moritz',
+        country: 'Switzerland',
+        noc: 'SUI',
+        summer: 0,
+        winter: 'II',
+        year: 1928,
+        lat: 46.4908,
+        lng: 9.8355,
+        x: 1035,
+        y: 203
+    },
+    9: {
+        name: 'Amsterdam',
+        country: 'Netherlands',
+        noc: 'NED',
+        summer: 'IX',
+        winter: 0,
+        year: 1928,
+        lat: 52.3075,
+        lng: 4.9722219,
+        x: 1010,
+        y: 167
+    },
+    10: {
+        name: 'Lake Placid',
+        country: 'United States',
+        noc: 'USA',
+        summer: 0,
+        winter: 'III',
+        year: 1932,
+        lat: 27.2931,
+        lng: -81.362846,
+        x: 540,
+        y: 326
+    },
+    11: {
+        name: 'Los Angeles',
+        country: 'United States',
+        noc: 'USA',
+        summer: 'X',
+        winter: 0,
+        year: 1932,
+        lat: 34.0522342,
+        lng: -118.2436829,
+        x: 351,
+        y: 283
+    },
+    12: {
+        name: 'Garmisch-Partenkirchen',
+        country: 'Nazi Germany',
+        noc: 'GER',
+        summer: 0,
+        winter: 'IV',
+        year: 1936,
+        lat: 47.49209,
+        lng: 11.09576,
+        x: 1041,
+        y: 197
+    },
+    13: {
+        name: 'Berlin',
+        country: 'Nazi Germany',
+        noc: 'GER',
+        summer: 'XI',
+        winter: 0,
+        year: 1936,
+        lat: 52.5166667,
+        lng: 13.3999996,
+        x: 1051,
+        y: 166
+    },
+    14: {
+        name: 'St. Moritz',
+        country: 'Switzerland',
+        noc: 'SUI',
+        summer: 0,
+        winter: 'V',
+        year: 1948,
+        lat: 46.4908,
+        lng: 9.8355,
+        x: 1035,
+        y: 203
+    },
+    15: {
+        name: 'London',
+        country: 'United Kingdom',
+        noc: 'GBR',
+        summer: 'XIV',
+        winter: 0,
+        year: 1948,
+        lat: 51.5084153,
+        lng: -0.1255327,
+        x: 985,
+        y: 172
+    },
+    16: {
+        name: 'Oslo',
+        country: 'Norway',
+        noc: 'NOR',
+        summer: 0,
+        winter: 'VI',
+        year: 1952,
+        lat: 60.1755556,
+        lng: 24.934166,
+        x: 1099,
+        y: 120
+    },
+    17: {
+        name: 'Helsinki',
+        country: 'Finland',
+        noc: 'FIN',
+        summer: 'XV',
+        winter: 0,
+        year: 1952,
+        lat: 60.1699,
+        lng: 24.9384,
+        x: 1099,
+        y: 120
+    },
+    18: {
+        name: "Cortina d'Ampezzo",
+        country: 'Italy',
+        noc: 'ITA',
+        summer: 0,
+        winter: 'VII',
+        year: 1956,
+        lat: 46.5405,
+        lng: 12.1357,
+        x: 1047,
+        y: 203
+    },
+    19: {
+        name: 'Melbourne',
+        country: 'Australia',
+        noc: 'AUS',
+        summer: 'XVI',
+        winter: 0,
+        year: 1956,
+        lat: -37.8139966,
+        lng: 144.9633179,
+        x: 1751,
+        y: 744
+    },
+    20: {
+        name: 'Stockholm',
+        country: 'Sweden',
+        noc: 'SWE',
+        summer: 'XVI',
+        winter: 0,
+        year: 1956,
+        lat: 59.3325765,
+        lng: 18.0649033,
+        x: 1068,
+        y: 125
+    },
+    21: {
+        name: 'Squaw Valley',
+        country: 'United States',
+        noc: 'USA',
+        summer: 0,
+        winter: 'VIII',
+        year: 1960,
+        lat: 39.1963,
+        lng: -120.2336,
+        x: 355,
+        y: 249
+    },
+    22: {
+        name: 'Rome',
+        country: 'Italy',
+        noc: 'ITA',
+        summer: 'XVII',
+        winter: 0,
+        year: 1960,
+        lat: 41.9,
+        lng: 12.4833336,
+        x: 1050,
+        y: 232
+    },
+    23: {
+        name: 'Innsbruck',
+        country: 'Austria',
+        noc: 'AUT',
+        summer: 0,
+        winter: 'IX',
+        year: 1964,
+        lat: 47.2666667,
+        lng: 11.3999996,
+        x: 1043,
+        y: 199
+    },
+    24: {
+        name: 'Tokyo',
+        country: 'Japan',
+        noc: 'JPN',
+        summer: 'XVIII',
+        winter: 0,
+        year: 1964,
+        lat: 35.6895266,
+        lng: 139.6916809,
+        x: 1730,
+        y: 272
+    },
+    25: {
+        name: 'Grenoble',
+        country: 'France',
+        noc: 'FRA',
+        summer: 0,
+        winter: 'X',
+        year: 1968,
+        lat: 45.1666667,
+        lng: 5.7166667,
+        x: 1015,
+        y: 212
+    },
+    26: {
+        name: 'Mexico City',
+        country: 'Mexico',
+        noc: 'MEX',
+        summer: 'XIX',
+        winter: 0,
+        year: 1968,
+        lat: 19.4341667,
+        lng: -99.1386108,
+        x: 433,
+        y: 377
+    },
+    27: {
+        name: 'Sapporo',
+        country: 'Japan',
+        noc: 'JPN',
+        summer: 0,
+        winter: 'XI',
+        year: 1972,
+        lat: 43.0547222,
+        lng: 141.3538818,
+        x: 1712,
+        y: 225
+    },
+    28: {
+        name: 'Munich',
+        country: 'West Germany',
+        noc: 'GER',
+        summer: 'XX',
+        winter: 0,
+        year: 1972,
+        lat: 48.1351,
+        lng: 11.582,
+        x: 1044,
+        y: 193
+    },
+    29: {
+        name: 'Innsbruck',
+        country: 'Austria',
+        noc: 'AUT',
+        summer: 0,
+        winter: 'XII',
+        year: 1976,
+        lat: 47.2666667,
+        lng: 11.3999996,
+        x: 1043,
+        y: 199
+    },
+    30: {
+        name: 'Montreal',
+        country: 'Canada',
+        noc: 'CAN',
+        summer: 'XXI',
+        winter: 0,
+        year: 1976,
+        lat: 45.5167792,
+        lng: -73.6491776,
+        x: 613,
+        y: 210
+    },
+    31: {
+        name: 'Lake Placid',
+        country: 'United States',
+        noc: 'USA',
+        summer: 0,
+        winter: 'XIII',
+        year: 1980,
+        lat: 27.2931,
+        lng: -81.362846,
+        x: 540,
+        y: 326
+    },
+    32: {
+        name: 'Moscow',
+        country: 'Soviet Union',
+        noc: 'RUS',
+        summer: 'XXII',
+        winter: 0,
+        year: 1980,
+        lat: 55.7522222,
+        lng: 37.6155548,
+        x: 1163,
+        y: 146
+    },
+    33: {
+        name: 'Sarajevo',
+        country: 'Yugoslavia',
+        noc: 'RUS',
+        summer: 0,
+        winter: 'XIV',
+        year: 1984,
+        lat: 43.85,
+        lng: 18.3833332,
+        x: 1080,
+        y: 220
+    },
+    34: {
+        name: 'Los Angeles',
+        country: 'United States',
+        noc: 'USA',
+        summer: 'XXIII',
+        winter: 0,
+        year: 1984,
+        lat: 34.0522342,
+        lng: -118.2436829,
+        x: 351,
+        y: 283
+    },
+    35: {
+        name: 'Calgary',
+        country: 'Canada',
+        noc: 'CAN',
+        summer: 0,
+        winter: 'XV',
+        year: 1988,
+        lat: 51.0501123,
+        lng: -114.085289,
+        x: 429,
+        y: 175
+    },
+    36: {
+        name: 'Seoul',
+        country: 'South Korea',
+        noc: 'KOR',
+        summer: 'XXIV',
+        winter: 0,
+        year: 1988,
+        lat: 37.5663889,
+        lng: 126.9997253,
+        x: 1657,
+        y: 260
+    },
+    37: {
+        name: 'Albertville',
+        country: 'France',
+        noc: 'FRA',
+        summer: 0,
+        winter: 'XVI',
+        year: 1992,
+        lat: 45.6755,
+        lng: 6.3927,
+        x: 1018,
+        y: 209
+    },
+    38: {
+        name: 'Barcelona',
+        country: 'Spain',
+        noc: 'ESP',
+        summer: 'XXV',
+        winter: 0,
+        year: 1992,
+        lat: 41.3887869,
+        lng: 2.1589851,
+        x: 997,
+        y: 235
+    },
+    39: {
+        name: 'Lillehammer',
+        country: 'Norway',
+        noc: 'NOR',
+        summer: 0,
+        winter: 'XVII',
+        year: 1994,
+        lat: 61.1153,
+        lng: 10.4662,
+        x: 1033,
+        y: 114
+    },
+    40: {
+        name: 'Atlanta',
+        country: 'United States',
+        noc: 'USA',
+        summer: 'XXVI',
+        winter: 0,
+        year: 1996,
+        lat: 33.7489954,
+        lng: -84.3879852,
+        x: 533,
+        y: 285
+    },
+    41: {
+        name: 'Nagano',
+        country: 'Japan',
+        noc: 'JPN',
+        summer: 0,
+        winter: 'XVIII',
+        year: 1998,
+        lat: 36.65,
+        lng: 138.1833344,
+        x: 1719,
+        y: 266
+    },
+    42: {
+        name: 'Sydney',
+        country: 'Australia',
+        noc: 'AUS',
+        summer: 'XXVII',
+        winter: 0,
+        year: 2000,
+        lat: -33.86785,
+        lng: 151.2073212,
+        x: 1798,
+        y: 719
+    },
+    43: {
+        name: 'Salt Lake City',
+        country: 'United States',
+        noc: 'USA',
+        summer: 0,
+        winter: 'XIX',
+        year: 2002,
+        lat: 40.758701,
+        lng: -111.876183,
+        x: 404,
+        y: 239
+    },
+    44: {
+        name: 'Athens',
+        country: 'Greece',
+        noc: 'GRE',
+        summer: 'XXVIII',
+        winter: 0,
+        year: 2004,
+        lat: 37.9833333,
+        lng: 23.7333336,
+        x: 1111,
+        y: 257
+    },
+    45: {
+        name: 'Turin',
+        country: 'Italy',
+        noc: 'ITA',
+        summer: 0,
+        winter: 'XX',
+        year: 2006,
+        lat: 45.0703,
+        lng: 7.6869,
+        x: 1025,
+        y: 212
+    },
+    46: {
+        name: 'Beijing',
+        country: 'China',
+        noc: 'CHN',
+        summer: 'XXIX',
+        winter: 0,
+        year: 2008,
+        lat: 39.9074977,
+        lng: 116.3972244,
+        x: 1595,
+        y: 245
+    },
+    47: {
+        name: 'Vancouver',
+        country: 'Canada',
+        noc: 'CAN',
+        summer: 0,
+        winter: 'XXI',
+        year: 2010,
+        lat: 49.2496574,
+        lng: -123.119339,
+        x: 377,
+        y: 186
+    },
+    48: {
+        name: 'London',
+        country: 'United Kingdom',
+        noc: 'GBR',
+        summer: 'XXX',
+        winter: 0,
+        year: 2012,
+        lat: 51.5084153,
+        lng: -0.1255327,
+        x: 985,
+        y: 172
+    },
+    49: {
+        name: 'Sochi',
+        country: 'Russia',
+        noc: 'RUS',
+        summer: 0,
+        winter: 'XXII',
+        year: 2014,
+        lat: 43.6,
+        lng: 39.730278,
+        x: 1189,
+        y: 222
+    },
+    50: {
+        name: 'Rio de Janeiro',
+        country: 'Brazil',
+        noc: 'BRA',
+        summer: 'XXXI',
+        winter: 0,
+        year: 2016,
+        lat: -22.9027778,
+        lng: -43.2075005,
+        x: 747,
+        y: 648
+    }
 }
-
 }
-
-
-
-
-
