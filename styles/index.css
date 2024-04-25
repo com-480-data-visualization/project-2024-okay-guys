@@ -38,3 +38,40 @@ h1 {
   background-color: #ddd;
 }
 
+/* .tooltip {
+  background: white;
+  border: 1px solid black;
+  padding: 5px;
+  position: absolute;
+  z-index: 1000;
+}
+ */
+
+ .tooltip {
+  background: #f9f9f9; 
+  color: #333; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  padding: 10px 15px; 
+  position: absolute;
+  z-index: 1000;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
+  transition: opacity 0.3s;
+  opacity: 0; 
+  font-family: "Josefin Sans", sans-serif; 
+  font-size: 14px; 
+  line-height: 1.4;
+}
+
+.tooltip .city-country {
+  font-size: 16px; /* Plus grand */
+  font-weight: bold; /* En gras */
+}
+
+.tooltip .year {
+  font-size: 14px; /* Taille normale */
+}
+
+.tooltip.show {
+  opacity: 1;
+}
