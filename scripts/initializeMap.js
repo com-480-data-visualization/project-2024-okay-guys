@@ -6,6 +6,7 @@ function drawSVGPaths() {
   }
   const paths = window.simplemaps_worldmap_mapinfo.paths;
   const locations = window.simplemaps_worldmap_mapdata.locations;
+  // const statSpecific = window.simplemaps_worldmap_mapdata.state_specific; // Ajout de cette ligne pour récupérer les informations spécifiques à chaque pays
 
   const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
@@ -13,12 +14,29 @@ function drawSVGPaths() {
   svgElement.style.width = "100%";
   svgElement.style.height = "auto";
 
+  const default_color = '#ffffff'
+  const hover_color = '#bbdef0'
   for (const country in paths) {
       const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
       pathElement.setAttribute("d", paths[country]);
-      pathElement.setAttribute("fill", "#ccc"); // Changer la couleur au besoin
+      pathElement.setAttribute("fill", default_color); // Changer la couleur au besoin
       pathElement.setAttribute("stroke", "black");
       pathElement.setAttribute("stroke-width", "2");
+
+      pathElement.addEventListener('mouseover', function(event) {
+        pathElement.setAttribute('fill', hover_color); // Couleur de survol
+      });
+
+    // Ajout de l'événement mouseout pour restaurer la couleur par défaut lorsque la souris quitte
+    pathElement.addEventListener('mouseout', function(event) {
+      pathElement.setAttribute('fill', default_color); // Couleur par défaut
+    });
+    
+    // // Ajouter le gestionnaire d'événements de clic pour le zoom sur le pays
+    // pathElement.addEventListener('click', function(event) {
+    //   zoomToCountry(country, svgElement);
+    // });
+    
       svgElement.appendChild(pathElement);
   }
 
@@ -69,7 +87,6 @@ function drawSVGPaths() {
   });
   
   
-
     document.addEventListener('click', (event) => {
     if (!event.target.closest('circle')) {
         document.querySelectorAll('.tooltip').forEach(tooltip => {
@@ -83,7 +100,67 @@ function drawSVGPaths() {
     svgElement.appendChild(circleElement);
   }
 
+  // Créer le conteneur de la légende
+const legendContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+legendContainer.setAttribute("transform", "translate(50, 900)"); // Position ajustée pour mieux s'adapter à la taille accrue
+
+// Créer le cercle pour les JO d'été
+const summerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+summerCircle.setAttribute("cx", 20);
+summerCircle.setAttribute("cy", 20); // Position Y ajustée
+summerCircle.setAttribute("r", 15); // Taille du rayon augmentée
+summerCircle.setAttribute("fill", "orange");
+legendContainer.appendChild(summerCircle);
+
+// Texte pour les JO d'été
+const summerText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+summerText.setAttribute("x", 50); // Position X ajustée pour mieux s'aligner avec le cercle plus grand
+summerText.setAttribute("y", 25); // Position Y ajustée
+summerText.textContent = "Summer Olympics";
+summerText.style.fill = "#333";
+summerText.style.fontSize = "18px"; // Taille de police augmentée
+legendContainer.appendChild(summerText);
+
+// Créer le cercle pour les JO d'hiver
+const winterCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+winterCircle.setAttribute("cx", 20);
+winterCircle.setAttribute("cy", 60); // Position Y ajustée pour plus d'espace
+winterCircle.setAttribute("r", 15); // Taille du rayon augmentée
+winterCircle.setAttribute("fill", "blue");
+legendContainer.appendChild(winterCircle);
+
+// Texte pour les JO d'hiver
+const winterText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+winterText.setAttribute("x", 50); // Position X ajustée pour mieux s'aligner avec le cercle plus grand
+winterText.setAttribute("y", 65); // Position Y ajustée
+winterText.textContent = "Winter Olympics";
+winterText.style.fill = "#333";
+winterText.style.fontSize = "18px"; // Taille de police augmentée
+legendContainer.appendChild(winterText);
+
+// Ajouter la légende au SVG principal
+svgElement.appendChild(legendContainer);
+
+
   document.getElementById("mapContainer").appendChild(svgElement);
 }
+
+// Définition de la fonction pour zoomer sur un pays spécifique
+function zoomToCountry(countryCode, svgElement) {
+  console.log(countryCode); // Afficher le countryCode dans la console
+  const countryInfo = simplemaps_worldmap_mapinfo.state_bbox_array[countryCode];
+
+  if (countryInfo) {
+    const centerX = (countryInfo.x + countryInfo.x2) / 2;
+    const centerY = (countryInfo.y + countryInfo.y2) / 2;
+
+    // Ajustez la vue pour centrer le pays
+    const translateX = -centerX + 500; // Vous pouvez ajuster cette valeur pour centrer le pays correctement dans la vue
+    const translateY = -centerY + 300;
+
+    svgElement.style.transform = `translate(${translateX}px, ${translateY}px)`;
+  }
+}
+
 
 document.addEventListener("DOMContentLoaded", drawSVGPaths);

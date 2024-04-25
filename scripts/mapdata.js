@@ -6,45 +6,13 @@ main_settings:{
 		background_transparent: 'no',
 		popups: 'on_click', //on_click, on_hover, or detect
 	
-		//State defaults
-		state_description:  "Have multiple links for each state<br /><a  href='#' onClick=\"alert('You would go to Link 1')\">Link 1</a><br /><a  href='#' onClick=\"alert('You would go to Link 2')\">Link 2</a><br /><a  href='#' onClick=\"alert('You would go to Link 3')\">Link 3</a><br />",
-		state_color: '#88A4BC',
-		state_hover_color: '#3B729F',
-		state_url: '',
-		border_size: 1.5,		
-		border_color: '#ffffff',
-		all_states_inactive: 'no',
-		all_states_zoomable: 'no',		
-		
-		//Location defaults
-    	location_description:  "Have multiple links for each state<br /><a  href='#' onClick=\"alert('You would go to Link 1')\">Link 1</a><br /><a  href='#' onClick=\"alert('You would go to Link 2')\">Link 2</a><br /><a  href='#' onClick=\"alert('You would go to Link 3')\">Link 3</a><br />",
-		location_color: '#FF0067',
-		location_opacity: .8,
-		location_hover_opacity: 1,
-		location_url: '',
-		location_size: 25,
-		location_type: 'square', // circle, square, image
-		location_border_color: '#FFFFFF',
-		location_border: 2,
-		location_hover_border: 2.5,				
-		all_locations_inactive: 'no',
-		all_locations_hidden: 'no',
-		
-		//Labels
-		label_color: '#ffffff',	
-		label_hover_color: '#ffffff',		
-		label_size: 22,
-		label_font: 'Arial',
-		hide_labels: 'no',
-    hide_eastern_labels: false,
-		
 		//Zoom settings
-    manual_zoom: 'no',
-    back_image: 'no',
-    arrow_box: 'no',
-    navigation_size: '40',
-    navigation_color: '#f7f7f7',
-    navigation_border_color: '#636363',
+		manual_zoom: 'no',
+		back_image: 'no',
+		arrow_box: 'no',
+		navigation_size: '40',
+		navigation_color: '#f7f7f7',
+		navigation_border_color: '#636363',
 		initial_back: 'no', //Show back button when zoomed out and do this JavaScript upon click		
 		initial_zoom: -1,  //-1 is zoomed out, 0 is for the first continent etc	
 		initial_zoom_solo: 'no', //hide adjacent states when starting map zoomed in
@@ -65,10 +33,10 @@ main_settings:{
 		//Advanced settings
 		div: 'map',
 		auto_load: 'yes',		
-    rotate: '0',
+    	rotate: '0',
 		url_new_tab: 'yes', 
 		images_directory: 'default', //e.g. 'map_images/'
-    import_labels: 'no',
+    	import_labels: 'no',
 		fade_time:  .1, //time to fade out		
 		link_text: 'View Website'  //Text mobile browsers will see for links	
 		

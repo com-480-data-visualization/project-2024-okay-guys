@@ -75,3 +75,18 @@ h1 {
 .tooltip.show {
   opacity: 1;
 }
+
+.legend-text {
+  fill: #333;
+  font-size: 18px; /* Taille augmentée pour rendre la légende plus lisible */
+}
+
+.legend-circle {
+  stroke: black;
+  stroke-width: 2;
+}
+
+/* Classe optionnelle pour positionner et styler le conteneur de légende */
+.legend-container {
+  transform: translate(50, 950); /* Position ajustée si nécessaire */
+}

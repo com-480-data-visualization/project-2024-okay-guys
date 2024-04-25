@@ -986,13 +986,6 @@ var simplemaps_worldmap_mapinfo = {
         },
         "4": { name: "South Asia", states: ["SG", "TW", "IN", "AU", "MY", "NP", "NZ", "TH", "BN", "JP", "VN", "LK", "SB", "FJ", "BD", "BT", "KH", "LA", "MM", "KP", "PG", "PH", "KR", "ID", "CN", "MV", "NC", "VU", "NR"] },
         "5": { name: "North Asia", states: ["MN", "RU", "KZ"] },
-    },
-    proj: "robinson",
-    proj_coordinates: [
-        { lat: 48.86666667, x: 997.9, lng: 2.333333333, y: 189.1 },
-        { lat: -34.615, x: 673.5, lng: -58.446, y: 724.1 },
-        { lat: -33.874, x: 1798.2, lng: 151.203, y: 719.3 },
-    ],
-    initial_view: { y: 0.99, x: 0.99, x2: 2018.99, y2: 864.5600000000001 },
+    }
 };
 
