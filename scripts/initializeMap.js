@@ -1,12 +1,39 @@
-function drawSVGPaths() {
-  // Assurez-vous que simplemaps_worldmap_mapinfo est chargé
-  if (!window.simplemaps_worldmap_mapinfo) {
-      console.error("Map data is not loaded.");
-      return;
+const regionColors = {
+  "North America": "#a1caf1", // Couleur pour l'Amérique du Nord
+  "South America": "#f4c2c2", // Couleur pour l'Amérique du Sud
+  "Europe": "#fbe7a1", // Couleur pour l'Europe
+  "Africa and the Middle East": "#b2beb5", // Couleur pour l'Afrique et le Moyen-Orient
+  "South Asia": "#ffef00", // Couleur pour l'Asie du Sud
+  "North Asia": "#88d8c0"  // Couleur pour l'Asie du Nord
+};
+
+let countryToRegion = {};
+for (const regionId in simplemaps_worldmap_mapinfo.default_regions) {
+  const region = simplemaps_worldmap_mapinfo.default_regions[regionId];
+  for (const country of region.states) {
+    countryToRegion[country] = region.name;
   }
+}
+
+function calculateRegionBBox(regionStates) {
+  let minX = Infinity, maxX = 0, minY = Infinity, maxY = 0;
+  regionStates.forEach(code => {
+    const bbox = state_bbox_array[code];
+    if (bbox) {
+      minX = Math.min(minX, bbox.x);
+      maxX = Math.max(maxX, bbox.x2);
+      minY = Math.min(minY, bbox.y);
+      maxY = Math.max(maxY, bbox.y2);
+    }
+  });
+  return { minX, maxX, minY, maxY };
+}
+
+
+function drawSVGPaths() {
+
   const paths = window.simplemaps_worldmap_mapinfo.paths;
   const locations = window.simplemaps_worldmap_mapdata.locations;
-  // const statSpecific = window.simplemaps_worldmap_mapdata.state_specific; // Ajout de cette ligne pour récupérer les informations spécifiques à chaque pays
 
   const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
@@ -14,29 +41,35 @@ function drawSVGPaths() {
   svgElement.style.width = "100%";
   svgElement.style.height = "auto";
 
-  const default_color = '#ffffff'
-  const hover_color = '#bbdef0'
-  for (const country in paths) {
+  function drawSVGPaths() {
+    const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svgElement.setAttribute("viewBox", "0 0 2000 1000");
+    svgElement.style.width = "100%";
+    svgElement.style.height = "auto";
+  
+    Object.keys(state_bbox_array).forEach(country => {
       const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      pathElement.setAttribute("d", paths[country]);
-      pathElement.setAttribute("fill", default_color); // Changer la couleur au besoin
+      pathElement.setAttribute("fill", "white");
       pathElement.setAttribute("stroke", "black");
       pathElement.setAttribute("stroke-width", "2");
-
-      pathElement.addEventListener('mouseover', function(event) {
-        pathElement.setAttribute('fill', hover_color); // Couleur de survol
-      });
-
-    // Ajout de l'événement mouseout pour restaurer la couleur par défaut lorsque la souris quitte
-    pathElement.addEventListener('mouseout', function(event) {
-      pathElement.setAttribute('fill', default_color); // Couleur par défaut
+      pathElement.setAttribute("data-country-code", country);
+  
+      pathElement.addEventListener('click', function() {
+        const regionId = Object.keys(default_regions).find(id =>
+          default_regions[id].states.includes(country)
+        );
+        if (regionId) {
+          const bbox = calculateRegionBBox(default_regions[regionId].states);
+          svgElement.setAttribute("viewBox", `${bbox.minX} ${bbox.minY} ${bbox.maxX - bbox.minX} ${bbox.maxY - bbox.minY}`);
+        }
+      })
+  
+      svgElement.appendChild(pathElement);
     });
-    
-    // // Ajouter le gestionnaire d'événements de clic pour le zoom sur le pays
-    // pathElement.addEventListener('click', function(event) {
-    //   zoomToCountry(country, svgElement);
-    // });
-    
+  
+    document.getElementById("mapContainer").appendChild(svgElement);
+  }
+
       svgElement.appendChild(pathElement);
   }
 
@@ -46,18 +79,16 @@ function drawSVGPaths() {
     circleElement.setAttribute("cx", cityCoords.x);
     circleElement.setAttribute("cy", cityCoords.y);
     circleElement.setAttribute("r", "10");
-    let fillColor;  // Variable pour stocker la couleur utilisée
-    // Changer la couleur en fonction de l'événement olympique
+    let fillColor;  
     if (cityCoords.winter === 0) {
-        fillColor = "orange";  // Jeux d'été
+        fillColor = "#fca311";  // Jeux d'été
     } else {
-        fillColor = "blue";    // Jeux d'hiver
+        fillColor = "#14213d";    // Jeux d'hiver
     }
     circleElement.setAttribute("fill", fillColor);
     circleElement.setAttribute("data-name", cityCoords.name);
     circleElement.setAttribute("data-year", cityCoords.year);
     circleElement.setAttribute("data-country", cityCoords.country);
-    console.log(`City: ${cityCoords.name}, Fill Color: ${fillColor}`);
 
     circleElement.addEventListener('click', (event) => {
       document.querySelectorAll('.tooltip').forEach(tooltip => tooltip.remove());
@@ -100,7 +131,7 @@ function drawSVGPaths() {
     svgElement.appendChild(circleElement);
   }
 
-  // Créer le conteneur de la légende
+// Créer le conteneur de la légende
 const legendContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
 legendContainer.setAttribute("transform", "translate(50, 900)"); // Position ajustée pour mieux s'adapter à la taille accrue
 
@@ -140,27 +171,7 @@ legendContainer.appendChild(winterText);
 
 // Ajouter la légende au SVG principal
 svgElement.appendChild(legendContainer);
-
-
   document.getElementById("mapContainer").appendChild(svgElement);
 }
-
-// Définition de la fonction pour zoomer sur un pays spécifique
-function zoomToCountry(countryCode, svgElement) {
-  console.log(countryCode); // Afficher le countryCode dans la console
-  const countryInfo = simplemaps_worldmap_mapinfo.state_bbox_array[countryCode];
-
-  if (countryInfo) {
-    const centerX = (countryInfo.x + countryInfo.x2) / 2;
-    const centerY = (countryInfo.y + countryInfo.y2) / 2;
-
-    // Ajustez la vue pour centrer le pays
-    const translateX = -centerX + 500; // Vous pouvez ajuster cette valeur pour centrer le pays correctement dans la vue
-    const translateY = -centerY + 300;
-
-    svgElement.style.transform = `translate(${translateX}px, ${translateY}px)`;
-  }
-}
-
 
 document.addEventListener("DOMContentLoaded", drawSVGPaths);

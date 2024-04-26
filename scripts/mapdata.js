@@ -6,6 +6,7 @@ main_settings:{
 		background_transparent: 'no',
 		popups: 'on_click', //on_click, on_hover, or detect
 	
+		
 		//Zoom settings
 		manual_zoom: 'no',
 		back_image: 'no',
