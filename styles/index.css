@@ -37,3 +37,56 @@ h1 {
 .menu a:hover {
   background-color: #ddd;
 }
+
+/* .tooltip {
+  background: white;
+  border: 1px solid black;
+  padding: 5px;
+  position: absolute;
+  z-index: 1000;
+}
+ */
+
+ .tooltip {
+  background: #f9f9f9; 
+  color: #333; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  padding: 10px 15px; 
+  position: absolute;
+  z-index: 1000;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
+  transition: opacity 0.3s;
+  opacity: 0; 
+  font-family: "Josefin Sans", sans-serif; 
+  font-size: 14px; 
+  line-height: 1.4;
+}
+
+.tooltip .city-country {
+  font-size: 16px; /* Plus grand */
+  font-weight: bold; /* En gras */
+}
+
+.tooltip .year {
+  font-size: 14px; /* Taille normale */
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+.legend-text {
+  fill: #333;
+  font-size: 18px; /* Taille augmentée pour rendre la légende plus lisible */
+}
+
+.legend-circle {
+  stroke: black;
+  stroke-width: 2;
+}
+
+/* Classe optionnelle pour positionner et styler le conteneur de légende */
+.legend-container {
+  transform: translate(50, 950); /* Position ajustée si nécessaire */
+}
