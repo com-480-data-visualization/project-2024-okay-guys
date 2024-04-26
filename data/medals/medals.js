@@ -93,6 +93,7 @@ function updateChart() {
         },
         options: {
             indexAxis: 'y', // Ensures the bar chart is horizontal
+            responsive: false,
             scales: {
                 x: {
                     stacked: true,
@@ -134,5 +135,5 @@ window.onload = function() {
             updateChart(); // Initialize the chart after data is loaded and processed
         }
     })
-    console.log("Global Data Check:", data);
+    //console.log("Global Data Check:", data);
 };
