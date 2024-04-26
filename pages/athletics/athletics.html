@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athletics Plots</title>
+  <!-- Include D3.js library -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+</head>
+
+
+<body>
+
+    <!-- Race Viz -->>
+    <p>World Records 100m Men Outdoors - Simulation</p>
+    <svg id="race-viz" width="800" height="400"></svg>
+    <button id="play-button">Play</button>
+    <button id="speed-up">Speed Up</button>
+    <button id="speed-down">Speed Down</button>
+    <span id="speed-display"></span>
+    <script src="/data/athletics/100mMenSeniorRaceViz.js" defer></script>
+
+    <!-- Container for plot -->
+    <p>World Records 100m Men Outdoors - Years Evolution</p>
+    <div id="chart-container"></div>
+    <script src="/data/athletics/100mMenSeniorScatterPlot.js" defer></script>
+
+
+</body>
+</html>
