@@ -1,76 +1,31 @@
-const regionColors = {
-  "North America": "#a1caf1", // Couleur pour l'Amérique du Nord
-  "South America": "#f4c2c2", // Couleur pour l'Amérique du Sud
-  "Europe": "#fbe7a1", // Couleur pour l'Europe
-  "Africa and the Middle East": "#b2beb5", // Couleur pour l'Afrique et le Moyen-Orient
-  "South Asia": "#ffef00", // Couleur pour l'Asie du Sud
-  "North Asia": "#88d8c0"  // Couleur pour l'Asie du Nord
-};
-
-let countryToRegion = {};
-for (const regionId in simplemaps_worldmap_mapinfo.default_regions) {
-  const region = simplemaps_worldmap_mapinfo.default_regions[regionId];
-  for (const country of region.states) {
-    countryToRegion[country] = region.name;
-  }
-}
-
-function calculateRegionBBox(regionStates) {
-  let minX = Infinity, maxX = 0, minY = Infinity, maxY = 0;
-  regionStates.forEach(code => {
-    const bbox = state_bbox_array[code];
-    if (bbox) {
-      minX = Math.min(minX, bbox.x);
-      maxX = Math.max(maxX, bbox.x2);
-      minY = Math.min(minY, bbox.y);
-      maxY = Math.max(maxY, bbox.y2);
-    }
-  });
-  return { minX, maxX, minY, maxY };
-}
-
-
 function drawSVGPaths() {
-
   const paths = window.simplemaps_worldmap_mapinfo.paths;
   const locations = window.simplemaps_worldmap_mapdata.locations;
 
   const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-
-  svgElement.setAttribute("viewBox", "0 0 2000 1000"); // Définir selon les besoins de votre carte
+  svgElement.setAttribute("viewBox", "0 0 2000 1000");
   svgElement.style.width = "100%";
   svgElement.style.height = "auto";
 
-  function drawSVGPaths() {
-    const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svgElement.setAttribute("viewBox", "0 0 2000 1000");
-    svgElement.style.width = "100%";
-    svgElement.style.height = "auto";
-  
-    Object.keys(state_bbox_array).forEach(country => {
-      const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      pathElement.setAttribute("fill", "white");
-      pathElement.setAttribute("stroke", "black");
-      pathElement.setAttribute("stroke-width", "2");
-      pathElement.setAttribute("data-country-code", country);
-  
-      pathElement.addEventListener('click', function() {
-        const regionId = Object.keys(default_regions).find(id =>
-          default_regions[id].states.includes(country)
-        );
-        if (regionId) {
-          const bbox = calculateRegionBBox(default_regions[regionId].states);
-          svgElement.setAttribute("viewBox", `${bbox.minX} ${bbox.minY} ${bbox.maxX - bbox.minX} ${bbox.maxY - bbox.minY}`);
-        }
-      })
-  
-      svgElement.appendChild(pathElement);
-    });
-  
-    document.getElementById("mapContainer").appendChild(svgElement);
-  }
+  const defaultColor = '#ffffff';
+  const hoverColor = '#ccc';
 
-      svgElement.appendChild(pathElement);
+  for (const country in paths) {
+    const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    pathElement.setAttribute("d", paths[country]);
+    pathElement.setAttribute("fill", defaultColor);
+    pathElement.setAttribute("stroke", "black");
+    pathElement.setAttribute("stroke-width", "2");
+
+    pathElement.addEventListener('mouseover', function(event) {
+      pathElement.setAttribute('fill', hoverColor); 
+    });
+
+    pathElement.addEventListener('mouseout', function(event) {
+      pathElement.setAttribute('fill', defaultColor); 
+    });
+
+    svgElement.appendChild(pathElement);
   }
 
   for (const city in locations) {
@@ -79,12 +34,8 @@ function drawSVGPaths() {
     circleElement.setAttribute("cx", cityCoords.x);
     circleElement.setAttribute("cy", cityCoords.y);
     circleElement.setAttribute("r", "10");
-    let fillColor;  
-    if (cityCoords.winter === 0) {
-        fillColor = "#fca311";  // Jeux d'été
-    } else {
-        fillColor = "#14213d";    // Jeux d'hiver
-    }
+
+    const fillColor = cityCoords.winter === 0 ? "orange" : "blue";
     circleElement.setAttribute("fill", fillColor);
     circleElement.setAttribute("data-name", cityCoords.name);
     circleElement.setAttribute("data-year", cityCoords.year);
@@ -93,84 +44,67 @@ function drawSVGPaths() {
     circleElement.addEventListener('click', (event) => {
       document.querySelectorAll('.tooltip').forEach(tooltip => tooltip.remove());
       
-      let tooltip = document.createElement('div');
+      const tooltip = document.createElement('div');
       tooltip.style.position = 'absolute';
-      tooltip.style.left = `${event.pageX + 10}px`; // Décalage pour ne pas couvrir le curseur
+      tooltip.style.left = `${event.pageX + 10}px`;
       tooltip.style.top = `${event.pageY + 10}px`;
       tooltip.className = 'tooltip';
-      
-      // Créer des éléments span pour chaque partie du texte
-      let cityCountrySpan = document.createElement('span');
+
+      const cityCountrySpan = document.createElement('span');
       cityCountrySpan.className = 'city-country';
       cityCountrySpan.textContent = `${event.target.getAttribute('data-name')}, ${event.target.getAttribute('data-country')}`;
       
-      let yearSpan = document.createElement('span');
+      const yearSpan = document.createElement('span');
       yearSpan.className = 'year';
       yearSpan.textContent = `${event.target.getAttribute('data-year')}`;
       
-      // Ajouter les spans au tooltip
       tooltip.appendChild(cityCountrySpan);
-      tooltip.appendChild(document.createElement('br')); // Saut de ligne
+      tooltip.appendChild(document.createElement('br'));
       tooltip.appendChild(yearSpan);
   
       document.body.appendChild(tooltip);
-      setTimeout(() => { tooltip.classList.add('show'); }, 10); // Ajouter la classe 'show'
-  });
-  
-  
-    document.addEventListener('click', (event) => {
-    if (!event.target.closest('circle')) {
-        document.querySelectorAll('.tooltip').forEach(tooltip => {
-            tooltip.classList.remove('show');
-            setTimeout(() => { tooltip.remove(); }, 300); // Attendre que la transition soit terminée
-        });
-    }
-});
+      setTimeout(() => { tooltip.classList.add('show'); }, 10);
+    });
 
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('circle')) {
+          document.querySelectorAll('.tooltip').forEach(tooltip => {
+              tooltip.classList.remove('show');
+              setTimeout(() => { tooltip.remove(); }, 300);
+          });
+      }
+    });
 
     svgElement.appendChild(circleElement);
   }
 
-// Créer le conteneur de la légende
-const legendContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
-legendContainer.setAttribute("transform", "translate(50, 900)"); // Position ajustée pour mieux s'adapter à la taille accrue
+  const legendContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  legendContainer.setAttribute("transform", "translate(50, 900)");
 
-// Créer le cercle pour les JO d'été
-const summerCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-summerCircle.setAttribute("cx", 20);
-summerCircle.setAttribute("cy", 20); // Position Y ajustée
-summerCircle.setAttribute("r", 15); // Taille du rayon augmentée
-summerCircle.setAttribute("fill", "orange");
-legendContainer.appendChild(summerCircle);
+  const createLegendItem = (cx, cy, fill, text) => {
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", cx);
+    circle.setAttribute("cy", cy);
+    circle.setAttribute("r", "15");
+    circle.setAttribute("fill", fill);
 
-// Texte pour les JO d'été
-const summerText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-summerText.setAttribute("x", 50); // Position X ajustée pour mieux s'aligner avec le cercle plus grand
-summerText.setAttribute("y", 25); // Position Y ajustée
-summerText.textContent = "Summer Olympics";
-summerText.style.fill = "#333";
-summerText.style.fontSize = "18px"; // Taille de police augmentée
-legendContainer.appendChild(summerText);
+    const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    textElement.setAttribute("x", cx + 30);
+    textElement.setAttribute("y", cy + 5);
+    textElement.textContent = text;
+    textElement.style.fill = "#333";
+    textElement.style.fontSize = "20px"; 
+    textElement.style.fontWeight = "bold"; 
 
-// Créer le cercle pour les JO d'hiver
-const winterCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-winterCircle.setAttribute("cx", 20);
-winterCircle.setAttribute("cy", 60); // Position Y ajustée pour plus d'espace
-winterCircle.setAttribute("r", 15); // Taille du rayon augmentée
-winterCircle.setAttribute("fill", "blue");
-legendContainer.appendChild(winterCircle);
+    legendContainer.appendChild(circle);
+    legendContainer.appendChild(textElement);
+  };
 
-// Texte pour les JO d'hiver
-const winterText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-winterText.setAttribute("x", 50); // Position X ajustée pour mieux s'aligner avec le cercle plus grand
-winterText.setAttribute("y", 65); // Position Y ajustée
-winterText.textContent = "Winter Olympics";
-winterText.style.fill = "#333";
-winterText.style.fontSize = "18px"; // Taille de police augmentée
-legendContainer.appendChild(winterText);
+  createLegendItem(20, 20, "orange", "Summer Olympics");
+  createLegendItem(20, 60, "blue", "Winter Olympics");
 
-// Ajouter la légende au SVG principal
-svgElement.appendChild(legendContainer);
+  svgElement.appendChild(legendContainer);
+
   document.getElementById("mapContainer").appendChild(svgElement);
 }
 
