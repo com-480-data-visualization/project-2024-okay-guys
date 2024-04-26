@@ -98,6 +98,10 @@ function updateChart() {
                 x: {
                     stacked: true,
                     beginAtZero: true,
+                    title: {
+                        display: true, // Ensure the title is displayed
+                        text: 'Number of Medals'
+                    },
                     ticks: {
                         stepSize: 1, // Forces the ticks to increment by 1
                         precision: 0, // Ensures no decimal places
