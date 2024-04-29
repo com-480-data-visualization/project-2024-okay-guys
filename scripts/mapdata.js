@@ -1462,7 +1462,7 @@ locations: {
         noc: 'GRE',
         summer: 'I',
         winter: 0,
-        year: 1896,
+        year: [1896, 2004],
         lat: 37.9833333,
         lng: 23.7333336,
         x: 1111,
@@ -1474,7 +1474,7 @@ locations: {
         noc: 'FRA',
         summer: 'II',
         winter: 0,
-        year: 1900,
+        year: [1900, 1924],
         lat: 48.85341,
         lng: 2.3487999,
         x: 997,
@@ -1498,7 +1498,7 @@ locations: {
         noc: 'GBR',
         summer: 'IV',
         winter: 0,
-        year: 1908,
+        year: [1908,1948, 2012],
         lat: 51.5084153,
         lng: -0.1255327,
         x: 985,
@@ -1540,18 +1540,6 @@ locations: {
         x: 1021,
         y: 207
     },
-    7: {
-        name: 'Paris',
-        country: 'France',
-        noc: 'FRA',
-        summer: 'VIII',
-        winter: 0,
-        year: 1924,
-        lat: 48.85341,
-        lng: 2.3487999,
-        x: 997,
-        y: 189
-    },
     8: {
         name: 'St. Moritz',
         country: 'Switzerland',
@@ -1582,7 +1570,7 @@ locations: {
         noc: 'USA',
         summer: 0,
         winter: 'III',
-        year: 1932,
+        year: [1932, 1984],
         lat: 27.2931,
         lng: -81.362846,
         x: 540,
@@ -1635,18 +1623,6 @@ locations: {
         lng: 9.8355,
         x: 1035,
         y: 203
-    },
-    15: {
-        name: 'London',
-        country: 'United Kingdom',
-        noc: 'GBR',
-        summer: 'XIV',
-        winter: 0,
-        year: 1948,
-        lat: 51.5084153,
-        lng: -0.1255327,
-        x: 985,
-        y: 172
     },
     16: {
         name: 'Oslo',
@@ -1750,7 +1726,7 @@ locations: {
         noc: 'JPN',
         summer: 'XVIII',
         winter: 0,
-        year: 1964,
+        year:  [1964,2020], 
         lat: 35.6895266,
         lng: 139.6916809,
         x: 1730,
@@ -1827,18 +1803,6 @@ locations: {
         lng: -73.6491776,
         x: 613,
         y: 210
-    },
-    31: {
-        name: 'Lake Placid',
-        country: 'United States',
-        noc: 'USA',
-        summer: 0,
-        winter: 'XIII',
-        year: 1980,
-        lat: 27.2931,
-        lng: -81.362846,
-        x: 540,
-        y: 326
     },
     32: {
         name: 'Moscow',
@@ -1984,18 +1948,6 @@ locations: {
         x: 404,
         y: 239
     },
-    44: {
-        name: 'Athens',
-        country: 'Greece',
-        noc: 'GRE',
-        summer: 'XXVIII',
-        winter: 0,
-        year: 2004,
-        lat: 37.9833333,
-        lng: 23.7333336,
-        x: 1111,
-        y: 257
-    },
     45: {
         name: 'Turin',
         country: 'Italy',
@@ -2031,18 +1983,6 @@ locations: {
         lng: -123.119339,
         x: 377,
         y: 186
-    },
-    48: {
-        name: 'London',
-        country: 'United Kingdom',
-        noc: 'GBR',
-        summer: 'XXX',
-        winter: 0,
-        year: 2012,
-        lat: 51.5084153,
-        lng: -0.1255327,
-        x: 985,
-        y: 172
     },
     49: {
         name: 'Sochi',

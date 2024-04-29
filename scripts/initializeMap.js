@@ -49,22 +49,28 @@ function drawSVGPaths() {
       tooltip.style.left = `${event.pageX + 10}px`;
       tooltip.style.top = `${event.pageY + 10}px`;
       tooltip.className = 'tooltip';
-
+    
+      const cityName = event.target.getAttribute('data-name');
+      const countryName = event.target.getAttribute('data-country');
+      const years = event.target.getAttribute('data-year').split(',').map(year => parseInt(year)).sort((a, b) => a - b);
+    
+      console.log(years);
       const cityCountrySpan = document.createElement('span');
       cityCountrySpan.className = 'city-country';
-      cityCountrySpan.textContent = `${event.target.getAttribute('data-name')}, ${event.target.getAttribute('data-country')}`;
-      
+      cityCountrySpan.textContent = `${cityName}, ${countryName}`;
+    
       const yearSpan = document.createElement('span');
       yearSpan.className = 'year';
-      yearSpan.textContent = `${event.target.getAttribute('data-year')}`;
-      
+      yearSpan.textContent = years.join(', ');
+    
       tooltip.appendChild(cityCountrySpan);
       tooltip.appendChild(document.createElement('br'));
       tooltip.appendChild(yearSpan);
-  
+    
       document.body.appendChild(tooltip);
       setTimeout(() => { tooltip.classList.add('show'); }, 10);
     });
+    
 
     document.addEventListener('click', (event) => {
       if (!event.target.closest('circle')) {

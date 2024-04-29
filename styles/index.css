@@ -38,16 +38,7 @@ h1 {
   background-color: #ddd;
 }
 
-/* .tooltip {
-  background: white;
-  border: 1px solid black;
-  padding: 5px;
-  position: absolute;
-  z-index: 1000;
-}
- */
-
- .tooltip {
+.tooltip {
   background: #f9f9f9; 
   color: #333; 
   border: 1px solid #ccc; 
@@ -64,12 +55,12 @@ h1 {
 }
 
 .tooltip .city-country {
-  font-size: 16px; /* Plus grand */
-  font-weight: bold; /* En gras */
+  font-size: 16px;
+  font-weight: bold; 
 }
 
 .tooltip .year {
-  font-size: 14px; /* Taille normale */
+  font-size: 14px; 
 }
 
 .tooltip.show {
@@ -78,7 +69,7 @@ h1 {
 
 .legend-text {
   fill: #333;
-  font-size: 18px; /* Taille augmentée pour rendre la légende plus lisible */
+  font-size: 18px; 
 }
 
 .legend-circle {
@@ -86,7 +77,10 @@ h1 {
   stroke-width: 2;
 }
 
-/* Classe optionnelle pour positionner et styler le conteneur de légende */
 .legend-container {
-  transform: translate(50, 950); /* Position ajustée si nécessaire */
+  transform: translate(50, 950); 
+}
+
+#mapContainer {
+  margin-top: 20px;
 }
