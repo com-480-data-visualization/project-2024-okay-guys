@@ -1590,7 +1590,7 @@ locations: {
     },
     12: {
         name: 'Garmisch-Partenkirchen',
-        country: 'Nazi Germany',
+        country: 'Germany',
         noc: 'GER',
         summer: 0,
         winter: 'IV',
@@ -1602,7 +1602,7 @@ locations: {
     },
     13: {
         name: 'Berlin',
-        country: 'Nazi Germany',
+        country: 'Germany',
         noc: 'GER',
         summer: 'XI',
         winter: 0,
