@@ -645,7 +645,7 @@ var simplemaps_worldmap_mapinfo = {
         ZM: "Zambia",
         BQSE: "St. Eustatius (Netherlands)",
         EH: "Western Sahara",
-        RU: "Russian Federation",
+        RU: "Russia",
         EE: "Estonia",
         EG: "Egypt",
         ZA: "South Africa",
