@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {  
-    fetch('/data/swimming/Men50mFreestyle.csv')
+    fetch('../data/swimming/Men50mFreestyle.csv')
     .then(response => response.text())
     .then(csvData => {
         // Parse the CSV data using Papa Parse
