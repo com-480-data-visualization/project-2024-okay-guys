@@ -19,7 +19,7 @@ function drawSVGPaths() {
   const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svgElement.setAttribute("viewBox", "0 0 2000 1000");
   svgElement.style.width = "100%";
-  svgElement.style.height = "auto";
+  svgElement.style.height = "1000";
   const defaultColor = '#ffffff';
   const hoverColor = '#ccc';
   let selectedRegion = null;
@@ -53,9 +53,11 @@ function drawSVGPaths() {
 // Gestion du clic sur un pays
 function handleCountryClick(pathElement, svgElement) {
   const selectedRegion = pathElement.getAttribute('data-region');
+  console.log(selectedRegion);
   const boundingBox = calculateBoundingBox(selectedRegion);
   svgElement.setAttribute("viewBox", `${boundingBox.minX} ${boundingBox.minY} ${boundingBox.width} ${boundingBox.height}`);
   displayCities(selectedRegion, svgElement);
+  
 }
 
 // Affichage des villes en fonction de la région sélectionnée
