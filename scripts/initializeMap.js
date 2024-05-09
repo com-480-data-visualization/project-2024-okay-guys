@@ -4,7 +4,9 @@ const paths = mapInfo.paths;
 const defaultRegions = mapInfo.default_regions;
 const locations = window.simplemaps_worldmap_mapdata.locations;
 const stateBboxArray = mapInfo.state_bbox_array;
-const countryNames = mapInfo.names;
+const countryNames = mapInfo.idToNames;
+const defaultColor = '#ffffff';
+const hoverColor = '#ccc';
 
 // Conversion des noms de pays en identifiants
 const countryIdsByName = Object.fromEntries(Object.entries(countryNames).map(([id, name]) => [name, id]));
@@ -19,9 +21,8 @@ function drawSVGPaths() {
   const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svgElement.setAttribute("viewBox", "0 0 2000 1000");
   svgElement.style.width = "100%";
-  svgElement.style.height = "1000";
-  const defaultColor = '#ffffff';
-  const hoverColor = '#ccc';
+  svgElement.style.height = "1000px";
+
   let selectedRegion = null;
 
   // Traitement et ajout des chemins de chaque pays
@@ -53,11 +54,9 @@ function drawSVGPaths() {
 // Gestion du clic sur un pays
 function handleCountryClick(pathElement, svgElement) {
   const selectedRegion = pathElement.getAttribute('data-region');
-  console.log(selectedRegion);
   const boundingBox = calculateBoundingBox(selectedRegion);
   svgElement.setAttribute("viewBox", `${boundingBox.minX} ${boundingBox.minY} ${boundingBox.width} ${boundingBox.height}`);
   displayCities(selectedRegion, svgElement);
-  
 }
 
 // Affichage des villes en fonction de la région sélectionnée
