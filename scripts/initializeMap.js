@@ -57,7 +57,20 @@ function addPathEventListeners(path) {
 function handleRegionClick(region, svgElement) {
     const boundingBox = calculateBoundingBox(region);
     svgElement.setAttribute("viewBox", `${boundingBox.minX} ${boundingBox.minY} ${boundingBox.width} ${boundingBox.height}`);
+    displayPathsByRegion(region, svgElement);
     displayCities(region, svgElement);
+}
+
+function displayPathsByRegion(selectedRegion, svgElement) {
+    const allPaths = svgElement.querySelectorAll('path');
+    allPaths.forEach(path => {
+        // Vérifier si le chemin appartient à la région sélectionnée
+        if (path.getAttribute('data-region') === selectedRegion) {
+            path.style.display = 'block';
+        } else {
+            path.style.display = 'none'; 
+        }
+    });
 }
 
 function displayCities(svgElement, region) {
@@ -157,14 +170,21 @@ document.addEventListener("DOMContentLoaded", () => {
     createLegend(svgElement);
 
     const backButton = document.getElementById('backButton');
-    // Ajouter un gestionnaire d'événements de clic à la flèche de retour en arrière
     backButton.addEventListener('click', () => {
+        // Réinitialiser le zoom en ajustant la vue de la carte pour qu'elle s'adapte à toute la carte
+        svgElement.setAttribute("viewBox", "0 0 2000 1000");
 
-    // Réinitialiser le zoom en ajustant la vue de la carte pour qu'elle s'adapte à toute la carte
-    svgElement.setAttribute("viewBox", "0 0 2000 1000");
+        // Réinitialiser l'affichage de tous les chemins
+        resetPathVisibility(svgElement);
 
-    // Réinitialiser la région sélectionnée
-    selectedRegion = null;
-    displayCities(selectedRegion, svgElement); 
-  });
+        // Réinitialiser la région sélectionnée et réafficher toutes les villes
+        displayCities(null, svgElement);
+    });
 });
+
+function resetPathVisibility(svgElement) {
+    const allPaths = svgElement.querySelectorAll('path');
+    allPaths.forEach(path => {
+        path.style.display = 'block'; // Réafficher tous les chemins
+    });
+}
