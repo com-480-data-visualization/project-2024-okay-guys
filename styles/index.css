@@ -1,43 +1,77 @@
+/* Styling for HTML elements */
 html {
   background-color: #ffff;
+  overflow-x: hidden;
+
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%; /* ou une autre largeur en pourcentage pour s'adapter à la largeur de l'écran */
+  margin: 0 auto; /* Centrer le conteneur sur la page */
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#mapContainer {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement si le conteneur a une hauteur spécifique */
+  width: 100%; /* Prend toute la largeur du conteneur parent */
+  height: 100%; /* Optionnel, dépend de la hauteur que vous voulez pour votre conteneur */
 }
 
 
+/* Styling for headings */
 h1 {
   font-family: "Josefin Sans", sans-serif;
   font-size: 60px;
   text-align: center;
 }
 
-
+/* Center alignment utility */
 .center {
   text-align: center;
 }
 
+/* Logo image styling */
 .logo-image {
-  width: 600px; 
+  width: 100%; /* Assurez-vous que l'image ne dépasse pas la largeur du conteneur */
   height: auto;
+  max-width: 800px; /* Taille maximale de l'image pour qu'elle ne devienne pas trop grande */
 }
 
+
+/* Menu styling */
 .menu {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
+  width: 100%;
 }
 
 .menu a {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 20px 40px;
   background-color: #f2f2f2;
   color: #333;
   text-decoration: none;
-  border-radius: 5px;
-  margin-right: 10px;
+  border-radius: 10px;
+  margin-right: 40px;
+  font-family: "Josefin Sans", sans-serif; 
+  font-size: 40px; /* Utiliser la même taille de police que le titre */
 }
 
 .menu a:hover {
   background-color: #ddd;
 }
 
+
+/* Tooltip styling */
 .tooltip {
   background: #f9f9f9; 
   color: #333; 
@@ -67,30 +101,34 @@ h1 {
   opacity: 1;
 }
 
+/* Legend text styling */
 .legend-text {
   fill: #333;
   font-size: 25px; 
 }
 
+/* Legend circle styling */
 .legend-circle {
   stroke: black;
   stroke-width: 2;
 }
 
+/* Legend container positioning */
 .legend-container {
   transform: translate(50, 950); 
 }
 
-#mapContainer {
-  margin: 20px;
-}
 
+
+/* Body styling */
 body {
-  max-width: 2000px;
-  min-width: 800px; 
-  margin: 0 auto; 
+  overflow-x: hidden; /* Empêche le défilement horizontal inutile */
+  background-color: #f4f4f4; /* Couleur de fond pour tout le corps, différente du conteneur pour le contraste */
+  padding: 0;
+  margin: 0;
 }
 
+/* Back button styling */
 #backButton {
   font-size: 20px;
   padding: 15px 30px; 
@@ -100,10 +138,9 @@ body {
   border-radius: 8px; 
   cursor: pointer;
   transition: background-color 0.3s ease;
+  /* margin-top: -200px;  */
 }
 
 #backButton:hover {
   background-color: #0056b3;
 }
-
-

@@ -1,31 +1,31 @@
 <!doctype html>
 <html lang="en-US">
-  <head>
+<head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Olympic Games</title>
     <link rel="stylesheet" href="styles/index.css" />
 
     <script src="scripts/mapdata.js"></script> 
-    <script  src="scripts/worldmap.js"></script>
-    <script  src="scripts/initializeMap.js"></script>
+    <script src="scripts/worldmap.js"></script>
+    <script src="scripts/initializeMap.js"></script>
+</head>
+<body>
+    <div class="main-container"> <!-- Conteneur principal -->
+        <div class="center">
+            <img src="images/olympic_symbole.png" alt="Logo of the Olympics" class="logo-image">
+        </div>
+        <h1> Ring of Time : An Olympic Legacy </h1>
+        
+        <div class="menu">
+            <a href="pages/olympics.html">Olympics</a>
+            <a href="pages/history.html">History</a>
+            <a href="pages/about_us.html">About Us</a>
+        </div>
 
-  </head>
-  <body>
-    <div class="center">
-      <img src="images/olympic_symbole.png" alt="Logo of the Olympics" class="logo-image">
+        <!-- Container pour la carte SVG -->
+        <div id="mapContainer"></div>
+        <button id="backButton">Back</button>
     </div>
-    <h1> Ring of Time : An Olympic Legacy </h1>
-    
-    <div class="menu">
-      <a href="pages/olympics.html">Olympics</a>
-      <a href="pages/history.html">History</a>
-      <a href="pages/about_us.html">About Us</a>
-    </div>
-
-    <!-- Container pour la carte SVG -->
-    <div id="mapContainer"></div>
-    <button id="backButton">Back</button>
-
-  </body>
+</body>
 </html>

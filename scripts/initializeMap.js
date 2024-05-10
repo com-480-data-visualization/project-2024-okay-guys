@@ -18,8 +18,8 @@ function findRegionByCountry(country) {
 function createSVGElement() {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("viewBox", "0 0 2000 1000");
-    svg.style.width = "100%";
-    svg.style.height = "1000px";
+    svg.style.width = "80%";
+    svg.style.height = "auto";
     return svg;
 }
 
@@ -61,6 +61,7 @@ function handleRegionClick(region, svgElement) {
     const boundingBox = calculateBoundingBox(region);
     svgElement.setAttribute("viewBox", `${boundingBox.minX} ${boundingBox.minY} ${boundingBox.width} ${boundingBox.height}`);
     displayPathsByRegion(region, svgElement);
+    adjustSvgSize(); 
 }
 
 function displayPathsByRegion(selectedRegion, svgElement) {
@@ -171,19 +172,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("mapContainer").appendChild(svgElement);
     drawSVGPaths(svgElement);
     createLegend(svgElement);
+    adjustSvgSize(); 
+
+    window.addEventListener('resize', adjustSvgSize); // Ecouteur pour les redimensionnements de la fenêtre
 
     const backButton = document.getElementById('backButton');
     backButton.addEventListener('click', () => {
-        // Réinitialiser le zoom en ajustant la vue de la carte pour qu'elle s'adapte à toute la carte
         svgElement.setAttribute("viewBox", "0 0 2000 1000");
-
-        // Réinitialiser l'affichage de tous les chemins
         resetPathVisibility(svgElement);
-
-        // Réinitialiser la région sélectionnée et réafficher toutes les villes
-        displayCities(null, svgElement);
+        adjustSvgSize();
     });
 });
+
 
 function resetPathVisibility(svgElement) {
     const allPaths = svgElement.querySelectorAll('path');
@@ -194,4 +194,13 @@ function resetPathVisibility(svgElement) {
     allCircle.forEach(circle => {
         circle.style.display = 'block';
     });
+}
+
+function adjustSvgSize() {
+    const container = document.getElementById('mapContainer');
+    const svgElement = document.querySelector('#mapContainer svg');
+    if (svgElement && container) {
+        svgElement.style.width = '80%'; // Assurer que le SVG occupe toujours 100% de la largeur du conteneur
+        svgElement.style.height = container.offsetWidth * 0.5 + 'px'; // Ajuster la hauteur basée sur le ratio désiré
+    }
 }
