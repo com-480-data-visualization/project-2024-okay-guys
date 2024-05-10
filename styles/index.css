@@ -20,6 +20,7 @@ html {
   display: flex;
   justify-content: center; /* Centre horizontalement */
   align-items: center; /* Centre verticalement si le conteneur a une hauteur spécifique */
+  margin-top: 50px;
   width: 100%; /* Prend toute la largeur du conteneur parent */
   height: 100%; /* Optionnel, dépend de la hauteur que vous voulez pour votre conteneur */
 }
@@ -77,24 +78,24 @@ h1 {
   color: #333; 
   border: 1px solid #ccc; 
   border-radius: 8px; 
-  padding: 20px 25px; 
+  padding: 2vw 3vw; /* Utilisation de pourcentages de la largeur de la fenêtre */
   position: absolute;
   z-index: 1000;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
   transition: opacity 0.3s;
   opacity: 0; 
   font-family: "Josefin Sans", sans-serif; 
-  font-size: 20px; 
+  font-size: 1.5vw; /* Utilisation de pourcentages de la taille de la fenêtre */
   line-height: 1.4;
 }
 
 .tooltip .city-country {
-  font-size: 25px;
+  font-size: 2vw; /* Utilisation de pourcentages de la taille de la fenêtre */
   font-weight: bold; 
 }
 
 .tooltip .year {
-  font-size: 20px; 
+  font-size: 1.5vw; /* Utilisation de pourcentages de la taille de la fenêtre */
 }
 
 .tooltip.show {
@@ -130,15 +131,14 @@ body {
 
 /* Back button styling */
 #backButton {
-  font-size: 20px;
-  padding: 15px 30px; 
+  font-size: 2vw;
+  padding: 1.5vw 3vw;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 8px; 
+  border-radius: 20px; 
   cursor: pointer;
   transition: background-color 0.3s ease;
-  /* margin-top: -200px;  */
 }
 
 #backButton:hover {
