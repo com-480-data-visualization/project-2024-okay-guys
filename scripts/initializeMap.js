@@ -23,17 +23,20 @@ function createSVGElement() {
     return svg;
 }
 
-function drawSVGPaths(svgElement, filterRegion = null) {
+function drawSVGPaths(svgElement) {
     Object.entries(paths).forEach(([country, dPath]) => {
         const region = findRegionByCountry(country);
-
-        if (!filterRegion || region === filterRegion) {
-            const pathElement = createPathElement(dPath, country, region);
-            pathElement.addEventListener('click', () => handleRegionClick(region, svgElement));
-            svgElement.appendChild(pathElement);
-        }
+        const pathElement = createPathElement(dPath, country, region);
+        pathElement.addEventListener('click', () => handleRegionClick(region, svgElement));
+        svgElement.appendChild(pathElement);
+        
     });
-    displayCities(svgElement, filterRegion); 
+
+    Object.values(locations).forEach(city => {
+        const cityRegion = findRegionByCountry(countryIdsByName[city.country]);
+        const circle = createCityElement(city, cityRegion);
+        svgElement.appendChild(circle);
+    });
 
 }
 
@@ -58,7 +61,6 @@ function handleRegionClick(region, svgElement) {
     const boundingBox = calculateBoundingBox(region);
     svgElement.setAttribute("viewBox", `${boundingBox.minX} ${boundingBox.minY} ${boundingBox.width} ${boundingBox.height}`);
     displayPathsByRegion(region, svgElement);
-    displayCities(region, svgElement);
 }
 
 function displayPathsByRegion(selectedRegion, svgElement) {
@@ -71,24 +73,25 @@ function displayPathsByRegion(selectedRegion, svgElement) {
             path.style.display = 'none'; 
         }
     });
-}
-
-function displayCities(svgElement, region) {
-    Object.values(locations).forEach(city => {
-        const cityRegion = findRegionByCountry(countryIdsByName[city.country]);
-        if (!region || cityRegion === region) {
-            const circle = createCityElement(city);
-            svgElement.appendChild(circle);
+    const allCircle = svgElement.querySelectorAll('circle');
+    allCircle.forEach(circle => {
+        // Vérifier si la location appartient à la région sélectionnée
+        if (circle.getAttribute('data-region') === selectedRegion) {
+            circle.style.display = 'block';
+        } else {
+            circle.style.display = 'none'; 
         }
     });
+
 }
 
-function createCityElement(city) {
+function createCityElement(city, cityRegion) {
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("cx", city.x);
     circle.setAttribute("cy", city.y);
     circle.setAttribute("r", "7");
     circle.setAttribute("fill", city.winter === 0 ? "orange" : "blue");
+    circle.setAttribute("data-region", cityRegion);
     circle.addEventListener('mouseover', event => showTooltip(event, city));
     circle.addEventListener('mouseout', hideTooltip);
     return circle;
@@ -186,5 +189,9 @@ function resetPathVisibility(svgElement) {
     const allPaths = svgElement.querySelectorAll('path');
     allPaths.forEach(path => {
         path.style.display = 'block'; // Réafficher tous les chemins
+    });
+    const allCircle = svgElement.querySelectorAll('circle');
+    allCircle.forEach(circle => {
+        circle.style.display = 'block';
     });
 }
