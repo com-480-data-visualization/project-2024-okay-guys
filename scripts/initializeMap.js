@@ -79,6 +79,7 @@ function displayPathsByRegion(selectedRegion, svgElement) {
         // Vérifier si la location appartient à la région sélectionnée
         if (circle.getAttribute('data-region') === selectedRegion) {
             circle.style.display = 'block';
+            circle.setAttribute("r", "4");
         } else {
             circle.style.display = 'none'; 
         }
@@ -195,9 +196,12 @@ function resetPathVisibility(svgElement) {
     const allCircle = svgElement.querySelectorAll('circle');
     allCircle.forEach(circle => {
         circle.style.display = 'block';
+        circle.setAttribute("r", "7");
+
     });
     const legend = document.querySelector('.legend-container');
     legend.style.display = 'block';
+
 }
 
 function adjustSvgSize() {
