@@ -140,7 +140,6 @@ function showTooltip(event, city) {
     tooltip.innerHTML = `<span class='city-country'>${city.name}, ${city.country}</span><br><span class='year'>${city.year}</span>`;
     document.body.appendChild(tooltip);
     setTimeout(() => { tooltip.classList.add('show'); }, 10);
-
 }
 
 function hideTooltip() {

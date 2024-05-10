@@ -43,24 +43,24 @@ h1 {
   color: #333; 
   border: 1px solid #ccc; 
   border-radius: 8px; 
-  padding: 10px 15px; 
+  padding: 20px 25px; 
   position: absolute;
   z-index: 1000;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
   transition: opacity 0.3s;
   opacity: 0; 
   font-family: "Josefin Sans", sans-serif; 
-  font-size: 14px; 
+  font-size: 20px; 
   line-height: 1.4;
 }
 
 .tooltip .city-country {
-  font-size: 16px;
+  font-size: 25px;
   font-weight: bold; 
 }
 
 .tooltip .year {
-  font-size: 14px; 
+  font-size: 20px; 
 }
 
 .tooltip.show {
@@ -69,7 +69,7 @@ h1 {
 
 .legend-text {
   fill: #333;
-  font-size: 18px; 
+  font-size: 25px; 
 }
 
 .legend-circle {
@@ -82,7 +82,6 @@ h1 {
 }
 
 #mapContainer {
-  /* width: 100%; */
   margin: 20px;
 }
 
