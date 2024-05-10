@@ -102,22 +102,23 @@ h1 {
   opacity: 1;
 }
 
+
 /* Legend text styling */
+.legend-container {
+  transform: translate(5%, 90%); /* Ajustez la position selon vos besoins */
+}
+
+
+/* Style du texte de légende */
 .legend-text {
   fill: #333;
-  font-size: 25px; 
+  font-size: 40px; /* Utilisation de pourcentages de la largeur de la fenêtre */
+  font-family: "Josefin Sans", sans-serif; 
+  font-weight: bold;
+  
 }
 
-/* Legend circle styling */
-.legend-circle {
-  stroke: black;
-  stroke-width: 2;
-}
 
-/* Legend container positioning */
-.legend-container {
-  transform: translate(50, 950); 
-}
 
 
 

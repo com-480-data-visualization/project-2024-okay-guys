@@ -83,6 +83,8 @@ function displayPathsByRegion(selectedRegion, svgElement) {
             circle.style.display = 'none'; 
         }
     });
+    const legend = document.querySelector('.legend-container');
+    legend.style.display = 'none';
 
 }
 
@@ -119,34 +121,34 @@ function calculateBoundingBox(region) {
 
 function createLegend(svgElement) {
     const legendItems = [
-        { cx: 20, cy: 20, fill: "orange", text: "Summer Olympics" },
-        { cx: 20, cy: 60, fill: "blue", text: "Winter Olympics" }
-      ];
-    
-      const legendContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      legendContainer.setAttribute("transform", "translate(50, 900)");
-    
-      legendItems.forEach(({ cx, cy, fill, text }) => {
-        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        circle.setAttribute("cx", cx);
-        circle.setAttribute("cy", cy);
-        circle.setAttribute("r", "15");
-        circle.setAttribute("fill", fill);
-    
-        const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
-        textElement.setAttribute("x", cx + 30);
-        textElement.setAttribute("y", cy + 5);
-        textElement.textContent = text;
-        textElement.style.fill = "#333";
-        textElement.style.fontSize = "20px"; 
-        textElement.style.fontWeight = "bold"; 
-    
-        legendContainer.appendChild(circle);
-        legendContainer.appendChild(textElement);
-      });
-    
-      svgElement.appendChild(legendContainer);
+      { fill: "orange", text: "Summer Olympics" },
+      { fill: "blue", text: "Winter Olympics" }
+    ];
+  
+    const legendContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    legendContainer.classList.add("legend-container"); // Ajout de la classe CSS pour le conteneur de légende
+  
+    legendItems.forEach(({ fill, text }, index) => {
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.classList.add("legend-circle"); // Ajout de la classe CSS pour le cercle de légende
+      circle.setAttribute("cx", 20);
+      circle.setAttribute("cy", 20 + 40 * index);
+      circle.setAttribute("r", "15");
+      circle.setAttribute("fill", fill);
+  
+      const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      textElement.classList.add("legend-text"); // Ajout de la classe CSS pour le texte de légende
+      textElement.setAttribute("x", 50);
+      textElement.setAttribute("y", 40 + 40 * index);
+      textElement.textContent = text;
+  
+      legendContainer.appendChild(circle);
+      legendContainer.appendChild(textElement);
+    });
+  
+    svgElement.appendChild(legendContainer);
 }
+  
 
 function showTooltip(event, city) {
     const tooltip = document.createElement('div');
@@ -194,6 +196,8 @@ function resetPathVisibility(svgElement) {
     allCircle.forEach(circle => {
         circle.style.display = 'block';
     });
+    const legend = document.querySelector('.legend-container');
+    legend.style.display = 'block';
 }
 
 function adjustSvgSize() {
