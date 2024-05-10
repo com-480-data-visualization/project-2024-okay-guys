@@ -52,10 +52,19 @@ function createPathElement(dPath, country, region) {
     return path;
 }
 
+
+function changeRegionColor(region, color) {
+    const paths = document.querySelectorAll(`path[data-region="${region}"]`);
+    console.log(paths);
+    paths.forEach(path => {
+        path.setAttribute('fill', color);
+    });
+}
 function addPathEventListeners(path) {
-    path.addEventListener('mouseover', () => path.setAttribute('fill', hoverColor));
-    path.addEventListener('mouseout', () => path.setAttribute('fill', defaultColor));
-    }
+    path.addEventListener('mouseover', () => changeRegionColor(path.getAttribute('data-region'), hoverColor)); // Changement de couleur lors du survol
+    path.addEventListener('mouseout', () => changeRegionColor(path.getAttribute('data-region'), defaultColor)); // Revenir à la couleur par défaut lors de la sortie de la souris
+}
+
 
 function handleRegionClick(region, svgElement) {
     const boundingBox = calculateBoundingBox(region);
@@ -70,6 +79,9 @@ function displayPathsByRegion(selectedRegion, svgElement) {
         // Vérifier si le chemin appartient à la région sélectionnée
         if (path.getAttribute('data-region') === selectedRegion) {
             path.style.display = 'block';
+            path.addEventListener('mouseover', () => changeRegionColor(path.getAttribute('data-region'), defaultColor)); // Changement de couleur lors du survo
+            path.addEventListener('mouseover', () => path.setAttribute('fill', hoverColor));
+            path.addEventListener('mouseout', () => path.setAttribute('fill', defaultColor));
         } else {
             path.style.display = 'none'; 
         }
@@ -150,7 +162,6 @@ function createLegend(svgElement) {
     svgElement.appendChild(legendContainer);
 }
   
-
 function showTooltip(event, city) {
     const tooltip = document.createElement('div');
     tooltip.className = 'tooltip';
@@ -187,11 +198,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
 function resetPathVisibility(svgElement) {
     const allPaths = svgElement.querySelectorAll('path');
     allPaths.forEach(path => {
         path.style.display = 'block'; // Réafficher tous les chemins
+        addPathEventListeners(path);
     });
     const allCircle = svgElement.querySelectorAll('circle');
     allCircle.forEach(circle => {
