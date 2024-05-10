@@ -52,17 +52,43 @@ function createPathElement(dPath, country, region) {
     return path;
 }
 
+function showTooltipRegion(event, region) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    tooltip.style.position = 'absolute';
+    tooltip.style.left = `${event.pageX + 10}px`;
+    tooltip.style.top = `${event.pageY + 10}px`;
+    tooltip.innerHTML = `<span class='city-country'>${defaultRegions[region].name}</span>`;
+    document.body.appendChild(tooltip);
+    setTimeout(() => { tooltip.classList.add('show'); }, 10);
+}
 
-function changeRegionColor(region, color) {
+function hideTooltipRegion() {
+    const tooltip = document.querySelector('.tooltip');
+    if (tooltip) {
+        tooltip.classList.remove('show');
+        setTimeout(() => { tooltip.remove(); }, 10);
+    }
+}
+
+function changeRegionColor(event, mouse, region, color) {
     const paths = document.querySelectorAll(`path[data-region="${region}"]`);
-    console.log(paths);
     paths.forEach(path => {
         path.setAttribute('fill', color);
     });
+
+
+    if(mouse){
+        showTooltipRegion(event, region)
+    }
+    else{
+        hideTooltipRegion()
+    }
 }
+
 function addPathEventListeners(path) {
-    path.addEventListener('mouseover', () => changeRegionColor(path.getAttribute('data-region'), hoverColor)); // Changement de couleur lors du survol
-    path.addEventListener('mouseout', () => changeRegionColor(path.getAttribute('data-region'), defaultColor)); // Revenir à la couleur par défaut lors de la sortie de la souris
+    path.addEventListener('mouseover', event => changeRegionColor(event, true,  path.getAttribute('data-region'), hoverColor)); // Changement de couleur lors du survol
+    path.addEventListener('mouseout', event => changeRegionColor(event, false, path.getAttribute('data-region'), defaultColor)); // Revenir à la couleur par défaut lors de la sortie de la souris
 }
 
 
@@ -108,8 +134,8 @@ function createCityElement(city, cityRegion) {
     circle.setAttribute("r", "7");
     circle.setAttribute("fill", city.winter === 0 ? "orange" : "blue");
     circle.setAttribute("data-region", cityRegion);
-    circle.addEventListener('mouseover', event => showTooltip(event, city));
-    circle.addEventListener('mouseout', hideTooltip);
+    circle.addEventListener('mouseover', event => showTooltipCity(event, city));
+    circle.addEventListener('mouseout', hideTooltipCity);
     return circle;
 }
 
@@ -162,7 +188,7 @@ function createLegend(svgElement) {
     svgElement.appendChild(legendContainer);
 }
   
-function showTooltip(event, city) {
+function showTooltipCity(event, city) {
     const tooltip = document.createElement('div');
     tooltip.className = 'tooltip';
     tooltip.style.position = 'absolute';
@@ -173,7 +199,7 @@ function showTooltip(event, city) {
     setTimeout(() => { tooltip.classList.add('show'); }, 10);
 }
 
-function hideTooltip() {
+function hideTooltipCity() {
     const tooltip = document.querySelector('.tooltip');
     if (tooltip) {
         tooltip.classList.remove('show');
