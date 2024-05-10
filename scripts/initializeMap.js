@@ -1,170 +1,165 @@
 // Configuration initiale et récupération des données depuis la structure de la carte
 const mapInfo = window.simplemaps_worldmap_mapinfo;
-const paths = mapInfo.paths;
-const defaultRegions = mapInfo.default_regions;
+const { paths, defaultRegions, stateBboxArray } = mapInfo;
 const locations = window.simplemaps_worldmap_mapdata.locations;
-const stateBboxArray = mapInfo.state_bbox_array;
 const countryNames = mapInfo.idToNames;
+
+// Styles par défaut
 const defaultColor = '#ffffff';
 const hoverColor = '#ccc';
 
 // Conversion des noms de pays en identifiants
 const countryIdsByName = Object.fromEntries(Object.entries(countryNames).map(([id, name]) => [name, id]));
 
-// Fonction pour trouver la région par pays
 function findRegionByCountry(country) {
-  return Object.entries(defaultRegions).find(([_, region]) => region.states.includes(country))?.[0];
+    return Object.entries(defaultRegions).find(([_, region]) => region.states.includes(country))?.[0];
 }
 
-// Dessin des chemins SVG pour les pays
-function drawSVGPaths() {
-  const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svgElement.setAttribute("viewBox", "0 0 2000 1000");
-  svgElement.style.width = "100%";
-  svgElement.style.height = "1000px";
-
-  let selectedRegion = null;
-
-  // Traitement et ajout des chemins de chaque pays
-  Object.entries(paths).forEach(([country, dPath]) => {
-    const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    pathElement.setAttribute("d", dPath);
-    pathElement.setAttribute("fill", defaultColor);
-    pathElement.setAttribute("stroke", "black");
-    pathElement.setAttribute("stroke-width", "2");
-    pathElement.setAttribute("id", country);
-
-    const region = findRegionByCountry(country);
-    pathElement.setAttribute("data-region", region || '');
-
-    displayCities(selectedRegion, svgElement); 
-
-    pathElement.addEventListener('mouseover', () => pathElement.setAttribute('fill', hoverColor));
-    pathElement.addEventListener('mouseout', () => pathElement.setAttribute('fill', defaultColor));
-    pathElement.addEventListener('click', () => handleCountryClick(pathElement, svgElement));
-
-    svgElement.appendChild(pathElement);
-  });
-
-  // Ajout de la légende
-  createLegend(svgElement);
-  document.getElementById("mapContainer").appendChild(svgElement);
+function createSVGElement() {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 2000 1000");
+    svg.style.width = "100%";
+    svg.style.height = "1000px";
+    return svg;
 }
 
-// Gestion du clic sur un pays
-function handleCountryClick(pathElement, svgElement) {
-  const selectedRegion = pathElement.getAttribute('data-region');
-  const boundingBox = calculateBoundingBox(selectedRegion);
-  svgElement.setAttribute("viewBox", `${boundingBox.minX} ${boundingBox.minY} ${boundingBox.width} ${boundingBox.height}`);
-  displayCities(selectedRegion, svgElement);
+function drawSVGPaths(svgElement, filterRegion = null) {
+    Object.entries(paths).forEach(([country, dPath]) => {
+        const region = findRegionByCountry(country);
+
+        if (!filterRegion || region === filterRegion) {
+            const pathElement = createPathElement(dPath, country, region);
+            pathElement.addEventListener('click', () => handleRegionClick(region, svgElement));
+            svgElement.appendChild(pathElement);
+        }
+    });
+    displayCities(svgElement, filterRegion); 
+
 }
 
-// Affichage des villes en fonction de la région sélectionnée
-function displayCities(region, svgElement) {
-  Object.entries(locations).forEach(([_, city]) => {
+function createPathElement(dPath, country, region) {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", dPath);
+    path.setAttribute("fill", defaultColor);
+    path.setAttribute("stroke", "black");
+    path.setAttribute("stroke-width", "2");
+    path.setAttribute("id", country);
+    path.setAttribute("data-region", region);
+    addPathEventListeners(path);
+    return path;
+}
 
-    const cityCountryId = countryIdsByName[city.country];
-    const cityRegion = findRegionByCountry(cityCountryId);
-    
-    if (region === null || cityRegion === region ) {
-      const circleElement = createCityElement(city);
-      svgElement.appendChild(circleElement);
+function addPathEventListeners(path) {
+    path.addEventListener('mouseover', () => path.setAttribute('fill', hoverColor));
+    path.addEventListener('mouseout', () => path.setAttribute('fill', defaultColor));
     }
-  
-  });
+
+function handleRegionClick(region, svgElement) {
+    const boundingBox = calculateBoundingBox(region);
+    svgElement.setAttribute("viewBox", `${boundingBox.minX} ${boundingBox.minY} ${boundingBox.width} ${boundingBox.height}`);
+    displayCities(region, svgElement);
 }
 
-// Création des éléments SVG pour les villes
+function displayCities(svgElement, region) {
+    Object.values(locations).forEach(city => {
+        const cityRegion = findRegionByCountry(countryIdsByName[city.country]);
+        if (!region || cityRegion === region) {
+            const circle = createCityElement(city);
+            svgElement.appendChild(circle);
+        }
+    });
+}
+
 function createCityElement(city) {
-  const circleElement = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  circleElement.setAttribute("cx", city.x);
-  circleElement.setAttribute("cy", city.y);
-  circleElement.setAttribute("r", "7");
-  circleElement.setAttribute("fill", city.winter === 0 ? "orange" : "blue");
-  circleElement.addEventListener('mouseover', (event) => showTooltip(event, city));
-  circleElement.addEventListener('mouseout', () => hideTooltip());
-  return circleElement;
-}
-
-function createLegend(svgElement) {
-  const legendItems = [
-    { cx: 20, cy: 20, fill: "orange", text: "Summer Olympics" },
-    { cx: 20, cy: 60, fill: "blue", text: "Winter Olympics" }
-  ];
-
-  const legendContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  legendContainer.setAttribute("transform", "translate(50, 900)");
-
-  legendItems.forEach(({ cx, cy, fill, text }) => {
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circle.setAttribute("cx", cx);
-    circle.setAttribute("cy", cy);
-    circle.setAttribute("r", "15");
-    circle.setAttribute("fill", fill);
-
-    const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    textElement.setAttribute("x", cx + 30);
-    textElement.setAttribute("y", cy + 5);
-    textElement.textContent = text;
-    textElement.style.fill = "#333";
-    textElement.style.fontSize = "20px"; 
-    textElement.style.fontWeight = "bold"; 
-
-    legendContainer.appendChild(circle);
-    legendContainer.appendChild(textElement);
-  });
-
-  svgElement.appendChild(legendContainer);
-}
-
-// Affichage d'un tooltip pour les détails de la ville
-function showTooltip(event, city) {
-  const tooltip = document.createElement('div');
-  tooltip.className = 'tooltip';
-  tooltip.style.position = 'absolute';
-  tooltip.style.left = `${event.pageX + 10}px`;
-  tooltip.style.top = `${event.pageY + 10}px`;
-  tooltip.innerHTML = `<span class='city-country'>${city.name}, ${city.country}</span><br><span class='year'>${city.year}</span>`;
-  document.body.appendChild(tooltip);
-  setTimeout(() => { tooltip.classList.add('show'); }, 10);
-}
-
-function hideTooltip() {
-  const tooltip = document.querySelector('.tooltip');
-  if (tooltip) {
-    tooltip.classList.remove('show');
-    setTimeout(() => { tooltip.remove(); }, 10);
-  }
+    circle.setAttribute("cx", city.x);
+    circle.setAttribute("cy", city.y);
+    circle.setAttribute("r", "7");
+    circle.setAttribute("fill", city.winter === 0 ? "orange" : "blue");
+    circle.addEventListener('mouseover', event => showTooltip(event, city));
+    circle.addEventListener('mouseout', hideTooltip);
+    return circle;
 }
 
 function calculateBoundingBox(region) {
-  let minX = Infinity;
-  let minY = Infinity;
-  let maxX = -Infinity;
-  let maxY = -Infinity;
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+    
+    Object.keys(stateBboxArray).forEach(country_id => {
+      if (defaultRegions[region].states.includes(country_id)) {
+  
+        const bbox = stateBboxArray[country_id];
+        minX = Math.min(minX, bbox.x);
+        minY = Math.min(minY, bbox.y);
+        maxX = Math.max(maxX, bbox.x2);
+        maxY = Math.max(maxY, bbox.y2);
+      }
+    });
+    return { minX, minY, width: maxX - minX, height: maxY - minY };
+  }
 
-  Object.keys(stateBboxArray).forEach(country_id => {
-    if (defaultRegions[region].states.includes(country_id)) {
-
-      const bbox = stateBboxArray[country_id];
-      minX = Math.min(minX, bbox.x);
-      minY = Math.min(minY, bbox.y);
-      maxX = Math.max(maxX, bbox.x2);
-      maxY = Math.max(maxY, bbox.y2);
-    }
-  });
-  return { minX, minY, width: maxX - minX, height: maxY - minY };
+function createLegend(svgElement) {
+    const legendItems = [
+        { cx: 20, cy: 20, fill: "orange", text: "Summer Olympics" },
+        { cx: 20, cy: 60, fill: "blue", text: "Winter Olympics" }
+      ];
+    
+      const legendContainer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      legendContainer.setAttribute("transform", "translate(50, 900)");
+    
+      legendItems.forEach(({ cx, cy, fill, text }) => {
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", cx);
+        circle.setAttribute("cy", cy);
+        circle.setAttribute("r", "15");
+        circle.setAttribute("fill", fill);
+    
+        const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        textElement.setAttribute("x", cx + 30);
+        textElement.setAttribute("y", cy + 5);
+        textElement.textContent = text;
+        textElement.style.fill = "#333";
+        textElement.style.fontSize = "20px"; 
+        textElement.style.fontWeight = "bold"; 
+    
+        legendContainer.appendChild(circle);
+        legendContainer.appendChild(textElement);
+      });
+    
+      svgElement.appendChild(legendContainer);
 }
 
-// Initialisation une fois le document chargé
-document.addEventListener("DOMContentLoaded", drawSVGPaths);
+function showTooltip(event, city) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    tooltip.style.position = 'absolute';
+    tooltip.style.left = `${event.pageX + 10}px`;
+    tooltip.style.top = `${event.pageY + 10}px`;
+    tooltip.innerHTML = `<span class='city-country'>${city.name}, ${city.country}</span><br><span class='year'>${city.year}</span>`;
+    document.body.appendChild(tooltip);
+    setTimeout(() => { tooltip.classList.add('show'); }, 10);
+
+}
+
+function hideTooltip() {
+    const tooltip = document.querySelector('.tooltip');
+    if (tooltip) {
+        tooltip.classList.remove('show');
+        setTimeout(() => { tooltip.remove(); }, 10);
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-  const backButton = document.getElementById('backButton');
-  const svgElement = document.querySelector("svg");
+    const svgElement = createSVGElement();
+    document.getElementById("mapContainer").appendChild(svgElement);
+    drawSVGPaths(svgElement);
+    createLegend(svgElement);
 
-  // Ajouter un gestionnaire d'événements de clic à la flèche de retour en arrière
-  backButton.addEventListener('click', () => {
+    const backButton = document.getElementById('backButton');
+    // Ajouter un gestionnaire d'événements de clic à la flèche de retour en arrière
+    backButton.addEventListener('click', () => {
 
     // Réinitialiser le zoom en ajustant la vue de la carte pour qu'elle s'adapte à toute la carte
     svgElement.setAttribute("viewBox", "0 0 2000 1000");

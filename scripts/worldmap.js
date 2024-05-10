@@ -1,7 +1,7 @@
 /* Map path and default settings - you can edit this */
 var simplemaps_worldmap_mapinfo = {
     map_name: "world",
-    state_bbox_array: {
+    stateBboxArray: {
         BD: { y: 332, x: 1472, x2: 1501, y2: 369 },
         BE: { y: 173, x: 999, x2: 1017, y2: 185 },
         BF: { y: 405, x: 956, x2: 999, y2: 440 },
@@ -800,7 +800,7 @@ var simplemaps_worldmap_mapinfo = {
         MZ: "Mozambique",
     },
 
-    default_regions: {
+    defaultRegions: {
         "0": { name: "North America", states: ["MX", "CA", "US", "GL", "BM"] },
         "1": {
             name: "South America",
