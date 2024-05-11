@@ -150,7 +150,7 @@ function displayPathsByRegion(selectedRegion, svgElement) {
         // Vérifier si la location appartient à la région sélectionnée
         if (circle.getAttribute('data-region') === selectedRegion) {
             circle.style.display = 'block';
-            circle.setAttribute("r", "5");
+            circle.setAttribute("r", "0.3vw");
         } else {
             circle.style.display = 'none'; 
         }
@@ -167,6 +167,8 @@ function createCityElement(city, cityRegion) {
     circle.setAttribute("r", "7");
     circle.setAttribute("fill", city.winter === 0 ? "orange" : "blue");
     circle.setAttribute("data-region", cityRegion);
+    circle.setAttribute("stroke", "black");
+    circle.setAttribute("stroke-width", "2");
     circle.addEventListener('mouseover', event => showTooltip('city', event, city));
     circle.addEventListener('mouseout', hideTooltip);
     return circle;
