@@ -29,7 +29,7 @@ html {
 /* Styling for headings */
 h1 {
   font-family: "Josefin Sans", sans-serif;
-  font-size: 60px;
+  font-size: 3vw;
   text-align: center;
 }
 
@@ -42,7 +42,7 @@ h1 {
 .logo-image {
   width: 100%; /* Assurez-vous que l'image ne dépasse pas la largeur du conteneur */
   height: auto;
-  max-width: 800px; /* Taille maximale de l'image pour qu'elle ne devienne pas trop grande */
+  max-width: 1000px; /* Taille maximale de l'image pour qu'elle ne devienne pas trop grande */
 }
 
 
@@ -64,7 +64,7 @@ h1 {
   border-radius: 10px;
   margin-right: 40px;
   font-family: "Josefin Sans", sans-serif; 
-  font-size: 40px; /* Utiliser la même taille de police que le titre */
+  font-size: 2vw; /* Utiliser la même taille de police que le titre */
 }
 
 .menu a:hover {
@@ -78,28 +78,32 @@ h1 {
   color: #333; 
   border: 1px solid #ccc; 
   border-radius: 8px; 
-  padding: 2vw 3vw; /* Utilisation de pourcentages de la largeur de la fenêtre */
+  padding: 1vw 2vw; /* Utilisation de pourcentages de la largeur de la fenêtre */
   position: absolute;
   z-index: 1000;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
   transition: opacity 0.3s;
   opacity: 0; 
   font-family: "Josefin Sans", sans-serif; 
-  font-size: 1.5vw; /* Utilisation de pourcentages de la taille de la fenêtre */
+  font-size: 1vw; /* Utilisation de pourcentages de la taille de la fenêtre */
   line-height: 1.4;
 }
 
 .tooltip .city-country {
-  font-size: 2vw; /* Utilisation de pourcentages de la taille de la fenêtre */
+  font-size: 1.5vw; /* Utilisation de pourcentages de la taille de la fenêtre */
   font-weight: bold; 
 }
 
 .tooltip .year {
-  font-size: 1.5vw; /* Utilisation de pourcentages de la taille de la fenêtre */
+  font-size: 1vw; /* Utilisation de pourcentages de la taille de la fenêtre */
 }
 
 .tooltip.show {
   opacity: 1;
+}
+
+.city-tooltip {
+  border-radius: 50px; /* Augmenter le rayon des coins pour des bords plus arrondis */
 }
 
 
@@ -117,10 +121,6 @@ h1 {
   font-weight: bold;
   
 }
-
-
-
-
 
 /* Body styling */
 body {
@@ -140,6 +140,7 @@ body {
   border-radius: 20px; 
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: none;
 }
 
 #backButton:hover {

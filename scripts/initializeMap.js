@@ -20,6 +20,7 @@ function createSVGElement() {
     svg.setAttribute("viewBox", "0 0 2000 1000");
     svg.style.width = "80%";
     svg.style.height = "auto";
+    svg.style.backgroundColor = "bfd7ea";
     return svg;
 }
 
@@ -52,62 +53,94 @@ function createPathElement(dPath, country, region) {
     return path;
 }
 
-function showTooltipRegion(event, region) {
+function showTooltip(type, event, data) {
     const tooltip = document.createElement('div');
     tooltip.className = 'tooltip';
     tooltip.style.position = 'absolute';
     tooltip.style.left = `${event.pageX + 10}px`;
     tooltip.style.top = `${event.pageY + 10}px`;
-    tooltip.innerHTML = `<span class='city-country'>${defaultRegions[region].name}</span>`;
+
+    switch (type) {
+        case 'region':
+            tooltipContent = `<span class='city-country'>${defaultRegions[data].name}</span>`;
+            break;
+        case 'country':
+            tooltipContent = `<span class='city-country'>${countryNames[data]}</span>`;
+            break;
+        case 'city':
+            tooltipContent = `<span class='city-country'>${data.name}, ${data.country}</span><br><span class='year'>${data.year}</span>`;
+            tooltip.classList.add('city-tooltip'); // Ajouter une classe supplémentaire pour le type 'city'
+            break;
+        default:
+            tooltipContent = '';
+    }
+
+    tooltip.innerHTML = tooltipContent;
     document.body.appendChild(tooltip);
     setTimeout(() => { tooltip.classList.add('show'); }, 10);
 }
 
-function hideTooltipRegion() {
-    const tooltip = document.querySelector('.tooltip');
-    if (tooltip) {
+function hideTooltip() {
+    const tooltips = document.querySelectorAll('.tooltip');
+    tooltips.forEach(tooltip => {
         tooltip.classList.remove('show');
         setTimeout(() => { tooltip.remove(); }, 10);
-    }
+    });
 }
 
-function changeRegionColor(event, mouse, region, color) {
+function handlePathMouseOverRegion(event) {
+    const region = this.getAttribute('data-region');
     const paths = document.querySelectorAll(`path[data-region="${region}"]`);
     paths.forEach(path => {
-        path.setAttribute('fill', color);
+        path.setAttribute('fill', hoverColor);
     });
+    showTooltip('region', event, region);
+}
 
+function handlePathMouseOutRegion() {
+    const region = this.getAttribute('data-region');
+    const paths = document.querySelectorAll(`path[data-region="${region}"]`);
+    paths.forEach(path => {
+        path.setAttribute('fill', defaultColor);
+    });
+    hideTooltip();
+}
 
-    if(mouse){
-        showTooltipRegion(event, region)
-    }
-    else{
-        hideTooltipRegion()
-    }
+function handlePathMouseOverCountry(event, path) {
+    path.setAttribute('fill', hoverColor);
+    showTooltip('country', event, path.getAttribute('id'));
+}
+
+function handlePathMouseOutCountry(path) {
+    path.setAttribute('fill', defaultColor);
+    hideTooltip();
 }
 
 function addPathEventListeners(path) {
-    path.addEventListener('mouseover', event => changeRegionColor(event, true,  path.getAttribute('data-region'), hoverColor)); // Changement de couleur lors du survol
-    path.addEventListener('mouseout', event => changeRegionColor(event, false, path.getAttribute('data-region'), defaultColor)); // Revenir à la couleur par défaut lors de la sortie de la souris
+    path.addEventListener('mouseover', handlePathMouseOverRegion); 
+    path.addEventListener('mouseout',  handlePathMouseOutRegion);
 }
-
 
 function handleRegionClick(region, svgElement) {
     const boundingBox = calculateBoundingBox(region);
     svgElement.setAttribute("viewBox", `${boundingBox.minX} ${boundingBox.minY} ${boundingBox.width} ${boundingBox.height}`);
     displayPathsByRegion(region, svgElement);
     adjustSvgSize(); 
+    const backButton = document.getElementById('backButton');
+    backButton.style.display = 'block';
 }
 
 function displayPathsByRegion(selectedRegion, svgElement) {
     const allPaths = svgElement.querySelectorAll('path');
     allPaths.forEach(path => {
-        // Vérifier si le chemin appartient à la région sélectionnée
+        path.setAttribute('fill', defaultColor);
+        path.removeEventListener('mouseover', handlePathMouseOverRegion);
+        path.removeEventListener('mouseout', handlePathMouseOutRegion);
+        path.addEventListener('mouseover', event => handlePathMouseOverCountry(event, path));
+        path.addEventListener('mouseout', () => handlePathMouseOutCountry(path));
+
         if (path.getAttribute('data-region') === selectedRegion) {
-            path.style.display = 'block';
-            path.addEventListener('mouseover', () => changeRegionColor(path.getAttribute('data-region'), defaultColor)); // Changement de couleur lors du survo
-            path.addEventListener('mouseover', () => path.setAttribute('fill', hoverColor));
-            path.addEventListener('mouseout', () => path.setAttribute('fill', defaultColor));
+            path.style.display = 'block';            
         } else {
             path.style.display = 'none'; 
         }
@@ -117,7 +150,7 @@ function displayPathsByRegion(selectedRegion, svgElement) {
         // Vérifier si la location appartient à la région sélectionnée
         if (circle.getAttribute('data-region') === selectedRegion) {
             circle.style.display = 'block';
-            circle.setAttribute("r", "4");
+            circle.setAttribute("r", "5");
         } else {
             circle.style.display = 'none'; 
         }
@@ -134,8 +167,8 @@ function createCityElement(city, cityRegion) {
     circle.setAttribute("r", "7");
     circle.setAttribute("fill", city.winter === 0 ? "orange" : "blue");
     circle.setAttribute("data-region", cityRegion);
-    circle.addEventListener('mouseover', event => showTooltipCity(event, city));
-    circle.addEventListener('mouseout', hideTooltipCity);
+    circle.addEventListener('mouseover', event => showTooltip('city', event, city));
+    circle.addEventListener('mouseout', hideTooltip);
     return circle;
 }
 
@@ -188,24 +221,6 @@ function createLegend(svgElement) {
     svgElement.appendChild(legendContainer);
 }
   
-function showTooltipCity(event, city) {
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    tooltip.style.position = 'absolute';
-    tooltip.style.left = `${event.pageX + 10}px`;
-    tooltip.style.top = `${event.pageY + 10}px`;
-    tooltip.innerHTML = `<span class='city-country'>${city.name}, ${city.country}</span><br><span class='year'>${city.year}</span>`;
-    document.body.appendChild(tooltip);
-    setTimeout(() => { tooltip.classList.add('show'); }, 10);
-}
-
-function hideTooltipCity() {
-    const tooltip = document.querySelector('.tooltip');
-    if (tooltip) {
-        tooltip.classList.remove('show');
-        setTimeout(() => { tooltip.remove(); }, 10);
-    }
-}
 
 document.addEventListener("DOMContentLoaded", () => {
     const svgElement = createSVGElement();
@@ -238,6 +253,9 @@ function resetPathVisibility(svgElement) {
     });
     const legend = document.querySelector('.legend-container');
     legend.style.display = 'block';
+
+    const backButton = document.getElementById('backButton');
+    backButton.style.display = 'none';
 
 }
 
