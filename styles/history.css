@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#timeline {
+    margin: 40px auto;
+    width: 90%;
+    height: 500px;
+    position: relative;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.event {
+    stroke: #000;
+    stroke-width: 2px;
+    fill: #fff;
+}
+
+.event text {
+    font-size: 12px;
+}

@@ -1,53 +1,53 @@
-City,Year,Season
-Albertville,1992,Winter
-Amsterdam,1928,Summer
-Antwerpen,1920,Summer
-Athina,1896,Summer
-Athina,1906,Summer
-Athina,2004,Summer
-Atlanta,1996,Summer
-Barcelona,1992,Summer
-Beijing,2008,Summer
-Berlin,1936,Summer
-Calgary,1988,Winter
-Chamonix,1924,Winter
-Cortina d'Ampezzo,1956,Winter
-Garmisch-Partenkirchen,1936,Winter
-Grenoble,1968,Winter
-Helsinki,1952,Summer
-Innsbruck,1964,Winter
-Innsbruck,1976,Winter
-Lake Placid,1932,Winter
-Lake Placid,1980,Winter
-Lillehammer,1994,Winter
-London,1908,Summer
-London,1948,Summer
-London,2012,Summer
-Los Angeles,1932,Summer
-Los Angeles,1984,Summer
-Melbourne,1956,Summer
-Mexico City,1968,Summer
-Montreal,1976,Summer
-Moskva,1980,Summer
-Munich,1972,Summer
-Nagano,1998,Winter
-Oslo,1952,Winter
-Paris,1900,Summer
-Paris,1924,Summer
-Rio de Janeiro,2016,Summer
-Roma,1960,Summer
-Salt Lake City,2002,Winter
-Sankt Moritz,1928,Winter
-Sankt Moritz,1948,Winter
-Sapporo,1972,Winter
-Sarajevo,1984,Winter
-Seoul,1988,Summer
-Sochi,2014,Winter
-Squaw Valley,1960,Winter
-St. Louis,1904,Summer
-Stockholm,1912,Summer
-Stockholm,1956,Summer
-Sydney,2000,Summer
-Tokyo,1964,Summer
-Torino,2006,Winter
-Vancouver,2010,Winter
+Year,City,Season
+1896,Athina,Summer
+1900,Paris,Summer
+1904,St. Louis,Summer
+1906,Athina,Summer
+1908,London,Summer
+1912,Stockholm,Summer
+1920,Antwerpen,Summer
+1924,Chamonix,Winter
+1924,Paris,Summer
+1928,Amsterdam,Summer
+1928,Sankt Moritz,Winter
+1932,Lake Placid,Winter
+1932,Los Angeles,Summer
+1936,Berlin,Summer
+1936,Garmisch-Partenkirchen,Winter
+1948,London,Summer
+1948,Sankt Moritz,Winter
+1952,Helsinki,Summer
+1952,Oslo,Winter
+1956,Cortina d'Ampezzo,Winter
+1956,Melbourne,Summer
+1956,Stockholm,Summer
+1960,Roma,Summer
+1960,Squaw Valley,Winter
+1964,Innsbruck,Winter
+1964,Tokyo,Summer
+1968,Grenoble,Winter
+1968,Mexico City,Summer
+1972,Munich,Summer
+1972,Sapporo,Winter
+1976,Innsbruck,Winter
+1976,Montreal,Summer
+1980,Lake Placid,Winter
+1980,Moskva,Summer
+1984,Los Angeles,Summer
+1984,Sarajevo,Winter
+1988,Calgary,Winter
+1988,Seoul,Summer
+1992,Albertville,Winter
+1992,Barcelona,Summer
+1994,Lillehammer,Winter
+1996,Atlanta,Summer
+1998,Nagano,Winter
+2000,Sydney,Summer
+2002,Salt Lake City,Winter
+2004,Athina,Summer
+2006,Torino,Winter
+2008,Beijing,Summer
+2010,Vancouver,Winter
+2012,London,Summer
+2014,Sochi,Winter
+2016,Rio de Janeiro,Summer

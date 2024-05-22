@@ -2,6 +2,14 @@
 
 /* Define styles for the button */
 
+/* Styling for headings */
+h1 {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 3vw;
+    text-align: center;
+  }
+
+  
 .custom-button{
     background-color: #4CAF50; /* Green background */
     border: none; /* No border */
