@@ -2,26 +2,73 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#timeline {
-    margin: 40px auto;
-    width: 90%;
-    height: 500px;
+#timeline-container {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
     position: relative;
 }
 
-.axis path,
-.axis line {
+#timeline {
+    display: inline-block;
+    position: relative;
+    height: 200px;
+}
+
+.event {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.event-summer {
+    background-color: orange;
+}
+
+.event-winter {
+    background-color: steelblue;
+}
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 6px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.axis path, .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
 }
 
-.event {
-    stroke: #000;
-    stroke-width: 2px;
-    fill: #fff;
+.year-label {
+    text-anchor: middle;
+    font-size: 10px;
 }
 
-.event text {
-    font-size: 12px;
+.arrow {
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#left-arrow {
+    left: 0;
+}
+
+#right-arrow {
+    right: 0;
 }

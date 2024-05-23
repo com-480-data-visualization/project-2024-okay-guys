@@ -1,39 +1,31 @@
 <!doctype html>
 <html lang="en-US">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>History</title>
+    <title>History of the Olympic Games</title>
     <link rel="stylesheet" href="../styles/history.css" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
-  </head>
-  <body>
-    <h1>History</h1>
-    <div id="timeline"></div>
-    <!-- <script src="../scripts/history/timeline.js"></script> -->
+    <script src="../scripts/history/data_timeline.js"></script>
+    <script src="../scripts/history/timeline.js"></script>
+</head>
+<body>
+    <h1>History of the Olympic Games</h1>
+    <div id="timeline-container">
+        <div id="timeline"></div>
+    </div>
+    <div id="left-arrow" class="arrow">&#9664;</div>
+    <div id="right-arrow" class="arrow">&#9654;</div>
+    <script>
+        createCombinedTimeline(summerOlympicsData, winterOlympicsData, '#timeline');
 
-    <!-- <img
-    src="https://flagcdn.com/80x60/ua.png"
-    srcset="https://flagcdn.com/160x120/ua.png 2x, https://flagcdn.com/240x180/ua.png 3x"
-    width="80"
-    height="60"
-    alt="Ukraine"> -->
+        document.getElementById('left-arrow').addEventListener('click', function() {
+            document.getElementById('timeline-container').scrollBy({ left: -200, behavior: 'smooth' });
+        });
 
-    <!-- → Introduction et ouverture vers les autres onglets : 
-
-    1. Histoire des JO moderne. 
-        
-        → faire une frise avec bulles ou autre avec grand évènements/périodes des JO 
-        
-        → a la vertical 
-        
-    2. Pourquoi est-ce plus qu’un évènement sportif : 
-        1. implication politique → évènement marquant 
-        2. L’ouverture à l’international : carte avec curseur sur le nombre de pays participant?
-    3. Finir sur la face des JO a énormément évoluer avec le temps ( évoquer apparition des paralympiques + évolution des disciplines + évolution des athlètes + évolution place des femmes dans les compétions sportives ) 
-        → lien vers `evol_disciplines.html`, `evol_gender.html` et `evol_athletes.html`
-
-    → le tout agrémenter de fun fact ( réfléchir sur le format mais sois sur le coté soit petit point le saviez vous incorporer dans le texte ) -->
-
-    </body>
+        document.getElementById('right-arrow').addEventListener('click', function() {
+            document.getElementById('timeline-container').scrollBy({ left: 200, behavior: 'smooth' });
+        });
+    </script>
+</body>
 </html>

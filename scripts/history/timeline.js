@@ -1,54 +1,77 @@
-// Données des événements des JO
-const events = [
-    { year: 1896, event: "Premiers JO modernes à Athènes" },
-    { year: 1924, event: "Premiers JO d'hiver à Chamonix" },
-    { year: 1936, event: "JO de Berlin, premières retransmissions télévisées" },
-    { year: 1960, event: "Premiers JO télévisés en direct à Rome" },
-    { year: 1980, event: "Boycott des JO de Moscou par les USA" },
-    { year: 2008, event: "JO de Pékin, record de médailles pour Michael Phelps" },
-    { year: 2021, event: "JO de Tokyo reportés à cause de la COVID-19" }
-];
+function createCombinedTimeline(summerData, winterData, element) {
+    const margin = { top: 20, right: 30, bottom: 50, left: 40 };
+    const width = 2000 - margin.left - margin.right; // Largeur étendue pour le défilement
+    const height = 200 - margin.top - margin.bottom;
 
-// Dimensions
-const margin = { top: 20, right: 20, bottom: 30, left: 50 },
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    const svg = d3.select(element).append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
 
-// Échelle de temps
-const x = d3.scaleTime()
-    .domain([new Date(d3.min(events, d => d.year)), new Date(d3.max(events, d => d.year))])
-    .range([0, width]);
+    const allData = summerData.concat(winterData);
 
-// Axe
-const xAxis = d3.axisBottom(x).ticks(events.length).tickFormat(d3.timeFormat("%Y"));
+    const x = d3.scaleTime()
+        .domain(d3.extent(allData, d => new Date(d.Year, 0, 1)))
+        .range([0, width]);
 
-// Création du SVG
-const svg = d3.select("#timeline").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
+    svg.append('g')
+        .attr('class', 'x axis')
+        .attr('transform', `translate(0,${height / 2})`)
+        .call(d3.axisBottom(x).tickFormat('')); // Suppression des ticks par défaut
 
-// Ajout de l'axe
-svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", `translate(0,${height})`)
-    .call(xAxis);
+    const tooltip = d3.select('body').append('div')
+        .attr('class', 'tooltip')
+        .style('opacity', 0);
 
-// Ajout des événements
-svg.selectAll(".event")
-    .data(events)
-  .enter().append("circle")
-    .attr("class", "event")
-    .attr("cx", d => x(new Date(d.year)))
-    .attr("cy", height / 2)
-    .attr("r", 5);
+    svg.selectAll('.event-summer')
+        .data(summerData)
+      .enter().append('circle')
+        .attr('class', 'event event-summer')
+        .attr('cx', d => x(new Date(d.Year, 0, 1)))
+        .attr('cy', height / 2 - 20) // Décalage pour les Jeux d'été
+        .attr('r', 5)
+        .on('mouseover', (event, d) => {
+            tooltip.transition().duration(200).style('opacity', .9);
+            tooltip.html(`${d.City}, ${d.Year}`)
+                .style('left', (event.pageX + 5) + 'px')
+                .style('top', (event.pageY - 28) + 'px');
+        })
+        .on('mouseout', d => {
+            tooltip.transition().duration(500).style('opacity', 0);
+        });
 
-svg.selectAll(".event-text")
-    .data(events)
-  .enter().append("text")
-    .attr("class", "event-text")
-    .attr("x", d => x(new Date(d.year)))
-    .attr("y", (height / 2) - 10)
-    .attr("text-anchor", "middle")
-    .text(d => d.event);
+    svg.selectAll('.event-winter')
+        .data(winterData)
+      .enter().append('circle')
+        .attr('class', 'event event-winter')
+        .attr('cx', d => x(new Date(d.Year, 0, 1)))
+        .attr('cy', height / 2 + 20) // Décalage pour les Jeux d'hiver
+        .attr('r', 5)
+        .on('mouseover', (event, d) => {
+            tooltip.transition().duration(200).style('opacity', .9);
+            tooltip.html(`${d.City}, ${d.Year}`)
+                .style('left', (event.pageX + 5) + 'px')
+                .style('top', (event.pageY - 28) + 'px');
+        })
+        .on('mouseout', d => {
+            tooltip.transition().duration(500).style('opacity', 0);
+        });
+
+    // Ajouter des labels d'années sous chaque point
+    svg.selectAll('.year-label-summer')
+        .data(summerData)
+      .enter().append('text')
+        .attr('class', 'year-label')
+        .attr('x', d => x(new Date(d.Year, 0, 1)))
+        .attr('y', height / 2 - 30)
+        .text(d => d.Year);
+
+    svg.selectAll('.year-label-winter')
+        .data(winterData)
+      .enter().append('text')
+        .attr('class', 'year-label')
+        .attr('x', d => x(new Date(d.Year, 0, 1)))
+        .attr('y', height / 2 + 30)
+        .text(d => d.Year);
+}
