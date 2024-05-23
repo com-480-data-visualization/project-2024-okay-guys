@@ -83,6 +83,7 @@ const summerOlympicsData =[
         "City": "amsterdam",
         "City_count": 1.0,
         "Country": "the netherlands",
+        "Iso": "nl",
         "Country_count": 1.0,
         "Continent": "europe",
         "Continent_count": 7.0
@@ -188,6 +189,7 @@ const summerOlympicsData =[
         "City": "munich",
         "City_count": 1.0,
         "Country": "west germany",
+        "Iso": "de",
         "Country_count": 2.0,
         "Continent": "europe",
         "Continent_count": 12.0
@@ -207,6 +209,7 @@ const summerOlympicsData =[
         "City": "moscow",
         "City_count": 1.0,
         "Country": "soviet union",
+        "Iso": "ru", // Russia not Soviet Union
         "Country_count": 1.0,
         "Continent": "europe",
         "Continent_count": 13.0
@@ -364,6 +367,7 @@ const winterOlympicsData = [{
     "City": "st. moritz",
     "City_count": 1.0,
     "Country": "swiss",
+    "Iso": "ch",
     "Country_count": 1.0,
     "Continent": "europe",
     "Continent_count": 2.0
@@ -409,6 +413,7 @@ const winterOlympicsData = [{
     "City": "st. moritz",
     "City_count": 2.0,
     "Country": "swiss",
+    "Iso": "ch",
     "Country_count": 2.0,
     "Continent": "europe",
     "Continent_count": 4.0
