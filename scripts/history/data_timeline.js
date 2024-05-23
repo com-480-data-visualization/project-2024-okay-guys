@@ -56,7 +56,7 @@ const summerOlympicsData =[
         "Country": "germany",
         "Iso": "de",
         "Continent": "europe",
-        "Notabene": "the 1916 olympics were canceled due to world war i"
+        "Notabene": "The 1916 olympics were canceled due to world war I."
     }, {
         "Year": 1920,
         "Olympiad": "VII",
@@ -114,7 +114,7 @@ const summerOlympicsData =[
         "Country": "finland",
         "Iso": "fi",
         "Continent": "europe",
-        "Notabene": "the 1940 and 1944 summer olympics were canceled due to world war ii."
+        "Notabene": "The 1940 and 1944 summer olympics were canceled due to world war II."
     }, {
         "Year": 1944,
         "Olympiad": "XIII",
@@ -122,7 +122,7 @@ const summerOlympicsData =[
         "Country": "united kingdom",
         "Iso": "gb",
         "Continent": "europe",
-        "Notabene": "the 1940 and 1944 summer olympics were canceled due to world war ii."
+        "Notabene": "The 1940 and 1944 summer olympics were canceled due to world war II."
     }, {
         "Year": 1948,
         "Olympiad": "XIV",
@@ -313,7 +313,7 @@ const summerOlympicsData =[
         "Country_count": 2.0,
         "Continent": "asia",
         "Continent_count": 4.0,
-        "Notabene": "the 2020 summer olympics have been postponed to 2021, following the covid-19 pandemic."
+        "Notabene": "The 2020 summer olympics have been postponed to 2021, following the covid-19 pandemic."
     }, {
         "Year": 2024,
         "Olympiad": "XXXIII",
