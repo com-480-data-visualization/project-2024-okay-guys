@@ -20,32 +20,74 @@ function createCombinedTimeline(summerData, winterData, element) {
         .range([0, width]);
 
     // Axe central
-    svg.append('g')
+    const axis = svg.append('g')
         .attr('class', 'x axis')
         .attr('transform', `translate(0,${height / 2})`)
         .call(d3.axisBottom(x)
             .ticks(summerData.length)
             .tickSize(0)
             .tickFormat(() => "")
-        )
-        .attr('stroke-width', 2); // Épaissir l'axe central
+        );
+
 
     const tooltip = d3.select('body').append('div')
         .attr('class', 'tooltip')
         .style('opacity', 0);
 
+    const cursor = svg.append('circle')
+        .attr('class', 'cursor')
+        .attr('cy', height / 2)
+        .attr('r', 5)
+        .attr('fill', 'red')
+        .style('opacity', 0);
+
+    // Ajouter la ligne rouge qui se déplace avec le curseur
+    const cursorLine = svg.append('line')
+        // .attr('class', 'cursor-line')
+        .attr('x1', 0)
+        .attr('y1', height / 2)
+        .attr('x2', 0)
+        .attr('y2', height / 2)
+        .attr('stroke', 'red')
+        .attr('stroke-width', 2)
+    
+        
+     // Événement de défilement
+     d3.select(element).node().parentNode.addEventListener('scroll', function() {
+        const scrollX = this.scrollLeft ;
+        const maxScrollLeft = this.scrollWidth - this.clientWidth;
+        const maxCursorX = width + margin.left;
+        const relativeCursorX = scrollX / maxScrollLeft * maxCursorX;
+
+        cursor.attr('cx', relativeCursorX);
+        cursor.style('opacity', 1);
+        cursorLine.attr('x2', relativeCursorX).style('opacity', 1);
+    });
+
     // Lignes pour les événements d'été
     svg.selectAll('.line-summer')
         .data(summerData)
       .enter().append('line')
-        .attr('class', 'line-summer')
         .attr('x1', d => x(new Date(d.Year, 0, 1)))
         .attr('y1', height / 2)
         .attr('x2', d => x(new Date(d.Year, 0, 1)))
         .attr('y2', height / 2 - 50)
         .attr('stroke', 'orange')
         .attr('stroke-width', 2)
-        .attr('stroke-dasharray', d => d.Notabene ? '4,2' : 'none'); // Pointillé pour événements annulés
+        .attr('stroke-dasharray', d => typeof d.City_count === 'string' ? '4,2' : 'none'); // Pointillé pour les City_count en string
+
+
+    // Lignes pour les événements d'été
+    svg.selectAll('.line-summer')
+        .data(summerData)
+      .enter().append('line')
+        .attr('x1', d => x(new Date(d.Year, 0, 1)))
+        .attr('y1', height / 2)
+        .attr('x2', d => x(new Date(d.Year, 0, 1)))
+        .attr('y2', height / 2 - 50)
+        .attr('stroke', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke-dasharray', d => typeof d.City_count === 'string' ? '4,2' : 'none'); // Pointillé pour les City_count en string
 
     // Drapeaux pour les Jeux d'été
     svg.selectAll('.event-summer')
@@ -58,11 +100,14 @@ function createCombinedTimeline(summerData, winterData, element) {
         .attr('y', height / 2 - 74) // Position au-dessus de l'axe central
         .on('mouseover', function(event, d) {
             tooltip.transition().duration(200).style('opacity', .9);
+            const hostedText = typeof d.City_count === 'string' 
+                ? d.City_count 
+                : `${d.City_count || 1} time(s).`;
             tooltip.html(`
                 <strong>City</strong>: ${capitalize(d.City)}<br>
                 <strong>Country</strong>: ${capitalize(d.Country)}<br>
                 <strong>Year</strong>: ${d.Year}<br>
-                <strong>Hosted</strong>: ${d.City_count || 1} time(s).<br>
+                <strong>Hosted</strong>: ${hostedText}<br>
                 ${d.Notabene ? `<strong>Note</strong>: ${d.Notabene}` : ''}
             `)
                 .style('left', (event.pageX + 5) + 'px')
@@ -83,7 +128,7 @@ function createCombinedTimeline(summerData, winterData, element) {
         .attr('y2', height / 2 + 50)
         .attr('stroke', 'blue')
         .attr('stroke-width', 2)
-        .attr('stroke-dasharray', d => d.Notabene ? '4,2' : 'none'); // Pointillé pour événements annulés
+        .attr('stroke-dasharray', d => typeof d.City_count === 'string' ? '4,2' : 'none'); // Pointillé pour les City_count en string
 
     // Drapeaux pour les Jeux d'hiver
     svg.selectAll('.event-winter')
@@ -96,11 +141,14 @@ function createCombinedTimeline(summerData, winterData, element) {
         .attr('y', height / 2 + 50) // Position en dessous de l'axe central
         .on('mouseover', function(event, d) {
             tooltip.transition().duration(200).style('opacity', .9);
+            const hostedText = typeof d.City_count === 'string' 
+                ? d.City_count 
+                : `${d.City_count || 1} time(s).`;
             tooltip.html(`
                 <strong>City</strong>: ${capitalize(d.City)}<br>
                 <strong>Country</strong>: ${capitalize(d.Country)}<br>
                 <strong>Year</strong>: ${d.Year}<br>
-                <strong>Hosted</strong>: ${d.City_count || 1} time(s).<br>
+                <strong>Hosted</strong>: ${hostedText}<br>
                 ${d.Notabene ? `<strong>Note</strong>: ${d.Notabene}` : ''}
             `)
                 .style('left', (event.pageX + 5) + 'px')

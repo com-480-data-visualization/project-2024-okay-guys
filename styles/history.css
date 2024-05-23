@@ -59,3 +59,28 @@ body {
 #right-arrow {
     right: 0;
 }
+
+/* Style pour le curseur */
+.cursor {
+    fill: red;
+    stroke-width: 2;
+    opacity: 0;
+}
+
+/* Style pour la ligne centrale */
+.central-line {
+    stroke: gray;
+    stroke-width: 2;
+}
+
+/* Style pour la partie gauche de l'axe central */
+.x.axis line {
+    stroke: #000;
+    stroke-width: 2;
+}
+
+.x.axis path {
+    stroke: gray;
+    stroke-width: 2;
+    opacity: 0.5;
+}
