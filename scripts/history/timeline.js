@@ -145,6 +145,10 @@ function createCombinedTimeline(summerData, winterData, element) {
             .classed('passed', function(d) {
                 return new Date(d.Year, 0, 1) <= cursorDate;
             });
+
+        // Mettre à jour l'élément affichant l'année courante au-dessus des tableaux
+        document.getElementById('current-year').textContent = cursorYear;
+
         // Filtrer les données en fonction de l'année du curseur
         const filteredSummerData = summerData.filter(d => new Date(d.Year, 0, 1) <= cursorDate);
         const filteredWinterData = winterData.filter(d => new Date(d.Year, 0, 1) <= cursorDate);
