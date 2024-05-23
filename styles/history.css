@@ -34,11 +34,15 @@ body {
 .date-box {
     fill: white;
     stroke: black;
-    stroke-width: 1;
-    rx: 3;
-    ry: 3;
+    stroke-width: 1px;
 }
-
+.date-box.passed {
+    stroke-width: 2px;
+}
+.year-display {
+    font-size: 16px;
+    fill: black;
+}
 .arrow {
     position: absolute;
     top: 50%;

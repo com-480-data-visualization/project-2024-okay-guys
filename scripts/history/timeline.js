@@ -19,6 +19,27 @@ function createCombinedTimeline(summerData, winterData, element) {
         .domain(d3.extent(allData, d => new Date(d.Year, 0, 1)))
         .range([0, width]);
 
+    // Ajouter un groupe pour afficher l'année dans un carré blanc
+    const yearGroup = svg.append('g')
+        .attr('class', 'year-display-group')
+        .style('opacity', 0); // Initialement caché
+
+    const yearRect = yearGroup.append('rect')
+    .attr('width', 50)
+    .attr('height', 30)
+    .attr('rx', 5) // Rayon de coin horizontal
+    .attr('ry', 5) // Rayon de coin vertical
+    .attr('fill', 'white')
+    .attr('stroke', 'black');
+    
+
+    const yearDisplay = yearGroup.append('text')
+        .attr('x', 25) // Centrer le texte dans le rectangle
+        .attr('y', 20) // Ajuster la position selon vos besoins
+        .attr('text-anchor', 'middle')
+        .style('font-size', '16px')
+        .style('fill', 'black');
+
     // Axe central
     const axis = svg.append('g')
         .attr('class', 'x axis')
@@ -62,6 +83,21 @@ function createCombinedTimeline(summerData, winterData, element) {
         cursor.attr('cx', relativeCursorX);
         cursor.style('opacity', 1);
         cursorLine.attr('x2', relativeCursorX).style('opacity', 1);
+
+        // Trouver l'année correspondant à la position du curseur
+        const cursorDate = x.invert(relativeCursorX);
+        const cursorYear = cursorDate.getFullYear();
+        yearDisplay.text(cursorYear);
+
+        // Mettre à jour la position et l'affichage du groupe de l'année
+        yearGroup.attr('transform', `translate(${relativeCursorX - 25},${margin.top - 30})`)
+            .style('opacity', 1); // Rendre le groupe visible
+
+        // Mettre à jour les boîtes de date
+        svg.selectAll('.date-box')
+            .classed('passed', function(d) {
+                return new Date(d.Year, 0, 1) <= cursorDate;
+            });
     });
 
     // Lignes pour les événements d'été
