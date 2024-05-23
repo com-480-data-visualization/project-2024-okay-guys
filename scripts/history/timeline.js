@@ -2,6 +2,53 @@ function capitalize(str) {
     return str.replace(/\b\w/g, char => char.toUpperCase());
 }
 
+function updateTable(data, tableId) {
+    const tableBody = document.querySelector(`#${tableId} tbody`);
+    tableBody.innerHTML = '';
+
+    const continentCounts = {};
+
+    data.forEach(d => {
+        const continent = capitalize(d.Continent);
+        const country = capitalize(d.Country);
+        if (d.City_count === "Canceled") {
+            return; 
+        }
+        if (!continentCounts[continent]) {
+            continentCounts[continent] = { count: 0, countries: {} };
+        }
+        continentCounts[continent].count += 1;
+
+        if (!continentCounts[continent].countries[country]) {
+            continentCounts[continent].countries[country] = { count: 0, iso: d.Iso };
+        }
+        continentCounts[continent].countries[country].count += 1;
+    });
+
+    const sortedContinents = Object.keys(continentCounts).sort((a, b) => continentCounts[b].count - continentCounts[a].count);
+
+    sortedContinents.forEach(continent => {
+        const continentCount = continentCounts[continent].count;
+        const countries = Object.keys(continentCounts[continent].countries).sort((a, b) => continentCounts[continent].countries[b].count - continentCounts[continent].countries[a].count);
+
+        let firstContinentRow = true;
+        countries.forEach((country, countryIndex) => {
+            const countryData = continentCounts[continent].countries[country];
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                ${firstContinentRow ? `<td rowspan="${countries.length}" class="centered">${continent}</td>` : ''}
+                ${firstContinentRow ? `<td rowspan="${countries.length}" class="centered">${continentCount}</td>` : ''}
+                <td class="centered"><img src="https://flagcdn.com/24x18/${countryData.iso}.png" alt="${country}"> ${country}</td>
+                <td class="centered">${countryData.count}</td>
+            `;
+            tableBody.appendChild(row);
+
+            firstContinentRow = false;
+        });
+    });
+}
+
+
 function createCombinedTimeline(summerData, winterData, element) {
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
     const width = 7000 - margin.left - margin.right; // Largeur étendue pour le défilement
@@ -98,6 +145,14 @@ function createCombinedTimeline(summerData, winterData, element) {
             .classed('passed', function(d) {
                 return new Date(d.Year, 0, 1) <= cursorDate;
             });
+        // Filtrer les données en fonction de l'année du curseur
+        const filteredSummerData = summerData.filter(d => new Date(d.Year, 0, 1) <= cursorDate);
+        const filteredWinterData = winterData.filter(d => new Date(d.Year, 0, 1) <= cursorDate);
+
+        // Mettre à jour les tableaux dynamiques
+        updateTable(filteredSummerData, 'summer-olympics-table');
+        updateTable(filteredWinterData, 'winter-olympics-table');
+
     });
 
     // Lignes pour les événements d'été

@@ -88,3 +88,30 @@ body {
     stroke-width: 2;
     opacity: 0.5;
 }
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+.centered {
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.olympics-table table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.olympics-table th, .olympics-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.olympics-table th {
+    background-color: #f2f2f2;
+}
