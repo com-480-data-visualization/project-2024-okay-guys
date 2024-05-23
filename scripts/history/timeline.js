@@ -1,7 +1,7 @@
 function createCombinedTimeline(summerData, winterData, element) {
     const margin = { top: 20, right: 30, bottom: 50, left: 40 };
-    const width = 2000 - margin.left - margin.right; // Largeur étendue pour le défilement
-    const height = 200 - margin.top - margin.bottom;
+    const width = 5000 - margin.left - margin.right; // Largeur étendue pour le défilement
+    const height = 300 - margin.top - margin.bottom; // Hauteur augmentée pour deux axes
 
     const svg = d3.select(element).append('svg')
         .attr('width', width + margin.left + margin.right)
@@ -15,10 +15,25 @@ function createCombinedTimeline(summerData, winterData, element) {
         .domain(d3.extent(allData, d => new Date(d.Year, 0, 1)))
         .range([0, width]);
 
+    // Axe des Jeux d'été
     svg.append('g')
-        .attr('class', 'x axis')
-        .attr('transform', `translate(0,${height / 2})`)
-        .call(d3.axisBottom(x).tickFormat('')); // Suppression des ticks par défaut
+    .attr('class', 'x axis')
+    .attr('transform', `translate(0,${height / 3})`)
+    .call(d3.axisBottom(x)
+        .ticks(summerData.length)
+        .tickSize(0)
+        .tickFormat(() => "") 
+    );
+
+    // Axe des Jeux d'hiver
+    svg.append('g')
+    .attr('class', 'x axis')
+    .attr('transform', `translate(0,${(2 * height) / 3})`)
+    .call(d3.axisBottom(x)
+        .ticks(winterData.length)
+        .tickSize(0)
+        .tickFormat(() => "") 
+    );
 
     const tooltip = d3.select('body').append('div')
         .attr('class', 'tooltip')
@@ -27,10 +42,10 @@ function createCombinedTimeline(summerData, winterData, element) {
     svg.selectAll('.event-summer')
         .data(summerData)
       .enter().append('circle')
-        .attr('class', 'event event-summer')
+        .attr('fill', "orange")
         .attr('cx', d => x(new Date(d.Year, 0, 1)))
-        .attr('cy', height / 2 - 20) // Décalage pour les Jeux d'été
-        .attr('r', 5)
+        .attr('cy', height / 3)
+        .attr('r', 10)
         .on('mouseover', (event, d) => {
             tooltip.transition().duration(200).style('opacity', .9);
             tooltip.html(`${d.City}, ${d.Year}`)
@@ -44,10 +59,10 @@ function createCombinedTimeline(summerData, winterData, element) {
     svg.selectAll('.event-winter')
         .data(winterData)
       .enter().append('circle')
-        .attr('class', 'event event-winter')
+        .attr('fill', "blue")
         .attr('cx', d => x(new Date(d.Year, 0, 1)))
-        .attr('cy', height / 2 + 20) // Décalage pour les Jeux d'hiver
-        .attr('r', 5)
+        .attr('cy', (2 * height) / 3) 
+        .attr('r', 10)
         .on('mouseover', (event, d) => {
             tooltip.transition().duration(200).style('opacity', .9);
             tooltip.html(`${d.City}, ${d.Year}`)
@@ -64,7 +79,7 @@ function createCombinedTimeline(summerData, winterData, element) {
       .enter().append('text')
         .attr('class', 'year-label')
         .attr('x', d => x(new Date(d.Year, 0, 1)))
-        .attr('y', height / 2 - 30)
+        .attr('y', height / 2 -50)
         .text(d => d.Year);
 
     svg.selectAll('.year-label-winter')
