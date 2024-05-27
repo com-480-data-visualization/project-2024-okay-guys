@@ -54,13 +54,17 @@ function createCombinedTimeline(summerData, winterData, element) {
     const width = 7000 - margin.left - margin.right; // Largeur étendue pour le défilement
     const height = 300 - margin.top - margin.bottom; // Hauteur ajustée
 
+    // Filter data to only include years up to 2024
+    const filteredSummerData = summerData.filter(d => d.Year <= 2024);
+    const filteredWinterData = winterData.filter(d => d.Year <= 2024);
+
     const svg = d3.select(element).append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
       .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const allData = summerData.concat(winterData);
+    const allData = filteredSummerData.concat(filteredWinterData);
 
     const x = d3.scaleTime()
         .domain(d3.extent(allData, d => new Date(d.Year, 0, 1)))
@@ -92,7 +96,7 @@ function createCombinedTimeline(summerData, winterData, element) {
         .attr('class', 'x axis')
         .attr('transform', `translate(0,${height / 2})`)
         .call(d3.axisBottom(x)
-            .ticks(summerData.length)
+            .ticks(filteredSummerData.length)
             .tickSize(0)
             .tickFormat(() => "")
         );
@@ -150,18 +154,18 @@ function createCombinedTimeline(summerData, winterData, element) {
         document.getElementById('current-year').textContent = cursorYear;
 
         // Filtrer les données en fonction de l'année du curseur
-        const filteredSummerData = summerData.filter(d => new Date(d.Year, 0, 1) <= cursorDate);
-        const filteredWinterData = winterData.filter(d => new Date(d.Year, 0, 1) <= cursorDate);
+        const filteredSummerData_ = filteredSummerData.filter(d => new Date(d.Year, 0, 1) <= cursorDate);
+        const filteredWinterData_ = filteredWinterData .filter(d => new Date(d.Year, 0, 1) <= cursorDate);
 
         // Mettre à jour les tableaux dynamiques
-        updateTable(filteredSummerData, 'summer-olympics-table');
-        updateTable(filteredWinterData, 'winter-olympics-table');
+        updateTable(filteredSummerData_, 'summer-olympics-table');
+        updateTable(filteredWinterData_, 'winter-olympics-table');
 
     });
 
     // Lignes pour les événements d'été
     svg.selectAll('.line-summer')
-        .data(summerData)
+        .data(filteredSummerData)
       .enter().append('line')
         .attr('x1', d => x(new Date(d.Year, 0, 1)))
         .attr('y1', height / 2)
@@ -174,7 +178,7 @@ function createCombinedTimeline(summerData, winterData, element) {
 
     // Lignes pour les événements d'été
     svg.selectAll('.line-summer')
-        .data(summerData)
+        .data(filteredSummerData)
       .enter().append('line')
         .attr('x1', d => x(new Date(d.Year, 0, 1)))
         .attr('y1', height / 2)
@@ -186,7 +190,7 @@ function createCombinedTimeline(summerData, winterData, element) {
 
     // Drapeaux pour les Jeux d'été
     svg.selectAll('.event-summer')
-        .data(summerData)
+        .data(filteredSummerData)
       .enter().append('image')
         .attr('xlink:href', d => `https://flagcdn.com/32x24/${d.Iso}.png`)
         .attr('width', 32)
@@ -214,7 +218,7 @@ function createCombinedTimeline(summerData, winterData, element) {
 
     // Lignes pour les événements d'hiver
     svg.selectAll('.line-winter')
-        .data(winterData)
+        .data(filteredWinterData )
       .enter().append('line')
         .attr('class', 'line-winter')
         .attr('x1', d => x(new Date(d.Year, 0, 1)))
@@ -227,7 +231,7 @@ function createCombinedTimeline(summerData, winterData, element) {
 
     // Drapeaux pour les Jeux d'hiver
     svg.selectAll('.event-winter')
-        .data(winterData)
+        .data(filteredWinterData )
       .enter().append('image')
         .attr('xlink:href', d => `https://flagcdn.com/32x24/${d.Iso}.png`)
         .attr('width', 32)
@@ -255,7 +259,7 @@ function createCombinedTimeline(summerData, winterData, element) {
 
     // Ajouter des carrés avec les années au niveau de la jonction entre l'axe principal et les barres
     svg.selectAll('.date-box-summer')
-        .data(summerData)
+        .data(filteredSummerData )
       .enter().append('g')
         .attr('transform', d => `translate(${x(new Date(d.Year, 0, 1))},${height / 2})`)
         .each(function(d) {
@@ -277,7 +281,7 @@ function createCombinedTimeline(summerData, winterData, element) {
         });
 
     svg.selectAll('.date-box-winter')
-        .data(winterData)
+        .data(filteredWinterData )
       .enter().append('g')
         .attr('transform', d => `translate(${x(new Date(d.Year, 0, 1))},${height / 2})`)
         .each(function(d) {
