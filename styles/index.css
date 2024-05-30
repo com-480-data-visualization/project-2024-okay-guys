@@ -1,113 +1,136 @@
-html {
-  background-color: #ffff;
+/* Styles for the main container */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+#mapContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 100%;
+  height: 100%;
+}
 
+/* Styles for headings */
 h1 {
   font-family: "Josefin Sans", sans-serif;
-  font-size: 60px;
+  font-size: 3vw;
   text-align: center;
 }
-
 
 .center {
   text-align: center;
 }
 
+/* Styles for logo images */
 .logo-image {
-  width: 600px; 
+  width: 100%;
   height: auto;
+  max-width: 1000px;
 }
 
+/* Styles for menu */
 .menu {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
+  width: 100%;
 }
 
 .menu a {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 20px 40px;
   background-color: #f2f2f2;
   color: #333;
   text-decoration: none;
-  border-radius: 5px;
-  margin-right: 10px;
+  border-radius: 10px;
+  margin-right: 40px;
+  font-family: "Josefin Sans", sans-serif; 
+  font-size: 2vw;
 }
 
 .menu a:hover {
   background-color: #ddd;
 }
 
+/* Styles for tooltips */
 .tooltip {
   background: #f9f9f9; 
   color: #333; 
   border: 1px solid #ccc; 
   border-radius: 8px; 
-  padding: 10px 15px; 
+  padding: 1vw 2vw;
   position: absolute;
   z-index: 1000;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
   transition: opacity 0.3s;
   opacity: 0; 
   font-family: "Josefin Sans", sans-serif; 
-  font-size: 14px; 
+  font-size: 1vw;
   line-height: 1.4;
 }
 
 .tooltip .city-country {
-  font-size: 16px;
+  font-size: 1.5vw;
   font-weight: bold; 
 }
 
 .tooltip .year {
-  font-size: 14px; 
+  font-size: 1vw;
 }
 
 .tooltip.show {
   opacity: 1;
 }
 
+.city-tooltip {
+  border-radius: 50px;
+}
+
+/* Styles for legend container */
+.legend-container {
+  transform: translate(5%, 90%);
+}
+
 .legend-text {
   fill: #333;
-  font-size: 18px; 
+  font-size: 40px;
+  font-family: "Josefin Sans", sans-serif; 
+  font-weight: bold;
 }
 
-.legend-circle {
-  stroke: black;
-  stroke-width: 2;
-}
-
-.legend-container {
-  transform: translate(50, 950); 
-}
-
-
-#mapContainer {
+/* Styles for button container */
+.button-container {
+  position: relative;
   width: 100%;
-  height: 600px;
-  display: block;
-  margin: 20px;
-}
-
-body {
-  max-width: 2000px;
-  min-width: 800px; 
-  margin: 0 auto; 
+  display: flex;
 }
 
 #backButton {
-  font-size: 20px;
-  padding: 15px 30px; 
+  font-size: 2vw;
+  padding: 1.5vw 3vw;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 8px; 
+  border-radius: 20px; 
   cursor: pointer;
   transition: background-color 0.3s ease;
+  position: absolute;
+  top: 7vh;
+  left: 18vh;
+  display: none;
 }
 
 #backButton:hover {
   background-color: #0056b3;
 }
-
-

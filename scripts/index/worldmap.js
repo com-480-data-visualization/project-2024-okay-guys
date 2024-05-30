@@ -1,7 +1,20 @@
-/* Map path and default settings - you can edit this */
+/**
+ * Contains map information and bounding box data for the interactive world map.
+ * This script defines the overall map configuration and the bounding box data
+ * for each country, which is used for positioning and scaling the map elements.
+ *
+ * Variables:
+ * - simplemaps_worldmap_mapinfo: Contains the map name, state bounding box array, and other relevant data.
+ *
+ * Data Structures:
+ * - map_name: The name of the map.
+ * - stateBboxArray: An object where each key is a country code and each value is an object
+ *   containing the bounding box coordinates for the country.
+ */
+
 var simplemaps_worldmap_mapinfo = {
     map_name: "world",
-    state_bbox_array: {
+    stateBboxArray: {
         BD: { y: 332, x: 1472, x2: 1501, y2: 369 },
         BE: { y: 173, x: 999, x2: 1017, y2: 185 },
         BF: { y: 405, x: 956, x2: 999, y2: 440 },
@@ -575,7 +588,7 @@ var simplemaps_worldmap_mapinfo = {
         MZ:
             "m 1166.7,673.5 h -4.1 l -0.3,-2.9 -0.6,-2.9 -0.4,-2.3 1.4,-7.1 -1.1,-4.6 -2.2,-9 6.2,-7.3 1.7,-4.6 0.8,-0.6 0.9,-3.8 -0.8,-1.9 0.4,-4.8 1.3,-4.4 0.4,-8.2 -2.8,-2 -2.7,-0.5 -1.1,-1.6 -2.6,-1.3 -4.7,0.1 -0.2,-2.4 -0.4,-4.6 17.2,-5.3 3.2,3.1 1.5,-0.6 2.2,1.6 0.2,2.6 -1.3,3 0.2,4.5 3.5,4 1.9,-4.5 2.5,-1.3 -0.1,-8.3 -2.2,-4.6 -1.9,-2.1 h -0.4 l -0.6,-7.3 1.5,-6.1 2.2,-0.2 6.7,1.8 1.5,-0.8 3.9,-0.2 2.1,-1.9 3.4,0.1 6.2,-2.5 4.6,-3.7 0.9,2.8 -0.5,6.4 0.5,5.7 -0.2,10 0.8,3.1 -1.9,4.6 -2.4,4.5 -3.7,4 -5.3,2.4 -6.5,3.1 -6.6,6.9 -2.2,1.2 -4.2,4.6 -2.3,1.4 -0.8,4.6 2.4,4.9 0.9,3.7 v 2 l 1,-0.4 -0.5,6.3 -1.1,3 1.2,1.1 -1,2.7 -2.4,2.3 -4.7,2.1 -6.9,3.5 -2.5,2.4 0.3,2.7 1.3,0.4 z",
     },
-    names: {
+    idToNames: {
         BD: "Bangladesh",
         BE: "Belgium",
         BF: "Burkina Faso",
@@ -799,7 +812,8 @@ var simplemaps_worldmap_mapinfo = {
         QA: "Qatar",
         MZ: "Mozambique",
     },
-    default_regions: {
+
+    defaultRegions: {
         "0": { name: "North America", states: ["MX", "CA", "US", "GL", "BM"] },
         "1": {
             name: "South America",

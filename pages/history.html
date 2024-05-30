@@ -1,28 +1,79 @@
 <!doctype html>
 <html lang="en-US">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>History</title>
-    <link rel="stylesheet" href="styles/page.css" />
-  </head>
-  <body>
-    <h1>History</h1>
-    <!-- ## Contenue et description
+    <title>History of the Olympic Games</title>
+    <link rel="stylesheet" href="../styles/history.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../scripts/history/data_timeline.js"></script>
+    <script src="../scripts/history/timeline.js"></script>
+</head>
+<body>
+    <div class="title-container">
+        <img src="../images/olympic_symbole.png" alt="Logo of the Olympics" class="logo-image">
+        <h1>History of the Olympic Games</h1>
+        <img src="../images/olympic_symbole.png" alt="Logo of the Olympics" class="logo-image">
+    </div>
+    <div class="menu">
+        <a href="../index.html">Main Page</a>
+        <a href="../pages/olympics.html">Olympics</a>
+        <a href="../pages/about_us.html">About Us</a>
+    </div>
+    <div class="intro-block">
+        <p>The Olympic Games are much more than just a sporting competition; they are a global gathering where each country brings its own personal touch. Since their resurgence in 1896, these games have celebrated unity, diversity, and human excellence. Picture athletes from around the world coming together to compete in various disciplines, in a spirit of fair play and camaraderie. The Paralympic Games, in particular, serve as a source of inspiration, showing that the only limits are the ones we impose on ourselves. And when it comes to disciplines, classics like sprinting and swimming rub shoulders with sensational newcomers like skateboarding and surfing, attracting an ever more diverse and enthusiastic audience. The athletes themselves are true role models, with stories of success and perseverance that inspire us all. Let's also applaud the remarkable evolution of women in sports, progressing from mere spectators to champions in every discipline imaginable. In summary, the Olympic Games are like a constantly evolving puzzle, reflecting and driving the social changes of our time.</p>
+        <p>Get ready to dive into Olympic history with our chronological timeline and dynamic chart, which will take you on a journey through the time and space of the Games, highlighting their increasing internationalization! 🎢✨</p>
+    </div>
+    <div id="timeline-container">
+        <div id="timeline"></div>
+    </div>
+    <div id="left-arrow" class="arrow">&#9664;</div>
+    <div id="right-arrow" class="arrow">&#9654;</div>
+    <script>
+        createCombinedTimeline(summerOlympicsData, winterOlympicsData, '#timeline');
 
-    1. Liste des disciplines 
-        1. incorporer des images ? (long + chiant a voir si faisable )
+        document.getElementById('left-arrow').addEventListener('click', function() {
+            document.getElementById('timeline-container').scrollBy({ left: -200, behavior: 'smooth' });
+        });
 
-    → si on clique sur une discipline alors 
-
-    1. histogramme score ( médailles )  par pays (ajout d’un filtre année? période? )
-        
-        →  si années confondus alors prendre en compte le nombre de participation 
-        
-        → si dispo pour la discipline mettre record du monde et graphisme de louis. 
-        
-    2. si on peut :  ajouter très vite fait un texte modulable type appariation de cette discipline en ____/ ou discipline présente depuis création JO moderne)
-        
-        → lien dynamique vers la page `history/évolution du nombre de sport/disciplines`? -->
-  </body>
+        document.getElementById('right-arrow').addEventListener('click', function() {
+            document.getElementById('timeline-container').scrollBy({ left: 200, behavior: 'smooth' });
+        });
+    </script>
+    <div id="current-year" class="year-display"></div>
+    <div id="tables-container" class="flex-container">
+        <div id="summer-olympics-table" class="olympics-table">
+            <h3 class="summer-title">🏊‍♀️🚴Summer Olympics🎾🏀</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Continent</th>
+                        <th>Count</th>
+                        <th>Country</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+          
+                </tbody>
+            </table>
+        </div>
+        <div id="winter-olympics-table" class="olympics-table">
+            <h3 class="winter-title">🏂⛰️Winter Olympics❄️⛷️</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Continent</th>
+                        <th>Count</th>
+                        <th>Country</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+     
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
 </html>
