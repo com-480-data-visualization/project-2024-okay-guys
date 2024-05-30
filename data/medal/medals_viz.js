@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", function() {
             "Saint Vincent", "Saint Vincent and the Grenadines"
         ];
 
-        const otherSouthAmerica = [
+        const SouthAmerica = [
             "Argentina", "Brazil", "Bolivia", "Chile", "Colombia", "Ecuador", "Paraguay", "Peru", "Uruguay", "Venezuela", 
             "Guyana", "Suriname"
         ];
 
-        const otherAfrica = [
+        const Africa = [
             "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cape Verde", "Cameroon", "Central African Republic", 
             "Chad", "Comoros", "Congo", "Democratic Republic of the Congo", "Djibouti", "Egypt", "Equatorial Guinea", "Eritrea", "Eswatini", 
             "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Ivory Coast", "Kenya", "Lesotho", "Liberia", "Libya", 
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const processedData = years.map(year => {
             const yearData = nestedData.get(year) || [];
             const groupedData = {
-                "United States": 0,
+                "United States of America": 0,
                 "Russia": 0,
                 "Germany": 0,
                 "Australia": 0,
@@ -75,9 +75,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     groupedData["Asia"] += totalMedals;
                 } else if (CanadaMexico.includes(d.Country)) {
                     groupedData["Canada & Mexico"] += totalMedals;
-                } else if (otherSouthAmerica.includes(d.Country)) {
+                } else if (SouthAmerica.includes(d.Country)) {
                     groupedData["South America"] += totalMedals;
-                } else if (otherAfrica.includes(d.Country)) {
+                } else if (Africa.includes(d.Country)) {
                     groupedData["Africa"] += totalMedals;
                 }
             });
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
         legend.selectAll("rect")
             .data(series)
             .enter().append("rect")
-            .attr("x", (d, i) => (i % 6) * 200) 
+            .attr("x", (d, i) => (i % 6) * 240) 
             .attr("y", (d, i) => Math.floor(i / 6) * 30) 
             .attr("width", 18)
             .attr("height", 18)
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
         legend.selectAll("text")
             .data(series)
             .enter().append("text")
-            .attr("x", (d, i) => (i % 6) * 200 + 27) 
+            .attr("x", (d, i) => (i % 6) * 240 + 20) 
             .attr("y", (d, i) => Math.floor(i / 6) * 30 + 9)
             .attr("dy", ".35em")
             .style("text-anchor", "start")
