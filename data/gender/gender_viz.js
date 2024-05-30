@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
         fourYearSteps.sort((a, b) => a - b);
 
         const width = window.innerWidth * 0.90;
-        const height = window.innerHeight * 0.85;
+        const height = window.innerHeight * 0.8;
 
         const svg = d3.select("#chart")
             .append("svg")

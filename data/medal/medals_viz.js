@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const processedData = years.map(year => {
             const yearData = nestedData.get(year) || [];
             const groupedData = {
-                "United States of America": 0,
+                "United States": 0,
                 "Russia": 0,
                 "Germany": 0,
                 "Australia": 0,
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
         legend.selectAll("rect")
             .data(series)
             .enter().append("rect")
-            .attr("x", (d, i) => (i % 6) * 260) 
+            .attr("x", (d, i) => (i % 6) * 180) 
             .attr("y", (d, i) => Math.floor(i / 6) * 30) 
             .attr("width", 18)
             .attr("height", 18)
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
         legend.selectAll("text")
             .data(series)
             .enter().append("text")
-            .attr("x", (d, i) => (i % 6) * 260 + 27) 
+            .attr("x", (d, i) => (i % 6) * 180 + 27) 
             .attr("y", (d, i) => Math.floor(i / 6) * 30 + 9)
             .attr("dy", ".35em")
             .style("text-anchor", "start")
