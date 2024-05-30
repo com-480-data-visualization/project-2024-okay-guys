@@ -59,8 +59,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "France": 0,
                 "Switzerland": 0,
                 "Other Europe": 0,
-                "Other Asia": 0,
-                "Other North America": 0,
+                "Asia": 0,
+                "Canada & Mexico": 0,
                 "South America": 0,
                 "Africa": 0
             };
@@ -72,9 +72,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else if (otherEurope.includes(d.Country)) {
                     groupedData["Other Europe"] += totalMedals;
                 } else if (otherAsia.includes(d.Country)) {
-                    groupedData["Other Asia"] += totalMedals;
+                    groupedData["Asia"] += totalMedals;
                 } else if (otherNorthAmerica.includes(d.Country)) {
-                    groupedData["Other North America"] += totalMedals;
+                    groupedData["Canada & Mexico"] += totalMedals;
                 } else if (otherSouthAmerica.includes(d.Country)) {
                     groupedData["South America"] += totalMedals;
                 } else if (otherAfrica.includes(d.Country)) {

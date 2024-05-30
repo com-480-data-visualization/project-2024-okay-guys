@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const legend = svg.append("g")
             .attr("class", "legendSequential")
-            .attr("transform", `translate(${width * 0.05}, 350)`); 
+            .attr("transform", `translate(${width * 0.05}, 450)`); 
 
         const legendSequential = d3.legendColor()
             .shapeWidth(80)
