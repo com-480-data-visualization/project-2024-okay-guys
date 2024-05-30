@@ -9,7 +9,8 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%; /* ou une autre largeur en pourcentage pour s'adapter à la largeur de l'écran */
+  width: 80%; /* ou une autre largeur en pourcentage pour s'adapter à la largeur de l'écran */
+  height: 80%;
   margin: 0 auto; /* Centrer le conteneur sur la page */
   padding: 20px;
   background-color: #fff;

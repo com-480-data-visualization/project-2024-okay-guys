@@ -508,6 +508,7 @@ const winterOlympicsData = [{
     "City": "sarajevo",
     "City_count": 1.0,
     "Country": "yugoslavia",
+    "Iso": "ba",
     "Country_count": 1.0,
     "Continent": "europe",
     "Continent_count": 10.0
@@ -621,8 +622,4 @@ const winterOlympicsData = [{
     "Country_count": 3.0,
     "Continent": "europe",
     "Continent_count": 15.0
-}, {
-    "Year": 2030,
-    "Olympiad": "XXVI",
-    "City": "french alps"
 }]

@@ -1,6 +1,49 @@
 body {
     font-family: Arial, sans-serif;
 }
+h1 {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 3vw;
+    text-align: center;
+  }
+  
+/* Style for the title and logo images */
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 15vh; /* Adjust the size as needed */
+    height: auto;
+}
+/* Menu styling */
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.menu a {
+  display: inline-block;
+  padding: 20px 40px;
+  background-color: #f2f2f2;
+  color: #333;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-right: 40px;
+  font-family: "Josefin Sans", sans-serif; 
+  font-size: 2vw; /* Utiliser la même taille de police que le titre */
+}
+
+.menu a:hover {
+  background-color: #ddd;
+}
 
 #timeline-container {
     width: 100%;
@@ -19,7 +62,8 @@ body {
     position: absolute;
     text-align: left;
     padding: 8px;
-    font: 12px sans-serif;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 12px;
     background: lightsteelblue;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -135,4 +179,15 @@ body {
 .summer-title {
     background-color: rgba(255, 165, 0, 0.7);
     color: white;
+}
+
+.intro-block {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 3vw;
+    background-color: rgba(240, 240, 240, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.6;
 }
