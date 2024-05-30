@@ -213,7 +213,7 @@ function getRelevantColumns(eventData) {
 }
 
 function createPodiumVisualization(top3, valueColumn, competitorColumn, nocColumn, eventTitle) {
-  const svgWidth = 900;  // Increased width
+  const svgWidth = 1000;  // Increased width
   const svgHeight = 400;  // Increased height
   const podiumWidth = 120;  // Increased podium width
   const podiumHeight = [200, 150, 100];  // Increased podium heights

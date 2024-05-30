@@ -8,41 +8,77 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../scripts/medals.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="../scripts/podium.js"></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+      }
+      h1, h2 {
+        margin: 10px 0;
+      }
+      .chart-container {
+        width: 700px;
+        height: 400px;
+      }
+      .button-container {
+        margin-top: 20px;
+      }
+      .custom-button {
+        margin: 0 10px;
+      }
+      .select-container {
+        margin-bottom: 20px;
+      }
+      #visualization {
+        margin-top: 20px;
+      }
+      .selectors-container {
+        text-align: center;
+      }
+      .selectors-container h2 {
+        margin-bottom: 10px;
+      }
+    </style>
   </head>
   <body>
     <h1>Olympics</h1>
-    <!-- → a pour but de donner les records médailles/performances des JO 
-
-    1. Plusieurs filtres : 
-        1. Par type : Hiver/Eté
-        2. Par année : sélectionne de l’année (et ou un intervalles? et ou periode ?)
-        3. Par discipline 
-    2. Visuel : 
-        1. Histogramme pays eu le plus de médailles selon les filtres : 
-            
-            → différencier les types de médailles ? (or, argent, bronze?)
-            
-        2. Si discipline le permet ( natation ou athletisme) 
-            
-            → schéma du flex de duval -->
-      <h2> Medal Distributionsss </h2>
-        <label for="yearSeasonSelect">Select Year and Season:</label>
-        <select id="yearSeasonSelect" onchange="updateChart()">
-        </select>
-        <label for="Discipline">Discipline (not implemented yet):</label>
-        <select id="Discipline" onchange="">
-        </select>
-        <canvas id="medalChart" width = "700" height = "400"></canvas>
-
-
-        <script src="../scripts/medals.js"></script>
-
+    <h2>Medal Distributions</h2>
+    <div class="select-container">
+      <label for="yearSeasonSelect">Select Year and Season:</label>
+      <select id="yearSeasonSelect" onchange="updateChart()"></select>
+    </div>
+    <div class="chart-container">
+      <canvas id="medalChart" width="700" height="400"></canvas>
+    </div>
+    <h2>Olympic Podium Visualization</h2>
+    <div class="selectors-container">
+      <select id="yearSelector">
+        <option value="" disabled selected>Select Year</option>
+      </select>
+      <select id="disciplineSelector" style="display: none;">
+        <option value="" disabled selected>Select Discipline</option>
+      </select>
+      <select id="eventSelector" style="display: none;">
+        <option value="" disabled selected>Select Event</option>
+      </select>
+    </div>
+    <div id="performanceMetrics"></div>
+    <div id="visualization"></div>
+    <div id="sourceContainer"></div>
+    <div id="additionalInfo"></div>
 
 
-      <h2> World Record Simulation </h2>
-      <div>
-          <button class = "custom-button" onclick="location.href='swimming.html'">Swimming</button>
-          <button class = "custom-button" onclick="location.href='athletics.html'">Athletics</button>
-      </div>
+    <h2>Track and Swimming Finals Performance Simulation</h2>
+    <div class="button-container">
+      <button class="custom-button" onclick="location.href='swimming.html'">Swimming</button>
+      <button class="custom-button" onclick="location.href='athletics.html'">Athletics</button>
+    </div>
   </body>
 </html>
