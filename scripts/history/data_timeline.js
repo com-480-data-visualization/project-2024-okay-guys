@@ -1,3 +1,25 @@
+/**
+ * This script provides data for the Summer and Winter Olympics, used to generate timelines and visualizations.
+ * It includes arrays of objects, each representing an Olympic event with details such as year, city, country, ISO code, 
+ * and continent. This data can be utilized in other scripts to create visual representations of the Olympic Games history.
+ *
+ * Data Structures:
+ * - summerOlympicsData: An array of objects, each containing details of a Summer Olympic event.
+ * - winterOlympicsData: An array of objects, each containing details of a Winter Olympic event.
+ *
+ * Each object in the arrays contains the following properties:
+ * - Year: The year the Olympic event took place.
+ * - Olympiad: The number of the Olympiad.
+ * - City: The city where the event was held.
+ * - City_count: The count of times the city has hosted the Olympics.
+ * - Country: The country where the event was held.
+ * - Iso: The ISO code of the country.
+ * - Country_count: The count of times the country has hosted the Olympics.
+ * - Continent: The continent where the event was held.
+ * - Continent_count: The count of times the continent has hosted the Olympics.
+ * - Notabene (optional): Additional notes about the event, such as cancellations.
+ */
+
 const summerOlympicsData =[
     {
         "Year": 1896,

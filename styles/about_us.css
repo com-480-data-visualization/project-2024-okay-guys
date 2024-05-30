@@ -1,26 +1,29 @@
+/* Styling for headings */
 h1 {
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 3vw;
-    text-align: center;
-  }
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 3vw; 
+  text-align: center;
+}
 
 h2 {
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 2vw;
-  }
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 2vw; 
+}
+
 /* Style for the title and logo images */
 .title-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; 
+  margin-bottom: 20px;
 }
 
 .logo-image {
-    width: 15vh; /* Adjust the size as needed */
-    height: auto;
+  width: 15vh;
+  height: auto; 
 }
+
 /* Menu styling */
 .menu {
   display: flex;
@@ -39,37 +42,39 @@ h2 {
   border-radius: 10px;
   margin-right: 40px;
   font-family: "Josefin Sans", sans-serif; 
-  font-size: 2vw; /* Utiliser la même taille de police que le titre */
+  font-size: 2vw; 
 }
 
 .menu a:hover {
   background-color: #ddd;
 }
 
+/* Team section styling */
 .team {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
+  display: flex;
+  justify-content: space-around; 
+  margin: 20px 0; 
 }
 
 .team-member {
-text-align: center;
-font-family: "Josefin Sans", sans-serif;
+  text-align: center;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 .team-member img {
-width: 150px;
-height: 150px;
-border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; 
 }
 
+/* Introduction block styling */
 .intro-block {
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 3vw;
-    background-color: rgba(240, 240, 240, 0.9);
-    padding: 20px;
-    border-radius: 15px;
-    margin: 20px 0;
-    font-size: 16px;
-    line-height: 1.6;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 3vw; 
+  background-color: rgba(240, 240, 240, 0.9); 
+  padding: 20px; 
+  border-radius: 15px; 
+  margin: 20px 0; 
+  font-size: 16px;
+  line-height: 1.6; 
 }

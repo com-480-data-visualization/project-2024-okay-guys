@@ -1,48 +1,19 @@
-var simplemaps_worldmap_mapdata = {
-main_settings:{
-		//General settings
-		width: '700', //or 'responsive'
-		background_color: '#C0C0C0',	
-		background_transparent: 'no',
-		popups: 'on_click', //on_click, on_hover, or detect
-	
-		
-		//Zoom settings
-		manual_zoom: 'no',
-		back_image: 'no',
-		arrow_box: 'no',
-		navigation_size: '40',
-		navigation_color: '#f7f7f7',
-		navigation_border_color: '#636363',
-		initial_back: 'no', //Show back button when zoomed out and do this JavaScript upon click		
-		initial_zoom: -1,  //-1 is zoomed out, 0 is for the first continent etc	
-		initial_zoom_solo: 'no', //hide adjacent states when starting map zoomed in
-		region_opacity: 1,
-		region_hover_opacity: .6,
-		zoom_out_incrementally: 'yes',  // if no, map will zoom all the way out on click
-		zoom_percentage: .99,
-		zoom_time: .5, //time to zoom between regions in seconds
-		
-		//Popup settings
-		popup_color: 'white',
-		popup_opacity: .9,
-		popup_shadow: 1,
-		popup_corners: 5,
-		popup_font: '12px/1.5 Verdana, Arial, Helvetica, sans-serif',
-		popup_nocss: 'no', //use your own css	
-		
-		//Advanced settings
-		div: 'map',
-		auto_load: 'yes',		
-    	rotate: '0',
-		url_new_tab: 'yes', 
-		images_directory: 'default', //e.g. 'map_images/'
-    	import_labels: 'no',
-		fade_time:  .1, //time to fade out		
-		link_text: 'View Website'  //Text mobile browsers will see for links	
-		
-	},
+/**
+ * Provides data for configuring and displaying the interactive world map.
+ * This script defines the state-specific data and locations data used to
+ * populate the map with regions and points of interest.
+ *
+ * Variables:
+ * - simplemaps_worldmap_mapdata: Contains the state-specific data and locations data.
+ *
+ * Data Structures:
+ * - state_specific: An object where each key is a country code and each value is an object
+ *   containing information about the country such as name, description, color, hover color, and URL.
+ * - locations: An object where each key is an ID representing a location and each value is an object
+ *   containing information about the location such as name, country, coordinates, and related data.
+ */
 
+var simplemaps_worldmap_mapdata = {
 state_specific:{		
 	AE: { 
 	name: 'United Arab Emirates',
@@ -50,7 +21,7 @@ state_specific:{
 	color: 'default',
 	hover_color: 'default',
 	inactive: 'no',
-	url: 'default' //Note:  You must omit the comma after the last property in an object to prevent errors in internet explorer.
+	url: 'default' 
 	},
 
 	AF: { 
@@ -1451,10 +1422,9 @@ state_specific:{
 	color: 'default',
 	hover_color: 'default',
 	url: 'default'
-	}//Note:  You must omit the comma after the last property in an object to prevent errors in internet explorer.
+	}
 },
 
-// You must number locations sequentially
 locations: {
     0: {
         name: 'Athens',
