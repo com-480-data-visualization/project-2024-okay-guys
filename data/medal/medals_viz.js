@@ -11,14 +11,14 @@ document.addEventListener("DOMContentLoaded", function() {
             "Croatia", "Cyprus", "Estonia", "Georgia", "Iceland", "Kosovo", "Latvia", "Lithuania", "Luxembourg", "Malta", "San Marino"
         ];
 
-        const otherAsia = [
+        const Asia = [
             "China", "India", "Japan", "South Korea", "Malaysia", "Mongolia", "Nepal", "Pakistan", "Philippines", "Singapore", 
             "Sri Lanka", "Thailand", "Vietnam", "Afghanistan", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Cambodia", "Indonesia", 
             "Iran", "Iraq", "Jordan", "Kazakhstan", "Kuwait", "Kyrgyzstan", "Laos", "Lebanon", "Maldives", "Myanmar", "North Korea", 
             "Oman", "Qatar", "Saudi Arabia", "Syria", "Tajikistan", "Turkmenistan", "United Arab Emirates", "Uzbekistan", "Yemen"
         ];
 
-        const otherNorthAmerica = [
+        const CanadaMexico = [
             "Canada", "Mexico", "Bahamas", "Barbados", "Cuba", "Dominican Republic", "Haiti", "Jamaica", "Puerto Rico", 
             "Trinidad and Tobago", "Antigua", "Belize", "Bermuda", "Cayman Islands", "Dominica", "Grenada", "Saint Kitts", "Saint Lucia", 
             "Saint Vincent", "Saint Vincent and the Grenadines"
@@ -71,9 +71,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     groupedData[d.Country] += totalMedals;
                 } else if (otherEurope.includes(d.Country)) {
                     groupedData["Other Europe"] += totalMedals;
-                } else if (otherAsia.includes(d.Country)) {
+                } else if (Asia.includes(d.Country)) {
                     groupedData["Asia"] += totalMedals;
-                } else if (otherNorthAmerica.includes(d.Country)) {
+                } else if (CanadaMexico.includes(d.Country)) {
                     groupedData["Canada & Mexico"] += totalMedals;
                 } else if (otherSouthAmerica.includes(d.Country)) {
                     groupedData["South America"] += totalMedals;
