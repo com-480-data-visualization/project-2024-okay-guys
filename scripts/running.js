@@ -133,6 +133,8 @@ document.addEventListener("DOMContentLoaded", function() {
         svgContent.selectAll("text.runner-time").remove();
         svgContent.selectAll("text.runner-rank").remove();
         svgContent.selectAll("image.flag-end").remove();
+        svgContent.selectAll("text.runner-record").remove(); 
+
     }
 
 
@@ -186,11 +188,11 @@ document.addEventListener("DOMContentLoaded", function() {
             .duration(100)
             .style("opacity", 0)
             .remove();
-
+    
         // Sort the runners based on their times to determine the ranking
         const rankedRunners = [...RunnerData].sort((a, b) => a.time - b.time);
         rankedRunners.forEach((d, i) => d.rank = i + 1);
-
+    
         const circles = svgContent.selectAll("circle")
             .data(RunnerData)
             .enter()
@@ -199,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .attr("cy", (d, i) => calculateLanePosition(d, i))
             .attr("r", circleRadius)
             .attr("fill", "blue");
-
+    
         circles.transition() // Apply transition to all circles (enter & update)
             .duration(d => d.time * 1000 * animationSpeedFactor) // Set duration based on time (in milliseconds)
             .ease(d3.easeLinear) // Adjust animation easing (optional)
@@ -216,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     .attr("fill", "black")
                     .attr("font-family", "sans-serif")
                     .text(formatTime(d.time)); // Display time in seconds
-
+    
                 // Add text for displaying the rank inside the lane
                 svgContent.append("text")
                     .attr("class", "runner-rank")
@@ -228,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     .attr("fill", "red")
                     .attr("font-family", "sans-serif")
                     .text("Rank: " + d.rank); // Display the rank
-
+    
                 // Display flags at the end
                 svgContent.append("image")
                     .attr("class", "flag-end")
@@ -237,8 +239,22 @@ document.addEventListener("DOMContentLoaded", function() {
                     .attr("width", 32)
                     .attr("height", 24)
                     .attr("xlink:href", `https://flagcdn.com/32x24/${nocToIso[d.noc] || d.noc.toLowerCase()}.png`);
+    
+                // Check if the runner beat the previous record
+                if (d.time < previousRecord.time) {
+                    svgContent.append("text")
+                        .attr("class", "runner-record")
+                        .attr("x", trackWidth - margin.left - margin.right - circleRadius - 180) // Adjust the distance from the circle
+                        .attr("y", calculateLanePosition(d, i))
+                        .attr("dy", "0.35em") // Center text vertically
+                        .attr("text-anchor", "end") // Align text to the start
+                        .attr("font-size", "14px")
+                        .attr("fill", "yellow")
+                        .attr("font-family", "sans-serif")
+                        .text("New Record!"); // Display the record message
+                }
             });
-
+    
         svgContent.selectAll("text.runner-name")
             .data(RunnerData)
             .enter()
@@ -263,24 +279,24 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => response.text())
             .then(csvData => {
                 const parsedData = Papa.parse(csvData, { header: true }).data;
-
+    
                 RunnerData = parsedData
                     .filter(row => row.event_title === eventTitle && row.sport === "Athletics" && row.edition === edition)
                     .map(row => {
                         return {
                             runner: row.athlete_combined,
-                            time: convertTimeToSeconds(row.performance_combined),// Extract time and convert to number
+                            time: convertTimeToSeconds(row.performance_combined), // Extract time and convert to number
                             date: row.result_date,
                             noc: row.noc
                         };
                     })
                     .filter(d => !isNaN(d.time) && d.time !== '' && d.time !== '-') // Filter out invalid performance metrics
                     .sort((a, b) => a.time - b.time); // Sort by performance
-
+    
                 RunnerData = shuffleArray(RunnerData);
                 numLanes = RunnerData.length;
                 laneHeight = height / numLanes; // Recalculate lane height based on the number of runners
-
+    
                 if (RunnerData.length > 0) {
                     document.getElementById("play-button").disabled = false;
                     document.getElementById("speed-up").disabled = false;
@@ -291,11 +307,37 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else {
                     alert("No data found for the selected event.");
                 }
-
+    
+                // Get the current edition year
+                const currentEditionYear = parseInt(edition.split(" ")[0]);
+    
+                // Find and display previous record for similar events in past editions
+                previousRecord = parsedData
+                    .filter(row => row.event_title === eventTitle && row.sport === "Athletics" && parseInt(row.edition.split(" ")[0]) < currentEditionYear)
+                    .reduce((prev, current) => {
+                        const currentTime = convertTimeToSeconds(current.performance_combined);
+                        if (!isNaN(currentTime) && (prev === null || currentTime < prev.time)) {
+                            return {
+                                time: currentTime,
+                                edition: current.edition,
+                                runner: current.athlete_combined
+                            };
+                        }
+                        return prev;
+                    }, null);
+    
+                const recordDisplay = document.getElementById("record-display");
+                if (previousRecord) {
+                    recordDisplay.innerHTML = `<p>Previous Olympic Record: ${previousRecord.runner} (${previousRecord.edition}) - ${formatTime(previousRecord.time)}</p>`;
+                } else {
+                    recordDisplay.innerHTML = "<p>This is the first time the event occurs.</p>";
+                }
+    
             })
             .catch(error => console.error(error)); // Handle errors
     }
-
+    
+    
     function populateDropdowns() {
         fetch('../data/data.csv')
             .then(response => response.text())

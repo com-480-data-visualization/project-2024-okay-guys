@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
         svgContent.selectAll("text.Swimmer-time").remove();
         svgContent.selectAll("text.Swimmer-rank").remove();
         svgContent.selectAll("image.flag-end").remove();
+        svgContent.selectAll("text.swimmer-record").remove();
     }
 
 
@@ -237,6 +238,19 @@ document.addEventListener("DOMContentLoaded", function() {
                     .attr("width", 32)
                     .attr("height", 24)
                     .attr("xlink:href", `https://flagcdn.com/32x24/${nocToIso[d.noc] || d.noc.toLowerCase()}.png`);
+
+                    if (d.time < previousRecord.time) {
+                        svgContent.append("text")
+                            .attr("class", "swimmer-record")
+                            .attr("x", trackWidth - margin.left - margin.right - circleRadius - 180) // Adjust the distance from the circle
+                            .attr("y", calculateLanePosition(d, i))
+                            .attr("dy", "0.35em") // Center text vertically
+                            .attr("text-anchor", "end") // Align text to the start
+                            .attr("font-size", "14px")
+                            .attr("fill", "yellow")
+                            .attr("font-family", "sans-serif")
+                            .text("New Record!"); 
+                    }
             });
 
         svgContent.selectAll("text.Swimmer-name")
@@ -291,7 +305,32 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else {
                     alert("No data found for the selected event.");
                 }
-
+                
+                // Get the current edition year
+                const currentEditionYear = parseInt(edition.split(" ")[0]);
+    
+                // Find and display previous record for similar events in past editions
+                previousRecord = parsedData
+                    .filter(row => row.event_title === eventTitle && row.sport === "Swimming" && parseInt(row.edition.split(" ")[0]) < currentEditionYear)
+                    .reduce((prev, current) => {
+                        const currentTime = convertTimeToSeconds(current.performance_combined);
+                        if (!isNaN(currentTime) && (prev === null || currentTime < prev.time)) {
+                            return {
+                                time: currentTime,
+                                edition: current.edition,
+                                swimmer: current.athlete_combined
+                            };
+                        }
+                        return prev;
+                    }, null);
+    
+                const recordDisplay = document.getElementById("record-display");
+                if (previousRecord) {
+                    recordDisplay.innerHTML = `<p>Previous Olympic Record: ${previousRecord.swimmer} (${previousRecord.edition}) - ${formatTime(previousRecord.time)}</p>`;
+                } else {
+                    recordDisplay.innerHTML = "<p>This is the first time the event occurs.</p>";
+                }
+    
             })
             .catch(error => console.error(error)); // Handle errors
     }
