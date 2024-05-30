@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = results.data;
       const processedData = processEventData(data);
       initializeYearSelector(data, processedData);
+
+      // Automatically select random year, discipline, and event
+      selectRandomOptions(data, processedData);
     }
   });
 
@@ -178,7 +181,7 @@ function visualizeEvent(eventData, allData, processedData) {
 
   const event = eventData[0].event_title;
   const additionalInfo = processedData[event];
-  displayAdditionalInfo(additionalInfoContainer, additionalInfo);
+  //displayAdditionalInfo(additionalInfoContainer, additionalInfo);
 }
 
 function displayAdditionalInfo(container, info) {
@@ -210,10 +213,10 @@ function getRelevantColumns(eventData) {
 }
 
 function createPodiumVisualization(top3, valueColumn, competitorColumn, nocColumn, eventTitle) {
-  const svgWidth = 600;
-  const svgHeight = 400;
-  const podiumWidth = 100;
-  const podiumHeight = [150, 100, 50];
+  const svgWidth = 900;  // Increased width
+  const svgHeight = 400;  // Increased height
+  const podiumWidth = 120;  // Increased podium width
+  const podiumHeight = [200, 150, 100];  // Increased podium heights
   const colors = ["gold", "silver", "#cd7f32"];
 
   const svg = d3.select("#visualization")
@@ -227,15 +230,16 @@ function createPodiumVisualization(top3, valueColumn, competitorColumn, nocColum
     .attr("y", 30)
     .attr("text-anchor", "middle")
     .attr("fill", "black")
-    .attr("font-size", "20px")
+    .attr("font-size", "24px")
     .attr("font-weight", "bold")
     .text(eventTitle);
 
   // Define the x positions to center the first place and place second and third on the sides
+  // Define the x positions to center the first place and place second and third on the sides
   const xPositions = [
     svgWidth / 2 - podiumWidth / 2, // First place in the middle
-    svgWidth / 2 - podiumWidth * 1.5 - 10, // Second place on the left
-    svgWidth / 2 + podiumWidth / 2 + 10 // Third place on the right
+    svgWidth / 2 - podiumWidth * 1.5 - 30, // Second place on the left
+    svgWidth / 2 + podiumWidth / 2 + 30 // Third place on the right
   ];
 
   podiumHeight.forEach((height, i) => {
@@ -258,15 +262,15 @@ function createPodiumVisualization(top3, valueColumn, competitorColumn, nocColum
         .attr("y", svgHeight - podiumHeight[d.pos - 1] - 60)
         .attr("text-anchor", "middle")
         .attr("fill", "black")
-        .attr("font-size", "14px")
+        .attr("font-size", "16px")
         .text(`${d[competitorColumn]}`);
-    
+      
       svg.append("text")
         .attr("x", xPositions[d.pos - 1] + podiumWidth / 2)
-        .attr("y", svgHeight - podiumHeight[d.pos - 1] - 40)
+        .attr("y", svgHeight - podiumHeight[d.pos - 1] - 30)
         .attr("text-anchor", "middle")
         .attr("fill", "black")
-        .attr("font-size", "12px")
+        .attr("font-size", "14px")
         .text(`${d[valueColumn]}`);
 
       const isoCode = window.nocToIso[d[nocColumn]] || d[nocColumn].toLowerCase();
@@ -276,18 +280,20 @@ function createPodiumVisualization(top3, valueColumn, competitorColumn, nocColum
         .attr("width", 32)
         .attr("height", 24)
         .attr("x", xPositions[d.pos - 1] + podiumWidth / 2 - 16) // Center the flag
-        .attr("y", svgHeight - podiumHeight[d.pos - 1] - 110);
+        .attr("y", svgHeight - podiumHeight[d.pos - 1] - 130);
 
       svg.append("text")
         .attr("x", xPositions[d.pos - 1] + podiumWidth / 2)
-        .attr("y", svgHeight - podiumHeight[d.pos - 1] - 70)
+        .attr("y", svgHeight - podiumHeight[d.pos - 1] - 90)
         .attr("text-anchor", "middle")
         .attr("fill", "black")
-        .attr("font-size", "12px")
+        .attr("font-size", "14px")
         .text(d[nocColumn]);
-    } 
+    }
   });
 }
+
+
 
 function displayPerformanceMetrics(eventData, performanceColumn) {
   const performanceMetricsContainer = document.getElementById('performanceMetrics');
@@ -302,4 +308,30 @@ function displaySource(eventData) {
   const sourceLinks = uniqueResultIds.map(id => `<a href="https://www.olympedia.org/results/${id}" target="_blank">Source</a>`).join(', ');
 
   sourceContainer.innerHTML = `<p>${sourceLinks}</p>`;
+}
+
+function selectRandomOptions(data, processedData) {
+  const yearSelector = document.getElementById('yearSelector');
+  const disciplineSelector = document.getElementById('disciplineSelector');
+  const eventSelector = document.getElementById('eventSelector');
+
+  const uniqueYears = [...new Set(data.map(item => item.edition))];
+  const randomYear = uniqueYears[Math.floor(Math.random() * uniqueYears.length)];
+
+  yearSelector.value = randomYear;
+  yearSelector.dispatchEvent(new Event('change'));
+
+  const filteredData = data.filter(item => item.edition === randomYear);
+  const uniqueDisciplines = [...new Set(filteredData.map(item => item.sport))];
+  const randomDiscipline = uniqueDisciplines[Math.floor(Math.random() * uniqueDisciplines.length)];
+
+  disciplineSelector.value = randomDiscipline;
+  disciplineSelector.dispatchEvent(new Event('change'));
+
+  const disciplineFilteredData = filteredData.filter(item => item.sport === randomDiscipline);
+  const uniqueEvents = [...new Set(disciplineFilteredData.map(item => item.event_title))];
+  const randomEvent = uniqueEvents[Math.floor(Math.random() * uniqueEvents.length)];
+
+  eventSelector.value = randomEvent;
+  eventSelector.dispatchEvent(new Event('change'));
 }
