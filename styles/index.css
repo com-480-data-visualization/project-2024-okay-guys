@@ -123,12 +123,11 @@ h1 {
   
 }
 
-/* Body styling */
-body {
-  overflow-x: hidden; /* Empêche le défilement horizontal inutile */
-  background-color: #f4f4f4; /* Couleur de fond pour tout le corps, différente du conteneur pour le contraste */
-  padding: 0;
-  margin: 0;
+/* Styling for the button container */
+.button-container {
+  position: relative;
+  width: 100%;
+  display: flex;
 }
 
 /* Back button styling */
@@ -141,7 +140,10 @@ body {
   border-radius: 20px; 
   cursor: pointer;
   transition: background-color 0.3s ease;
-  display: none;
+  position: absolute; /* Position it absolutely within the button-container */
+  top: 7vh;
+  left: 18vh;
+  display: none; /* Initially hidden */
 }
 
 #backButton:hover {
