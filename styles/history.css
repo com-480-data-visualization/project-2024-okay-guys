@@ -203,3 +203,45 @@ h1 {
     font-size: 16px;
     line-height: 1.6;
 }
+
+/* .................. */
+
+.year-displays {
+    font-size: 40px; 
+    font-weight: bold;
+    position: absolute;
+    color: rgb(243, 113, 14);
+    top: 25px;
+    left: 900px;
+    z-index: 10;
+}
+
+.play-buttons {
+    font-size: 30px; 
+    padding: 24px 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    z-index: 10;
+}
+
+.year-sliders {
+    width: 50%; 
+    position: absolute;
+    top: 70px;
+    left: 140px;
+    z-index: 10;
+}
+
+.legendSequential {
+    font-size: 18px;
+    position: absolute;
+    top: 150px;
+    right: 10px;
+    z-index: 10;
+}
