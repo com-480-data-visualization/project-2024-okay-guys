@@ -1,30 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Athletics Plots</title>
-  <!-- Include D3.js library -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
-</head>
-
-<body>
-
-    <!-- Race Viz -->>
-    <p>World Records 100m Men Outdoors - Simulation</p>
-    <svg id="race-viz" width="800" height="400"></svg>
-    <button id="play-button">Play</button>
-    <button id="speed-up">Speed Up</button>
-    <button id="speed-down">Speed Down</button>
-    <span id="speed-display"></span>
-    <script src="../scripts/100mMenSeniorRaceViz.js" defer></script>
-
-    <!-- Container for plot  test-->
-    <p>World Records 100m Men Outdoors - Years Evolution</p>
-    <div id="chart-container"></div>
-    <script src="../scripts/100mMenSeniorScatterPlot.js" defer></script>
-
-
-</body>
-</html>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athletics Plots</title>
+    <!-- Include D3.js library -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+    <script src="../scripts/running.js" defer></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 20px;
+      }
+      #controls {
+        margin-bottom: 20px;
+      }
+      #controls label, #controls select, #controls button, #controls span {
+        margin-right: 10px;
+      }
+      #container {
+        position: relative;
+        width: 900px; /* Increased width for more space */
+        height: 500px;  /* Adjusted height */
+        margin: 0 auto; /* Center the container */
+      }
+      #race-viz {
+        width: 900px;  /* Match container width */
+        height: 500px;  /* Match container height */
+      }
+    </style>
+  </head>
+  <body>
+      <h1>Finals Track Events - Simulation</h1>
+      <div id="controls">
+        <label for="edition-select">Choose an edition:</label>
+        <select id="edition-select">
+          <!-- Options will be dynamically populated -->
+        </select>
+        <label for="event-select">Choose an event:</label>
+        <select id="event-select">
+        </select>
+        <button id="load-event">Load Event</button>
+        <button id="play-button" disabled>Play</button>
+        <button id="speed-up" disabled>Speed Up</button>
+        <button id="speed-down" disabled>Speed Down</button>
+        <span id="speed-display">Speed: x1</span>
+      </div>
+      <div id="container">
+        <svg id="race-viz"></svg>
+      </div>
+      <div id="sourceContainer"></div>
+  </body>
+  </html>

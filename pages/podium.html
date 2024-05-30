@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olympic Podium Visualization</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="../scripts/podium_basic copy.js"></script>
+</head>
+<body>
+  <select id="yearSelector">
+    <option value="" disabled selected>Select Year</option>
+  </select>
+  <select id="disciplineSelector" style="display: none;">
+    <option value="" disabled selected>Select Discipline</option>
+  </select>
+  <select id="eventSelector" style="display: none;">
+    <option value="" disabled selected>Select Event</option>
+  </select>
+  <div id="performanceMetrics"></div>
+  <div id="visualization"></div>
+  <div id="sourceContainer"></div>
+  <div id="additionalInfo"></div>
+
+</body>
+</html>
