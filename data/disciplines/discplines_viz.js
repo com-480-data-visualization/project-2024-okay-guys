@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    d3.csv("/data/dataset_olympics.csv").then(function(data) {
+    d3.csv("../data/dataset_olympics.csv").then(function(data) {
         console.log("CSV data loaded:", data);
 
         data.forEach(d => {

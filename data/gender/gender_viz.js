@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     Promise.all([
-        d3.csv("/data/dataset_olympics.csv"),
-        d3.json("/data/countries.geojson")
+        d3.csv("../data/dataset_olympics.csv"),
+        d3.json("../data/countries.geojson")
     ]).then(function(datasets) {
         const [data, world] = datasets;
         console.log("Datasets loaded:", datasets);
