@@ -93,26 +93,23 @@ document.addEventListener("DOMContentLoaded", function() {
     //         .attr("font-size", "12px")
     //         .attr("fill", "black")
     //         .attr("font-family", "sans-serif")
-    //         .text(d => d.runner);
-    // }
+    //         .text(d => d.runner)
 
-    // function resetSVG() {
-    //     // Remove existing SVG elements
-    //     svgContent.selectAll("circle").remove();
-    //     svgContent.selectAll("text.runner-name").remove();
-    //     svgContent.selectAll("text.runner-time").remove();
+    //     // Display flags at the start
+    //     svgContent.selectAll("image.flag-start")
+    //         .data(RunnerData)
+    //         .enter()
+    //         .append("image")
+    //         .attr("class", "flag-start")
+    //         .attr("x", circleRadius + 10 + d.textWidth) // Position the flag to the left of the starting point
+    //         .attr("y", (d, i) => calculateLanePosition(d, i) - 12) // Adjust Y position to align with the runner
+    //         .attr("width", 32)
+    //         .attr("height", 24)
+    //         .attr("xlink:href", d => `https://flagcdn.com/32x24/${nocToIso[d.noc] || d.noc.toLowerCase()}.png`);
     // }
     function init() {
-        svgContent.selectAll("circle")
-            .data(RunnerData)
-            .enter()
-            .append("circle")
-            .attr("cx", 0) // Start at the beginning of x-axis
-            .attr("cy", (d, i) => calculateLanePosition(d, i))
-            .attr("r", circleRadius)
-            .attr("fill", "blue");
-
-        svgContent.selectAll("text.runner-name")
+        // Append runner names and measure their widths
+        const runnerText = svgContent.selectAll("text.runner-name")
             .data(RunnerData)
             .enter()
             .append("text")
@@ -125,19 +122,34 @@ document.addEventListener("DOMContentLoaded", function() {
             .attr("fill", "black")
             .attr("font-family", "sans-serif")
             .text(d => d.runner)
+            .each(function(d) {
+                const bbox = this.getBBox();
+                d.textWidth = bbox.width;
+            });
 
-        // Display flags at the start
+        // Append circles for runners
+        svgContent.selectAll("circle")
+            .data(RunnerData)
+            .enter()
+            .append("circle")
+            .attr("cx", 0) // Start at the beginning of x-axis
+            .attr("cy", (d, i) => calculateLanePosition(d, i))
+            .attr("r", circleRadius)
+            .attr("fill", "blue");
+
+        // Display flags at the start based on the measured width of the runner names
         svgContent.selectAll("image.flag-start")
             .data(RunnerData)
             .enter()
             .append("image")
             .attr("class", "flag-start")
-            .attr("x", circleRadius + 10 + d.textWidth) // Position the flag to the left of the starting point
+            .attr("x", d => circleRadius + 10 + d.textWidth) // Position the flag after the text width
             .attr("y", (d, i) => calculateLanePosition(d, i) - 12) // Adjust Y position to align with the runner
             .attr("width", 32)
             .attr("height", 24)
             .attr("xlink:href", d => `https://flagcdn.com/32x24/${nocToIso[d.noc] || d.noc.toLowerCase()}.png`);
     }
+
 
     function resetSVG() {
         // Remove existing SVG elements
@@ -193,10 +205,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     function animaterunners() {
+        // Fade out the flags at the start
+        svgContent.selectAll("image.flag-start")
+            .transition()
+            .duration(100)
+            .style("opacity", 0)
+            .remove();
+
         // Sort the runners based on their times to determine the ranking
         const rankedRunners = [...RunnerData].sort((a, b) => a.time - b.time);
         rankedRunners.forEach((d, i) => d.rank = i + 1);
-    
+
         const circles = svgContent.selectAll("circle")
             .data(RunnerData)
             .enter()
@@ -205,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .attr("cy", (d, i) => calculateLanePosition(d, i))
             .attr("r", circleRadius)
             .attr("fill", "blue");
-    
+
         circles.transition() // Apply transition to all circles (enter & update)
             .duration(d => d.time * 1000 * animationSpeedFactor) // Set duration based on time (in milliseconds)
             .ease(d3.easeLinear) // Adjust animation easing (optional)
@@ -222,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     .attr("fill", "black")
                     .attr("font-family", "sans-serif")
                     .text(d.time + "s"); // Display time in seconds
-    
+
                 // Add text for displaying the rank inside the lane
                 svgContent.append("text")
                     .attr("class", "runner-rank")
@@ -238,13 +257,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Display flags at the end
                 svgContent.append("image")
                     .attr("class", "flag-end")
-                    .attr("x", trackWidth - margin.left - margin.right + 10) // Position the flag to the right of the ending point
+                    .attr("x", trackWidth - margin.left - margin.right - 170) // Position the flag to the right of the ending point
                     .attr("y", calculateLanePosition(d, i) - 12) // Adjust Y position to align with the runner
                     .attr("width", 32)
                     .attr("height", 24)
                     .attr("xlink:href", `https://flagcdn.com/32x24/${nocToIso[d.noc] || d.noc.toLowerCase()}.png`);
             });
-    
+
         svgContent.selectAll("text.runner-name")
             .data(RunnerData)
             .enter()
