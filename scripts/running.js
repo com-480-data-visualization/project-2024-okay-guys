@@ -71,42 +71,17 @@ document.addEventListener("DOMContentLoaded", function() {
         return array;
     }
 
-    // function init() {
-    //     svgContent.selectAll("circle")
-    //         .data(RunnerData)
-    //         .enter()
-    //         .append("circle")
-    //         .attr("cx", 0) // Start at the beginning of x-axis
-    //         .attr("cy", (d, i) => calculateLanePosition(d, i))
-    //         .attr("r", circleRadius)
-    //         .attr("fill", "blue");
+    function formatTime(seconds) {
+        if (seconds >= 60) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = (seconds % 60).toFixed(3);
+            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        } else {
+            return seconds.toFixed(2) + "s";
+        }
+    }
 
-    //     svgContent.selectAll("text.runner-name")
-    //         .data(RunnerData)
-    //         .enter()
-    //         .append("text")
-    //         .attr("class", "runner-name")
-    //         .attr("x", circleRadius + 5) // Adjust the distance from the circle
-    //         .attr("y", (d, i) => calculateLanePosition(d, i))
-    //         .attr("dy", "0.35em") // Center text vertically
-    //         .attr("text-anchor", "start") // Align text to the start
-    //         .attr("font-size", "12px")
-    //         .attr("fill", "black")
-    //         .attr("font-family", "sans-serif")
-    //         .text(d => d.runner)
 
-    //     // Display flags at the start
-    //     svgContent.selectAll("image.flag-start")
-    //         .data(RunnerData)
-    //         .enter()
-    //         .append("image")
-    //         .attr("class", "flag-start")
-    //         .attr("x", circleRadius + 10 + d.textWidth) // Position the flag to the left of the starting point
-    //         .attr("y", (d, i) => calculateLanePosition(d, i) - 12) // Adjust Y position to align with the runner
-    //         .attr("width", 32)
-    //         .attr("height", 24)
-    //         .attr("xlink:href", d => `https://flagcdn.com/32x24/${nocToIso[d.noc] || d.noc.toLowerCase()}.png`);
-    // }
     function init() {
         // Append runner names and measure their widths
         const runnerText = svgContent.selectAll("text.runner-name")
@@ -240,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     .attr("font-size", "12px")
                     .attr("fill", "black")
                     .attr("font-family", "sans-serif")
-                    .text(d.time + "s"); // Display time in seconds
+                    .text(formatTime(d.time)); // Display time in seconds
 
                 // Add text for displaying the rank inside the lane
                 svgContent.append("text")
