@@ -1,4 +1,17 @@
-/* Map path and default settings - you can edit this */
+/**
+ * Contains map information and bounding box data for the interactive world map.
+ * This script defines the overall map configuration and the bounding box data
+ * for each country, which is used for positioning and scaling the map elements.
+ *
+ * Variables:
+ * - simplemaps_worldmap_mapinfo: Contains the map name, state bounding box array, and other relevant data.
+ *
+ * Data Structures:
+ * - map_name: The name of the map.
+ * - stateBboxArray: An object where each key is a country code and each value is an object
+ *   containing the bounding box coordinates for the country.
+ */
+
 var simplemaps_worldmap_mapinfo = {
     map_name: "world",
     stateBboxArray: {

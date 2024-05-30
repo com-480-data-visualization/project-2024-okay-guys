@@ -1,17 +1,11 @@
-/* Styling for HTML elements */
-html {
-  background-color: #ffff;
-  overflow-x: hidden;
-
-}
-
+/* Styles for the main container */
 .main-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%; /* ou une autre largeur en pourcentage pour s'adapter à la largeur de l'écran */
+  width: 80%;
   height: 80%;
-  margin: 0 auto; /* Centrer le conteneur sur la page */
+  margin: 0 auto;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -19,35 +13,32 @@ html {
 
 #mapContainer {
   display: flex;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement si le conteneur a une hauteur spécifique */
+  justify-content: center;
+  align-items: center;
   margin-top: 50px;
-  width: 100%; /* Prend toute la largeur du conteneur parent */
-  height: 100%; /* Optionnel, dépend de la hauteur que vous voulez pour votre conteneur */
+  width: 100%;
+  height: 100%;
 }
 
-
-/* Styling for headings */
+/* Styles for headings */
 h1 {
   font-family: "Josefin Sans", sans-serif;
   font-size: 3vw;
   text-align: center;
 }
 
-/* Center alignment utility */
 .center {
   text-align: center;
 }
 
-/* Logo image styling */
+/* Styles for logo images */
 .logo-image {
-  width: 100%; /* Assurez-vous que l'image ne dépasse pas la largeur du conteneur */
+  width: 100%;
   height: auto;
-  max-width: 1000px; /* Taille maximale de l'image pour qu'elle ne devienne pas trop grande */
+  max-width: 1000px;
 }
 
-
-/* Menu styling */
+/* Styles for menu */
 .menu {
   display: flex;
   justify-content: center;
@@ -65,38 +56,37 @@ h1 {
   border-radius: 10px;
   margin-right: 40px;
   font-family: "Josefin Sans", sans-serif; 
-  font-size: 2vw; /* Utiliser la même taille de police que le titre */
+  font-size: 2vw;
 }
 
 .menu a:hover {
   background-color: #ddd;
 }
 
-
-/* Tooltip styling */
+/* Styles for tooltips */
 .tooltip {
   background: #f9f9f9; 
   color: #333; 
   border: 1px solid #ccc; 
   border-radius: 8px; 
-  padding: 1vw 2vw; /* Utilisation de pourcentages de la largeur de la fenêtre */
+  padding: 1vw 2vw;
   position: absolute;
   z-index: 1000;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
   transition: opacity 0.3s;
   opacity: 0; 
   font-family: "Josefin Sans", sans-serif; 
-  font-size: 1vw; /* Utilisation de pourcentages de la taille de la fenêtre */
+  font-size: 1vw;
   line-height: 1.4;
 }
 
 .tooltip .city-country {
-  font-size: 1.5vw; /* Utilisation de pourcentages de la taille de la fenêtre */
+  font-size: 1.5vw;
   font-weight: bold; 
 }
 
 .tooltip .year {
-  font-size: 1vw; /* Utilisation de pourcentages de la taille de la fenêtre */
+  font-size: 1vw;
 }
 
 .tooltip.show {
@@ -104,33 +94,28 @@ h1 {
 }
 
 .city-tooltip {
-  border-radius: 50px; /* Augmenter le rayon des coins pour des bords plus arrondis */
+  border-radius: 50px;
 }
 
-
-/* Legend text styling */
+/* Styles for legend container */
 .legend-container {
-  transform: translate(5%, 90%); /* Ajustez la position selon vos besoins */
+  transform: translate(5%, 90%);
 }
 
-
-/* Style du texte de légende */
 .legend-text {
   fill: #333;
-  font-size: 40px; /* Utilisation de pourcentages de la largeur de la fenêtre */
+  font-size: 40px;
   font-family: "Josefin Sans", sans-serif; 
   font-weight: bold;
-  
 }
 
-/* Styling for the button container */
+/* Styles for button container */
 .button-container {
   position: relative;
   width: 100%;
   display: flex;
 }
 
-/* Back button styling */
 #backButton {
   font-size: 2vw;
   padding: 1.5vw 3vw;
@@ -140,10 +125,10 @@ h1 {
   border-radius: 20px; 
   cursor: pointer;
   transition: background-color 0.3s ease;
-  position: absolute; /* Position it absolutely within the button-container */
+  position: absolute;
   top: 7vh;
   left: 18vh;
-  display: none; /* Initially hidden */
+  display: none;
 }
 
 #backButton:hover {
