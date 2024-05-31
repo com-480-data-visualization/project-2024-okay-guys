@@ -107,6 +107,7 @@ project-2024-okay-guys/
 │   ├── medal_distribution.csv # Distribution of medal by type, year and country
 │   ├── summer_olympics.csv # Dataset scrapped from wikipedia
 │   └── winter_olympics.csv # Dataset scrapped from wikipedia
+│   └── noc_to_iso_mapping.json # Dataset scrapped from wikipedia
 │
 ├── images/                  # Image files directory
 │   ├── lea.jpg
