@@ -51,9 +51,9 @@ Our inspiration for this project comes from an enjoyment of looking at the limit
 
 Finally, this dataset is totally new to us three, hence it was never previously explored in our past projects. 
 
-## Milestone 2 ()
+## Milestone 2 (26th April, 5pm)
 
-## Technical setup and intended usage 
+## Milestone 3 (31st May, 5pm) : Technical setup and intended usage 
 
 ### Overview
 The idea for our project was born from the media enthusiasm surrounding the 2024 Olympic Games. We realized that, amidst this influx of information about the upcoming Games, few people were truly aware of their history, creation, and evolution over time. Our online research revealed that searching for "history of the Olympics" mainly leads to the Wikipedia page, which, although comprehensive, remains very traditional with a straightforward presentation and often cumbersome tables. The official Olympic Games website also dedicates very little space to their history.
