@@ -66,8 +66,6 @@ These elements have been integrated to create an interactive, aesthetically plea
 1. [Installation](#installation)
 2. [Project Structure](#project-structure)
 3. [Usage](#usage)
-4. [Contributing](#contributing)
-5. [License](#license)
 
 ## Installation
 
