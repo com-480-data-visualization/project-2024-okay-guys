@@ -102,7 +102,7 @@ function updateChart() {
 
 
 window.onload = function() {
-    Papa.parse("../data/medals/medal_distribution.csv", {
+    Papa.parse("../data/medal_distribution.csv", {
         download: true,
         header: true,
         dynamicTyping: true,
