@@ -1,6 +1,6 @@
 # Project of Data Visualization (COM-480)
 
-You can check our website [https://www.kaggle.com/datasets/bhanupratapbiswas/olympic-data/data](website) ! 
+You can check our website (website)[https://www.kaggle.com/datasets/bhanupratapbiswas/olympic-data/data]
 
 | Student's name | SCIPER |
 | -------------- | ------ |
