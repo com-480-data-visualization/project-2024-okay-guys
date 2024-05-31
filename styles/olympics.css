@@ -1,0 +1,88 @@
+
+body {
+    font-family: "Josefin Sans", sans-serif;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+margin: 0;
+padding: 20px;
+}
+
+h1, h2 {
+margin: 10px 0;
+font-family: "Josefin Sans", sans-serif;
+}
+
+/* Title and logo styling */
+h1 {
+    font-size: 3vw;
+    text-align: center;
+}
+
+h2 {
+    font-size:2vw;
+    text-align: center;
+}
+
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 15vh;
+    height: auto;
+}
+
+/* Menu styling */
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.menu a {
+    display: inline-block;
+    padding: 20px 40px;
+    background-color: #f2f2f2;
+    color: #333;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-right: 40px;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 2vw;
+}
+
+.menu a:hover {
+    background-color: #ddd;
+}
+
+.chart-container {
+width: 700px;
+height: 400px;
+}
+.button-container {
+margin-top: 20px;
+}
+.custom-button {
+margin: 0 10px;
+}
+.select-container {
+margin-bottom: 20px;
+}
+#visualization {
+margin-top: 20px;
+}
+.selectors-container {
+text-align: center;
+}
+.selectors-container h2 {
+margin-bottom: 10px;
+}

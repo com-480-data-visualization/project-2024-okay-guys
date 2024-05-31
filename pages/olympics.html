@@ -4,51 +4,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Olympics</title>
-    <link rel="stylesheet" href="../styles/page.css" />
+    <link rel="stylesheet" href="../styles/olympics.css" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../scripts/olympics/medals.js"></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="../scripts/olympics/podium.js"></script>
-    <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin: 0;
-        padding: 20px;
-      }
-      h1, h2 {
-        margin: 10px 0;
-      }
-      .chart-container {
-        width: 700px;
-        height: 400px;
-      }
-      .button-container {
-        margin-top: 20px;
-      }
-      .custom-button {
-        margin: 0 10px;
-      }
-      .select-container {
-        margin-bottom: 20px;
-      }
-      #visualization {
-        margin-top: 20px;
-      }
-      .selectors-container {
-        text-align: center;
-      }
-      .selectors-container h2 {
-        margin-bottom: 10px;
-      }
-    </style>
+    
   </head>
   <body>
-    <h1>Olympics</h1>
+    <div class="title-container">
+      <img src="../images/olympic_symbole.png" alt="Logo of the Olympics" class="logo-image">
+      <h1>Olympics</h1>
+      <img src="../images/olympic_symbole.png" alt="Logo of the Olympics" class="logo-image">
+  </div>
+    <div class="menu">
+      <a href="../index.html">Main Page</a>
+      <a href="../pages/history.html">History</a>
+      <a href="../pages/about_us.html">About Us</a>
+  </div>
     <h2>Medal Distributions</h2>
     <div class="select-container">
       <label for="yearSeasonSelect">Select Year and Season:</label>
