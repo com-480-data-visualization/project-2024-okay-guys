@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     Promise.all([
-        d3.csv("../data/medals/medal_distribution.csv")
+        d3.csv("../data/medal_distribution.csv")
     ]).then(function(datasets) {
         const [data] = datasets;
 
