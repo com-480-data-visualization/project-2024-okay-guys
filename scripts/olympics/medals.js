@@ -113,5 +113,4 @@ window.onload = function() {
             updateChart(); 
         }
     })
-    //console.log(" Data Check:", data);
 };

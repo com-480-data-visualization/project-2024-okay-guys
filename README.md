@@ -50,3 +50,116 @@ Our inspiration for this project comes from an enjoyment of looking at the limit
 
 
 Finally, this dataset is totally new to us three, hence it was never previously explored in our past projects. 
+
+## Milestone 2 ()
+
+## Technical setup and intended usage 
+
+### Overview
+The idea for our project was born from the media enthusiasm surrounding the 2024 Olympic Games. We realized that, amidst this influx of information about the upcoming Games, few people were truly aware of their history, creation, and evolution over time. Our online research revealed that searching for "history of the Olympics" mainly leads to the Wikipedia page, which, although comprehensive, remains very traditional with a straightforward presentation and often cumbersome tables. The official Olympic Games website also dedicates very little space to their history.
+
+Our objective is to make the history and evolution of the Olympic Games accessible to everyone through engaging and visually appealing animations. This project proved to be vast, covering several important aspects. We explored the distribution of host cities worldwide with an interactive map, traced the evolution of Olympic venues with a dynamic timeline, and showcased the increase in the number of disciplines, from 10 to nearly 49 as we approach the Paris 2024 Games. Additionally, we highlighted the evolution of women’s participation in sports competitions and analyzed sports performances over time.
+
+These elements have been integrated to create an interactive, aesthetically pleasing, and user-friendly website, aiming to inform a broad audience that the Olympic Games are much more than just a sports competition. They are a showcase of our world in many aspects.
+
+## Table of Contents
+1. [Installation](#installation)
+2. [Project Structure](#project-structure)
+3. [Usage](#usage)
+4. [Contributing](#contributing)
+5. [License](#license)
+
+## Installation
+
+### Prerequisites
+Before you begin, ensure you have met the following requirements:
+- Python 3.8 or higher
+- The following Python libraries:
+  - pandas
+  - geopandas
+  - matplotlib
+  - pycountry
+  - requests
+  - BeautifulSoup (beautifulsoup4)
+  - deep_translator
+  - aiohttp
+  - nest_asyncio
+  - csv
+- D3.js for interactive visualizations
+
+### Steps
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/com-480-data-visualization/project-2024-okay-guys.git
+   cd project-2024-okay-guys
+
+## Project Structure
+```
+project-2024-okay-guys/
+│
+├── data/                    # Data files directory
+│   ├── countries.geojson
+│   ├── data.csv
+│   ├── dataset_olympics.csv # Dataset Kaggle 
+│   ├── host_cities_lon_lat.csv  # Dataset longitude and latitude of host cities 
+│   ├── iso_country.json # Correspondance ISO code and Country name 
+│   ├── medal_distribution.csv # Distribution of medal by type, year and country
+│   ├── summer_olympics.csv # Dataset scrapped from wikipedia
+│   └── winter_olympics.csv # Dataset scrapped from wikipedia
+│
+├── images/                  # Image files directory
+│   ├── lea.jpg
+│   ├── louis.jpg
+│   ├── olympic_symbole.png # Logo of our page
+│   └── tanguy.jpeg
+│
+├── notebook/                # Jupyter notebooks and scripts directory
+│   ├── gender_inclusion-checkpoint.py
+│   ├── gender_representation-checkpoint.ipynb 
+│   ├── preprocessing_data_gender_medals.ipynb
+│   ├── scrapping_historical_data.ipynb
+│   └── scrapping_olympdia_data.ipynb
+│
+├── pages/                   # HTML pages directory
+│   ├── about_us.html
+│   ├── athletics.html
+│   ├── disciplines_viz.html
+│   ├── gender_viz.html
+│   ├── history.html
+│   ├── medals_viz.html
+│   ├── olympics.html
+│   ├── podium.html
+│   └── swimming.html
+│
+├── scripts/                 # JavaScript scripts directory
+│   ├── history/
+│   │   ├── data_timeline.js
+│   │   ├── disciplines_viz.js
+│   │   ├── gender_viz.js
+│   │   ├── medals_viz.js
+│   │   └── timeline.js
+│   ├── index/
+│   │   ├── initializeMap.js
+│   │   ├── mapdata.js
+│   │   └── worldmap.js
+│   └── olympics/
+│       ├── medals.js
+│       ├── podium.js
+│       ├── running.js
+│       └── swimming.js
+│
+├── styles/                  # CSS styles directory
+│   ├── about_us.css
+│   ├── history.css
+│   ├── index.css
+│   └── olympics.css
+│
+├── index.html               # Main HTML file
+└── README.md                # Project README file
+
+```
+
+## Usage
+
+### Accessing the Website
+- Open your web browser and go to `https://com-480-data-visualization.github.io/project-2024-okay-guys/`.
