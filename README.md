@@ -53,7 +53,10 @@ Finally, this dataset is totally new to us three, hence it was never previously 
 
 ## Milestone 2 (26th April, 5pm)
 [Milestone 2](Milestone_2.pdf)
+
 ## Milestone 3 (31st May, 5pm) : Technical setup and intended usage 
+
+[Process Book](Okay_Guys.pdf)
 
 ### Overview
 The idea for our project was born from the media enthusiasm surrounding the 2024 Olympic Games. We realized that, amidst this influx of information about the upcoming Games, few people were truly aware of their history, creation, and evolution over time. Our online research revealed that searching for "history of the Olympics" mainly leads to the Wikipedia page, which, although comprehensive, remains very traditional with a straightforward presentation and often cumbersome tables. The official Olympic Games website also dedicates very little space to their history.
@@ -155,6 +158,7 @@ project-2024-okay-guys/
 ├── index.html               # Main HTML file
 └── README.md                # Project README file
 └── milestone2.pdf           # Milestone 2
+└── Okay_Guys.pdf            # Process Book
 
 
 ```
