@@ -9,8 +9,6 @@ You can check our [website](https://com-480-data-visualization.github.io/project
 |Léa Blinière | 283670 |
 |Louis Duval | 302576 |
 
-[Milestone 1](#milestone-1)
-
 ## Milestone 1 (29th March, 5pm)
 
 ### Dataset
