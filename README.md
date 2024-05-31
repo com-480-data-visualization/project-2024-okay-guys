@@ -52,7 +52,7 @@ Our inspiration for this project comes from an enjoyment of looking at the limit
 Finally, this dataset is totally new to us three, hence it was never previously explored in our past projects. 
 
 ## Milestone 2 (26th April, 5pm)
-[Milestone 2](Milestone 2.pdf)
+[Milestone 2](Milestone_2.pdf)
 ## Milestone 3 (31st May, 5pm) : Technical setup and intended usage 
 
 ### Overview
