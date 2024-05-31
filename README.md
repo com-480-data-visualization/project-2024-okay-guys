@@ -89,7 +89,7 @@ Before you begin, ensure you have met the following requirements:
 - D3.js for interactive visualizations
 
 ### Steps
-**Clone the repository:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/com-480-data-visualization/project-2024-okay-guys.git
    cd project-2024-okay-guys
